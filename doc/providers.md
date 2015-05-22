@@ -32,4 +32,4 @@ Experimental:
 | Yelp | https://github.com/koopjs/koop-yelp |
 | Zillow | https://github.com/dmfenton/koop-zillow |
 
-Know of any other Koop Providers that aren't in this list? Submit and issue or open a pull request!
+Know of any other Koop Providers that aren't in this list? Submit an issue or open a pull request!
