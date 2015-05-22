@@ -29,5 +29,7 @@ Experimental:
 | MongoDB | https://github.com/chelm/koop-mongo |
 | Citybikes | https://github.com/nixta/koop-citybikes |
 | [Decennial Census Data](http://www.census.gov/data/developers/data-sets/decennial-census-data.html) | https://github.com/koopjs/koop-census |
+| Yelp | https://github.com/koopjs/koop-yelp |
+| Zillow | https://github.com/dmfenton/koop-zillow |
 
 Know of any other Koop Providers that aren't in this list? Submit and issue or open a pull request!
