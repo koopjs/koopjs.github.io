@@ -21,6 +21,7 @@ Maintained by Third Parties:
 | Data Source | Github Repo URL |
 | ----------- | --------------- |
 | Cloudant | https://github.com/cloudant/koop-cloudant |
+| GeoJSON (from file server) | https://github.com/jseppi/koop-geojson-file |
 
 Experimental:
 
