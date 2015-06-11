@@ -1,4 +1,5 @@
-# Spec for Koop cache modules
+# Koop cache module specification
+
 In order to function as a cache for Koop, a module must support the following API
 
 ## Functions
@@ -27,7 +28,7 @@ function (table, data, layerId, function (err, success)
 ```javascript
 function (table, function(err, success))
 ```
-* Table: the name of the table to be deleted. Includes the layer id 
+* Table: the name of the table to be deleted. Includes the layer id
  * e.g. Socrata:ejk5-56ko:0
 * Callback: returns err on failure or true on success
 
@@ -39,7 +40,7 @@ function (table, options, function(err, data))
 * Options (object): used to select the proper table and pass where clauses
  * layerId (integer): the id of the layer to select. usually defaults to 0
  * where (string): Sql where clause
- * geometry (object): Bounding box to restrict select e.g. {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41} 
+ * geometry (object): Bounding box to restrict select e.g. {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}
  * idFilter (?) : ?
  * fields (array): Fields to include in the data response, * returns all fields. Akin to `select field1, field2` or `select *`
 * Callback (function): Returns error if select failed, or returns GeoJSON from the cache
@@ -58,10 +59,10 @@ function (table, info, function(err, success)
 #### Example info parameter
 ```javascript
 {
-  'status': 'processing', 
-  'updated_at': 1433882094, 
-  'checked_at': 1433882094, 
-  'count': 1025355, 
+  'status': 'processing',
+  'updated_at': 1433882094,
+  'checked_at': 1433882094,
+  'count': 1025355,
   'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
 }
 ```
@@ -77,14 +78,14 @@ function (table, function(err, info))
 #### Example response
 ```javascript
 (null, {
-  'status': 'processing', 
-  'updated_at': 1433882094, 
-  'checked_at': 1433882094, 
-  'count': 1025355, 
+  'status': 'processing',
+  'updated_at': 1433882094,
+  'checked_at': 1433882094,
+  'count': 1025355,
   'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
 })
 ```
- 
+
 ### getCount
 Get the count of features in the database for a given resource
 ```javascript
