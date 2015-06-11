@@ -13,4 +13,4 @@ If you like doing things manually, feel free to check out out the information in
 
 Heroku has beta support for [PostGIS](http://postgis.net/). Read more about it [here](https://devcenter.heroku.com/articles/heroku-postgres-extensions-postgis-full-text-search#postgis).
 
-Read the [PostGIS Cache](postgis-cache.md) article to find out more about configuring PostGIS as a persistent cache for Koop.
+Check out [`koop-pgcache`](https://github.com/koopjs/koop-pgcache) to find out more about configuring PostGIS as a persistent cache for Koop.
