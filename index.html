@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Koop</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="stylesheet" href="http://code.ngoldman.me/style.css/style.css">
   <style>
     main {
       display: block;
@@ -13,13 +14,26 @@
       text-align: center;
     }
     main img { max-width: 100%; }
-    main a { text-decoration: none; }
+    main a, { text-decoration: none; }
     main a:hover { text-decoration: none; }
+    sidebar {
+      float: left;
+      margin: 5%;
+    }
+    sidebar a, a:hover {
+      color: black;
+    }
   </style>
 </head>
 <body>
   <main>
     <a href="http://github.com/Esri/koop"><img src="logo.png" alt="Koop"></a>
   </main>
+  <sidebar>
+    <h1>koop!</h1>
+    <h2><a href="https://github.com/koopjs/koopjs.github.io/blob/master/docs/setup.md">in five minutes</a></h2>
+    <h2><a href="https://github.com/koopjs/koopjs.github.io/blob/master/docs/providers.md">existing providers</a></h2>
+    <h2><a href="https://github.com/koopjs/koopjs.github.io/blob/master/docs/specs/provider.md">create a new one</a></h2>
+  </sidebar>
 </body>
 </html>
