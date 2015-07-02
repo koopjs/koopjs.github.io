@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Koop</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<main class="page">
+
+<section class="markdown-body">
+<h1>Setup</h1>
+<blockquote>
+<p>Setting up a development environment for Koop</p>
+</blockquote>
+<p>All you need to have installed before Koop will run is a <a href="https://nodejs.org/">Node.js</a> environment and an internet connection. We recommend using version <code>0.10</code> until the <a href="https://www.joyent.com/blog/introducing-the-nodejs-foundation">Node.js Foundation</a> stabilizes differences between <code>0.12</code> and <code>iojs</code>.</p>
+<h2>Required</h2>
+<ul>
+<li><a href="https://nodejs.org/download/">Node.js</a></li>
+</ul>
+<h2>Recommended</h2>
+<ul>
+<li><a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">Postgres</a> and <a href="http://postgis.net/install">PostGIS</a></li>
+</ul>
+<p>Koop uses an in-memory cache by default. This is not recommended when running in production. A PostGIS cache using <a href="https://github.com/Esri/koop-pgcache">koop-pgcache</a> is recommended for all production deployments. See <a href="caches.md">caches</a> for more details.</p>
+<h2>Using Docker</h2>
+<p>There is an example of how to get Koop running with PostGIS inside a docker container <a href="https://github.com/kpettijohn/koop-docker-example">here</a>.</p>
+<h2>Supported Operating Systems</h2>
+<p>Koop has been tested on:</p>
+<ul>
+<li>Ubuntu
+<ul>
+<li>12.04</li>
+<li>14.04</li>
+</ul>
+</li>
+<li>OS X
+<ul>
+<li>10.9 (Mavericks)</li>
+<li>10.10 (Yosemite)</li>
+</ul>
+</li>
+<li>Windows
+<ul>
+<li>7</li>
+<li>8.1</li>
+<li>Server 2008R2</li>
+<li>Server 2012R2</li>
+</ul>
+</li>
+</ul>
+<h2>Next Steps</h2>
+<p>Once you have a development environment set up, Koop works best in combination with <a href="providers.md">providers</a>.</p>
+<nav class="sidebar">
+  <a href="/" class="koop-logo">
+    <img src="/logo.png" alt="Koop">
+  </a>
+  <ul>
+    <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
+    <li><a class="site-link" href="/docs/">Docs</a></li>
+  </ul>
+</nav>
+
+</section>
+</main>
+
+</body>
+</html>

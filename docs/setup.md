@@ -1,6 +1,8 @@
-# Setting up a development environment for Koop
+# Setup
 
-All you need to have installed before Koop will run is a [Node.js](https://nodejs.org/) environment and an internet connection. We recommend using `0.10` until the [Node.js Foundation](https://www.joyent.com/blog/introducing-the-nodejs-foundation) stabilizes differences between `0.12` and `iojs`.
+> Setting up a development environment for Koop
+
+All you need to have installed before Koop will run is a [Node.js](https://nodejs.org/) environment and an internet connection. We recommend using version `0.10` until the [Node.js Foundation](https://www.joyent.com/blog/introducing-the-nodejs-foundation) stabilizes differences between `0.12` and `iojs`.
 
 ## Required
 
@@ -8,8 +10,7 @@ All you need to have installed before Koop will run is a [Node.js](https://nodej
 
 ## Recommended
 
-- [Postgres](https://wiki.postgresql.org/wiki/Detailed_installation_guides)
-- [PostGIS](http://postgis.net/install)
+- [Postgres](https://wiki.postgresql.org/wiki/Detailed_installation_guides) and [PostGIS](http://postgis.net/install)
 
 Koop uses an in-memory cache by default. This is not recommended when running in production. A PostGIS cache using [koop-pgcache](https://github.com/Esri/koop-pgcache) is recommended for all production deployments. See [caches](caches.md) for more details.
 

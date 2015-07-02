@@ -1,0 +1,36 @@
+{
+  "name": "koopjs.github.io",
+  "description": "Website for the Koop project",
+  "version": "1.0.0",
+  "author": "Nate Goldman <nate@ngoldman.me>",
+  "bugs": {
+    "url": "https://github.com/koopjs/koopjs.github.io/issues"
+  },
+  "devDependencies": {
+    "markdown-it": "^3.0.2",
+    "nodefront": "^1.0.7",
+    "standard": "^2.6.3"
+  },
+  "homepage": "https://github.com/koopjs/koopjs.github.io",
+  "keywords": [
+    "data",
+    "engine",
+    "etl",
+    "geospatial",
+    "koop",
+    "koopjs",
+    "server"
+  ],
+  "license": "Apache-2.0",
+  "main": "scripts/build.js",
+  "private": "true",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/koopjs/koopjs.github.io.git"
+  },
+  "scripts": {
+    "build": "node scripts/build.js",
+    "start": "nodefront serve",
+    "test": "standard"
+  }
+}
