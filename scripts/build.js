@@ -21,7 +21,7 @@ pages.push({
 })
 
 pages.forEach(function (page) {
-  var rewrite = page.body.replace(/\.md"/g,'.html"')
+  var rewrite = page.body.replace(/\.md"/g, '.html"')
   fs.writeFile(page.path, header + rewrite + footer, function (err) {
     if (err) return console.error(err)
     console.log('built', page.path)
