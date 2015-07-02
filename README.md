@@ -14,7 +14,7 @@ OpenStreetMap                   Feature Service
 
 ## Core Concepts
 
-**Koop** is, first and foremost, a **server**. It is written in **JavaScript** and runs in the **Node.js** environment. It acts as **middleware** for the **Express** web framework. It uses **provider** node modules to *extract* data from third party providers, *transform* that data into **GeoJSON** and *load* it into the **cache**, then serve it on the web in various formats.
+**Koop** is, first and foremost, a **server**. It is written in **JavaScript** and runs in the [**Node.js**](https://nodejs.org/) runtime environment. It acts as **middleware** for the [**Express**](http://expressjs.com/) web framework. It uses **provider** node modules to *extract* data from third party providers, *transform* that data into [**GeoJSON**](http://geojson.org/) and *load* it into the **cache**, then serve it on the web in various formats.
 
 ### Providers
 
@@ -39,7 +39,7 @@ Koop uses **providers** to work with data from different sources -- usually an o
 | [Yelp](https://github.com/koopjs/koop-yelp) | [![npm](https://img.shields.io/npm/v/koop-yelp.svg?style=flat-square)](https://www.npmjs.com/package/koop-yelp) | [![travis](https://img.shields.io/travis/koopjs/koop-yelp.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-yelp) |
 | [Zillow](https://github.com/dmfenton/koop-zillow) | [![npm](https://img.shields.io/npm/v/koop-zillow.svg?style=flat-square)](https://www.npmjs.com/package/koop-zillow) | [![travis](https://img.shields.io/travis/dmfenton/koop-zillow.svg?style=flat-square)](https://travis-ci.org/dmfenton/koop-zillow) |
 
-[Read more about providers](docs/providers.md).
+[Read more about providers](docs/providers.md)
 
 ### Caches
 
@@ -50,7 +50,7 @@ Koop uses a **cache** to store data from third party providers. This helps reduc
 | [PostGIS](https://github.com/koopjs/koop-pgcache) *recommended* | [![npm](https://img.shields.io/npm/v/koop-pgcache.svg?style=flat-square)](https://www.npmjs.com/package/koop-pgcache) | [![travis](https://img.shields.io/travis/koopjs/koop-pgcache.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-pgcache) |
 | [ElasticSearch](https://github.com/koopjs/koop-escache) | [![npm](https://img.shields.io/npm/v/koop-escache.svg?style=flat-square)](https://www.npmjs.com/package/koop-escache) | [![travis](https://img.shields.io/travis/koopjs/koop-escache.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-escache) |
 
-[Read more about caches](docs/caches.md).
+[Read more about caches](docs/caches.md)
 
 ### Plugins
 
@@ -60,7 +60,7 @@ Koop has **plugins** that add extra functionality not covered by providers and c
 | ------ | ------- | ------------ |
 | [Koop Tile Plugin](https://github.com/koopjs/koop-tile-plugin) | [![npm](https://img.shields.io/npm/v/koop-tile-plugin.svg?style=flat-square)](https://www.npmjs.com/package/koop-tile-plugin) | [![travis](https://img.shields.io/travis/koopjs/koop-tile-plugin.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-tile-plugin) |
 
-[Read more about plugins](docs/plugins.md).
+[Read more about plugins](docs/plugins.md)
 
 ## Contributions welcome
 
