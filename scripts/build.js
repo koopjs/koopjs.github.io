@@ -18,6 +18,9 @@ pages.push({
 }, {
   path: 'docs/setup.html',
   body: md.render(fs.readFileSync('./docs/setup.md', opts))
+}, {
+  path: 'docs/heroku.html',
+  body: md.render(fs.readFileSync('./docs/heroku.md', opts))
 })
 
 pages.forEach(function (page) {

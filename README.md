@@ -2,7 +2,7 @@
 
 > An Open Geospatial ETL Engine
 
-Take geospatial data from one place and transform it into GeoJSON, CSV, KML, a Shapefile, or a Feature Service.
+Leave geospatial data where it lives and transform it into GeoJSON, CSV, KML, a Shapefile, or a Feature Service dynamically.
 
 ```
 ArcGIS Online                   GeoJSON
@@ -18,7 +18,7 @@ OpenStreetMap                   Feature Service
 
 ### Providers
 
-Koop uses **providers** to work with data from different sources -- usually an open data provider serving geospatial data on the web.
+Koop uses **providers** to transform data from different sources -- most often open data providers that serve geospatial data on the web.
 
 | provider | version | build status |
 | -------- | ------- | ------------ |
@@ -64,6 +64,6 @@ Koop has **plugins** that add extra functionality not covered by providers and c
 
 ## Contributions welcome
 
-Koop is entirely open source. Check us out, file an issue, open a pull request, and help grow the project to make it as useful as possible for the geospatial community.
+Koop is entirely open source. Check us out, file an issue, open a pull request, and help grow the project to make it as useful as possible to the geospatial community.
 
 [github.com/koopjs](http://github.com/koopjs)
