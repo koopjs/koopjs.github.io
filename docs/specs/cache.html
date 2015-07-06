@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Koop</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<main class="page">
+
+<section class="markdown-body">
+<h1>Koop cache module specification</h1>
+<p>In order to function as a cache for Koop, a module must support the following API</p>
+<h2>Functions</h2>
+<h3>insert</h3>
+<p>Insert a new table into the cache</p>
+<pre><code class="language-javascript">function (table, data, layer, function (err, success)
+</code></pre>
+<ul>
+<li>Table (string): the name of the table to be inserted. Usually of the form: type:key</li>
+<li>Data (object): geojson to be inserted after creation</li>
+<li>Layer (integer): the id of the layer. Usually defaults to 0</li>
+<li>Callback (function): returns err on failure or true on success</li>
+</ul>
+<h3>insertPartial</h3>
+<p>Insert a set of rows into an existing table</p>
+<pre><code class="language-javascript">function (table, data, layerId, function (err, success)
+</code></pre>
+<ul>
+<li>Table (string): the name of the table to be inserted. Usually of the form: type:key</li>
+<li>Data (object): geojson to be inserted after creation</li>
+<li>Layer (integer): the id of the layer. Usually defaults to 0</li>
+<li>Callback (function): returns err on failure or true on success</li>
+</ul>
+<h3>remove</h3>
+<pre><code class="language-javascript">function (table, function(err, success))
+</code></pre>
+<ul>
+<li>Table: the name of the table to be deleted. Includes the layer id</li>
+<li>e.g. Socrata:ejk5-56ko:0</li>
+<li>Callback: returns err on failure or true on success</li>
+</ul>
+<h3>select</h3>
+<pre><code class="language-javascript">function (table, options, function(err, data))
+</code></pre>
+<ul>
+<li>Table (string): The table to select data from, does not include the layerId.</li>
+<li>Options (object): used to select the proper table and pass where clauses</li>
+<li>layerId (integer): the id of the layer to select. usually defaults to 0</li>
+<li>where (string): Sql where clause</li>
+<li>geometry (object): Bounding box to restrict select e.g. {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}</li>
+<li>idFilter (?) : ?</li>
+<li>fields (array): Fields to include in the data response, * returns all fields. Akin to <code>select field1, field2</code> or <code>select *</code></li>
+<li>Callback (function): Returns error if select failed, or returns GeoJSON from the cache</li>
+</ul>
+<h3>updateInfo</h3>
+<p>Update an info doc that contains metadata about a resource</p>
+<pre><code class="language-javascript">function (table, info, function(err, success)
+</code></pre>
+<ul>
+<li>Table (string): The resource about which to update info. Includes the layer id</li>
+<li>e.g. Socrata:ejk5-56ko:0</li>
+<li>Info (object): Info to store along with the resource. Status must be set at processing while data is being added to the cache</li>
+<li>e.g. {status: ‘processing’, updated_at: 1433882094, checked_at: 1433882094, count: 1025355, extent: {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}}</li>
+<li>Callback: Returns error, false on failure, and null, true on success</li>
+</ul>
+<h4>Example info parameter</h4>
+<pre><code class="language-javascript">{
+  'status': 'processing',
+  'updated_at': 1433882094,
+  'checked_at': 1433882094,
+  'count': 1025355,
+  'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+}
+</code></pre>
+<h3>getInfo</h3>
+<p>Get an info doc with metadata about a resource</p>
+<pre><code class="language-javascript">function (table, function(err, info))
+</code></pre>
+<ul>
+<li>Table (string): The resource about which to update info. Includes the layer id</li>
+<li>Callback (function): Returns error, null failure and null, info (object) on success.</li>
+</ul>
+<h4>Example response</h4>
+<pre><code class="language-javascript">(null, {
+  'status': 'processing',
+  'updated_at': 1433882094,
+  'checked_at': 1433882094,
+  'count': 1025355,
+  'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+})
+</code></pre>
+<h3>getCount</h3>
+<p>Get the count of features in the database for a given resource</p>
+<pre><code class="language-javascript">function (table, options, function (err, count))
+</code></pre>
+<ul>
+<li>Table (string): The resource about which to update info. Includes the layer id</li>
+<li>Table (string): The table to select data from, does not include the layerId.</li>
+<li>Options (object): used to select the proper table and pass where clauses</li>
+<li>where (string): Sql where clause</li>
+<li>geometry (object): Bounding box to restrict select }</li>
+<li>Callback (function): Returns error, null on failure and null, count on success</li>
+</ul>
+<h3>Example Options param</h3>
+<pre><code class="language-javascript">{
+  'where': 'Field1 &gt; 2014 OR Field2 &gt; 9000'
+  'geometry': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+}
+</code></pre>
+<h4>Example response</h4>
+<pre><code class="language-javascript">(null, 105005)
+</code></pre>
+<h3>timerGet</h3>
+<p>Fetch a timer that tells the provider whether to check for cache expiration</p>
+<pre><code class="language-javascript">function (table, expires, function (err, timer)
+</code></pre>
+<ul>
+<li>Table (string): The resource about which to update info. Includes the layer id</li>
+<li>Callback (function): Returns with error, null on failure and null, timer on success</li>
+</ul>
+<h3>Example response</h3>
+<pre><code class="language-javascript">(null, 1433883928)
+</code></pre>
+<h3>timerSet</h3>
+<p>Set a timer that will tell the provider to check for cache expiration when it’s up</p>
+<pre><code class="language-javascript">function (table, expires, function (err, success)
+</code></pre>
+<ul>
+<li>Table (string): The resource about which to update info. Includes the layer id</li>
+<li>Expires (date object): The next date at which to check for cache expiration</li>
+<li>Callback (function): Returns err, null or null, true</li>
+</ul>
+<nav class="sidebar">
+  <a href="/" class="koop-logo">
+    <img src="/logo.png" alt="Koop">
+  </a>
+  <ul>
+    <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
+    <li><a class="site-link" href="/docs/">Docs</a></li>
+  </ul>
+</nav>
+
+</section>
+</main>
+
+</body>
+</html>

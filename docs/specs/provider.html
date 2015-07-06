@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Koop</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<main class="page">
+
+<section class="markdown-body">
+<h1>Koop provider module specification</h1>
+<p><strong>documentation incomplete: work in progress</strong></p>
+<p>Koop is designed to expose 3rd party services as Feature Services that are consumable within Esri products and services. See the <a href="https://github.com/koopjs/koopjs.github.io/blob/master/docs/providers.html">Providers</a> section of the documentation for a complete list of providers.</p>
+<h2>Development</h2>
+<p>To modify <a href="https://github.com/esri/koop">Koop</a> or develop new koop providers, install them to the <code>node_modules</code> directory in the koop application folder:</p>
+<h3>Defining a new provider</h3>
+<p>Check out providers such as <a href="https://github.com/Esri/koop-agol">koop-agol</a> and link in <code>node_modules/</code></p>
+<pre><code>git clone git@github.com:Esri/koop-agol.git
+cd koop-agol &amp;&amp; npm install
+cd node_modules &amp;&amp; ln -s ../koop-agol
+</code></pre>
+<p>Each provider defines custom routes, a controller, and a model. Each of these uses <code>module.exports</code> to export an object (CommonJS modules).  Each is then consumed by Koop at start up time and made available by the server.</p>
+<p><strong>Note</strong>: The name of the provider directory is used to define the name of the provider and its controller within Koop.</p>
+<h4>Routes</h4>
+<p>Define custom routes in the <code>routes/index.js</code> file:</p>
+<pre><code class="language-javascript">// defined in api/providers/sample/routes/index.js
+
+module.exports = {
+  'get /sample': {
+    controller: 'sample',
+    action: 'index'
+  }
+}
+</code></pre>
+<p>The above creates a <code>/sample</code> route that calls the <code>index</code> method on the sample controller (defined in <code>/api/providers/sample/controller/index.js</code>).</p>
+<h4>Controller</h4>
+<p>Defines the handlers used to respond to routes.</p>
+<pre><code class="language-javascript">module.exports = {
+  // this tells koop to treat this provider like AGS service and show up at the root data provider endpoint
+  provider: false,
+
+  // our index method to simple print text
+  index: function(req, res){
+    res.send('Sample Providers, to make this a real one set provider true');
+  }
+};
+</code></pre>
+<p>Each method takes in a request and response property and needs to send something to the reponse.</p>
+<h4>Models</h4>
+<p>Models are used to interact directly with 3rd party services and databases. They make the HTTP requests to the 3rd party API and should hand back raw data to the controllers.</p>
+<h4>Example URL Structure 1: Gists as a Feature Service</h4>
+<ul>
+<li><a href="http://koop.dc.esri.com/gist/6021269">http://koop.dc.esri.com/gist/6021269</a></li>
+<li><a href="http://koop.dc.esri.com/gist/6021269/FeatureServer">http://koop.dc.esri.com/gist/6021269/FeatureServer</a></li>
+<li><a href="http://koop.dc.esri.com/gist/6021269/FeatureServer/0">http://koop.dc.esri.com/gist/6021269/FeatureServer/0</a></li>
+<li><a href="http://koop.dc.esri.com/gist/6021269/FeatureServer/0/query">http://koop.dc.esri.com/gist/6021269/FeatureServer/0/query</a></li>
+</ul>
+<h4>Example URL Structure 2: Github Repo as a Feature Service</h4>
+<ul>
+<li><a href="http://koop.dc.esri.com/github/colemanm/hurricanes/fl_2004_hurricanes">http://koop.dc.esri.com/github/colemanm/hurricanes/fl_2004_hurricanes</a></li>
+<li><a href="http://koop.dc.esri.com/github/colemanm/hurricanes/fl_2004_hurricanes/FeatureServer/">http://koop.dc.esri.com/github/colemanm/hurricanes/fl_2004_hurricanes/FeatureServer</a></li>
+<li><a href="http://koop.dc.esri.com/github/colemanm/hurricanes/fl_2004_hurricanes/FeatureServer/0/query">http://koop.dc.esri.com/github/colemanm/hurricanes/fl_2004_hurricanes/FeatureServer/0/query</a></li>
+<li>Note: Repos can of course have directories, and this presents an issue with creating dynamic routes that match arbitrary paths in github. To solve this Koop will replace dashes with slashes in its github routes:
+<ul>
+<li><a href="http://koop.dc.esri.com/github/geobabbler/geodata/geojson-border_crossings/FeatureServer/0/query">http://koop.dc.esri.com/github/geobabbler/geodata/geojson-border_crossings/FeatureServer/0/query</a></li>
+<li>The above url would pull down this geojson file: <a href="https://github.com/geobabbler/geodata/blob/master/geojson/border_crossings.geojson">https://github.com/geobabbler/geodata/blob/master/geojson/border_crossings.geojson</a></li>
+</ul>
+</li>
+</ul>
+<nav class="sidebar">
+  <a href="/" class="koop-logo">
+    <img src="/logo.png" alt="Koop">
+  </a>
+  <ul>
+    <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
+    <li><a class="site-link" href="/docs/">Docs</a></li>
+  </ul>
+</nav>
+
+</section>
+</main>
+
+</body>
+</html>
