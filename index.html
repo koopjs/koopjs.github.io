@@ -15,7 +15,7 @@
 <blockquote>
 <p>An Open Geospatial ETL Engine</p>
 </blockquote>
-<p>Take geospatial data from one place and transform it into GeoJSON, CSV, KML, a Shapefile, or a Feature Service.</p>
+<p>Leave geospatial data where it lives and transform it into GeoJSON, CSV, KML, a Shapefile, or a Feature Service dynamically.</p>
 <pre><code>ArcGIS Online                   GeoJSON
 Socrata                         CSV
 CKAN             =&gt; Koop =&gt;     KML
@@ -25,7 +25,7 @@ OpenStreetMap                   Feature Service
 <h2>Core Concepts</h2>
 <p><strong>Koop</strong> is, first and foremost, a <strong>server</strong>. It is written in <strong>JavaScript</strong> and runs in the <a href="https://nodejs.org/"><strong>Node.js</strong></a> runtime environment. It acts as <strong>middleware</strong> for the <a href="http://expressjs.com/"><strong>Express</strong></a> web framework. It uses <strong>provider</strong> node modules to <em>extract</em> data from third party providers, <em>transform</em> that data into <a href="http://geojson.org/"><strong>GeoJSON</strong></a> and <em>load</em> it into the <strong>cache</strong>, then serve it on the web in various formats.</p>
 <h3>Providers</h3>
-<p>Koop uses <strong>providers</strong> to work with data from different sources – usually an open data provider serving geospatial data on the web.</p>
+<p>Koop uses <strong>providers</strong> to transform data from different sources – most often open data providers that serve geospatial data on the web.</p>
 <table>
 <thead>
 <tr><th>provider</th><th>version</th><th>build status</th></tr>
@@ -74,7 +74,7 @@ OpenStreetMap                   Feature Service
 </table>
 <p><a href="docs/plugins.html">Read more about plugins</a></p>
 <h2>Contributions welcome</h2>
-<p>Koop is entirely open source. Check us out, file an issue, open a pull request, and help grow the project to make it as useful as possible for the geospatial community.</p>
+<p>Koop is entirely open source. Check us out, file an issue, open a pull request, and help grow the project to make it as useful as possible to the geospatial community.</p>
 <p><a href="http://github.com/koopjs">github.com/koopjs</a></p>
 <nav class="sidebar">
   <a href="/" class="koop-logo">
