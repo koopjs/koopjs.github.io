@@ -10,6 +10,7 @@
     "glob": "^5.0.13",
     "markdown-it": "^3.0.2",
     "nodefront": "^1.0.7",
+    "sitedown": "^1.0.0",
     "standard": "^2.6.3"
   },
   "homepage": "https://github.com/koopjs/koopjs.github.io",
@@ -30,7 +31,7 @@
     "url": "git://github.com/koopjs/koopjs.github.io.git"
   },
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "sitedown --build . --header partials/_header.html --footer partials/_footer.html",
     "start": "nodefront serve",
     "test": "standard"
   }
