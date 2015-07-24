@@ -6,14 +6,14 @@ Koop is designed to expose 3rd party services as Feature Services that are consu
 
 ## Development
 
-To modify [Koop](https://github.com/esri/koop) or develop new koop providers, install them to the `node_modules` directory in the koop application folder:
+To modify [Koop](https://github.com/koopjs/koop) or develop new koop providers, install them to the `node_modules` directory in the koop application folder:
 
 ### Defining a new provider
 
-Check out providers such as [koop-agol](https://github.com/Esri/koop-agol) and link in `node_modules/`
+Check out providers such as [koop-agol](https://github.com/koopjs/koop-agol) and link in `node_modules/`
 
 ```
-git clone git@github.com:Esri/koop-agol.git
+git clone git@github.com:koopjs/koop-agol.git
 cd koop-agol && npm install
 cd node_modules && ln -s ../koop-agol
 ```
