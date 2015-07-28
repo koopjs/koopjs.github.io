@@ -12,22 +12,23 @@
 
 <section class="markdown-body">
 <h1>Setup</h1>
+<h2>1. Development Environment</h2>
 <blockquote>
 <p>Setting up a development environment for Koop</p>
 </blockquote>
 <p>All you need to have installed before Koop will run is a <a href="https://nodejs.org/">Node.js</a> environment and an internet connection. We recommend using version <code>0.10</code> until the <a href="https://www.joyent.com/blog/introducing-the-nodejs-foundation">Node.js Foundation</a> stabilizes differences between <code>0.12</code> and <code>iojs</code>.</p>
-<h2>Required</h2>
+<h3>Required</h3>
 <ul>
 <li><a href="https://nodejs.org/download/">Node.js</a></li>
 </ul>
-<h2>Recommended</h2>
+<h3>Recommended</h3>
 <ul>
 <li><a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">Postgres</a> and <a href="http://postgis.net/install">PostGIS</a></li>
 </ul>
 <p>Koop uses an in-memory cache by default. This is not recommended when running in production. A PostGIS cache using <a href="https://github.com/koopjs/koop-pgcache">koop-pgcache</a> is recommended for all production deployments. See <a href="caches.html">caches</a> for more details.</p>
-<h2>Using Docker</h2>
+<h3>Using Docker</h3>
 <p>There is an example of how to get Koop running with PostGIS inside a docker container <a href="https://github.com/kpettijohn/koop-docker-example">here</a>.</p>
-<h2>Supported Operating Systems</h2>
+<h3>Supported Operating Systems</h3>
 <p>Koop has been tested on:</p>
 <ul>
 <li>Ubuntu
@@ -51,8 +52,14 @@
 </ul>
 </li>
 </ul>
-<h2>Next Steps</h2>
-<p>Once you have a development environment set up, Koop works best in combination with <a href="providers.html">providers</a>.</p>
+<h2>2. Express server</h2>
+<p>Once you have a development environment set up, you need a basic Express server to get started with Koop. You can use the <a href="https://github.com/koopjs/koop-sample-app">sample app</a> as a starting point.</p>
+<h2>3. Cache</h2>
+<p>By default, Koop uses a local in-memory object to cache requests. We highly recommend using a database as a cache. PostGIS is currently the only officially supported database. The <a href="https://github.com/koopjs/koop-pgcache"><code>koop-pgcache</code></a> module takes care of establishing a connection between Koop and a PostGIS database.</p>
+<h2>4. Providers</h2>
+<p>Once you’ve got a development environment, an Express server, and a database, all you need to do is configure your providers! See the complete <a href="providers.html">list of providers</a> for further instructions.</p>
+<h2>5. Start the server!</h2>
+<p>If you’ve got everything set up properly, you should be able to start the server! This is usually done by running <code>node index.js</code>, <code>node server.js</code>, or simply <code>npm start</code>, depending on how you set up your Express server.</p>
 <nav class="sidebar">
   <a href="/" class="koop-logo">
     <img src="/logo.png" alt="Koop">

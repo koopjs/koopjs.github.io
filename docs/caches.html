@@ -12,28 +12,42 @@
 
 <section class="markdown-body">
 <h1>Caches</h1>
-<p>In Koop, the <strong>cache</strong> stores data from third party providers to reduce redundant requests and speed up response time. Koop’s data caching is by default a local, in-memory object. We strongly recommend using the PostGIS cache for production deployments. Other options are in development and available for experimentation.</p>
+<p>In Koop, the <strong>cache</strong> stores data from third party providers to reduce redundant requests and speed up response time. Koop’s data caching is by default a local, in-memory object. We strongly recommend using the PostGIS cache for production deployments.</p>
+<h2>Officially Supported</h2>
 <table>
 <thead>
 <tr>
-<th>cache</th>
-<th>version</th>
-<th>build status</th>
+<th style="text-align:left">name</th>
+<th style="text-align:left">version</th>
+<th style="text-align:left">build status</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="https://github.com/koopjs/koop-pgcache">PostGIS</a> <em>recommended</em></td>
-<td><a href="https://www.npmjs.com/package/koop-pgcache"><img src="https://img.shields.io/npm/v/koop-pgcache.svg?style=flat-square" alt="npm"></a></td>
-<td><a href="https://travis-ci.org/koopjs/koop-pgcache"><img src="https://img.shields.io/travis/koopjs/koop-pgcache.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td><a href="https://github.com/koopjs/koop-escache">ElasticSearch</a></td>
-<td><a href="https://www.npmjs.com/package/koop-escache"><img src="https://img.shields.io/npm/v/koop-escache.svg?style=flat-square" alt="npm"></a></td>
-<td><a href="https://travis-ci.org/koopjs/koop-escache"><img src="https://img.shields.io/travis/koopjs/koop-escache.svg?style=flat-square" alt="travis"></a></td>
+<td style="text-align:left"><a href="https://github.com/koopjs/koop-pgcache">PostGIS</a> <em>recommended</em></td>
+<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-pgcache"><img src="https://img.shields.io/npm/v/koop-pgcache.svg?style=flat-square" alt="npm"></a></td>
+<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-pgcache"><img src="https://img.shields.io/travis/koopjs/koop-pgcache.svg?style=flat-square" alt="travis"></a></td>
 </tr>
 </tbody>
 </table>
+<h2>Experimental</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">name</th>
+<th style="text-align:left">version</th>
+<th style="text-align:left">build status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="https://github.com/koopjs/koop-escache">ElasticSearch</a></td>
+<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-escache"><img src="https://img.shields.io/npm/v/koop-escache.svg?style=flat-square" alt="npm"></a></td>
+<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-escache"><img src="https://img.shields.io/travis/koopjs/koop-escache.svg?style=flat-square" alt="travis"></a></td>
+</tr>
+</tbody>
+</table>
+<p>Know of any caches that aren’t listed above? Please let us know by <a href="https://github.com/koopjs/koop/issues/new">submitting an issue</a>!</p>
 <nav class="sidebar">
   <a href="/" class="koop-logo">
     <img src="/logo.png" alt="Koop">
