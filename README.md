@@ -38,7 +38,7 @@ Koop uses a **cache** to store data from third party providers. This helps reduc
 
 | name | version | build status |
 | :--- | :------ | :----------- |
-| [PostGIS](https://github.com/koopjs/koop-pgcache) *recommended* | [![npm](https://img.shields.io/npm/v/koop-pgcache.svg?style=flat-square)](https://www.npmjs.com/package/koop-pgcache) | [![travis](https://img.shields.io/travis/koopjs/koop-pgcache.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-pgcache) |
+| [PostGIS](https://github.com/koopjs/koop-pgcache) | [![npm](https://img.shields.io/npm/v/koop-pgcache.svg?style=flat-square)](https://www.npmjs.com/package/koop-pgcache) | [![travis](https://img.shields.io/travis/koopjs/koop-pgcache.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-pgcache) |
 
 [Read more about caches](docs/caches.md)
 
