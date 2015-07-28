@@ -6,10 +6,10 @@ Koop Providers are modules for serving third party data sources as both GeoJSON 
 
 | name | version | build status |
 | :--- | :------ | :----------- |
-| [ArcGIS Online](https://github.com/koopjs/koop-agol) | [![npm](https://img.shields.io/npm/v/koop-agol.svg?style=flat-square)](https://www.npmjs.com/package/koop-agol) | [![travis](https://img.shields.io/travis/koopjs/koop-agol.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-agol) |
-| [Socrata](https://github.com/koopjs/koop-socrata) | [![npm](https://img.shields.io/npm/v/koop-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-socrata.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-socrata) |
-| [GitHub](https://github.com/koopjs/koop-github) | [![npm](https://img.shields.io/npm/v/koop-github.svg?style=flat-square)](https://www.npmjs.com/package/koop-github) | [![travis](https://img.shields.io/travis/koopjs/koop-github.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-github) |
-| [Gist](https://github.com/koopjs/koop-gist) | [![npm](https://img.shields.io/npm/v/koop-gist.svg?style=flat-square)](https://www.npmjs.com/package/koop-gist) | [![travis](https://img.shields.io/travis/koopjs/koop-gist.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-gist) |
+| [ArcGIS Online](https://github.com/koopjs/koop-agol) | [![npm](https://img.shields.io/npm/v/koop-agol.svg?style=flat-square)](https://www.npmjs.com/package/koop-agol) | [![travis](https://img.shields.io/travis/koopjs/koop-agol/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-agol) |
+| [Socrata](https://github.com/koopjs/koop-socrata) | [![npm](https://img.shields.io/npm/v/koop-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-socrata) |
+| [GitHub](https://github.com/koopjs/koop-github) | [![npm](https://img.shields.io/npm/v/koop-github.svg?style=flat-square)](https://www.npmjs.com/package/koop-github) | [![travis](https://img.shields.io/travis/koopjs/koop-github/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-github) |
+| [Gist](https://github.com/koopjs/koop-gist) | [![npm](https://img.shields.io/npm/v/koop-gist.svg?style=flat-square)](https://www.npmjs.com/package/koop-gist) | [![travis](https://img.shields.io/travis/koopjs/koop-gist/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-gist) |
 
 ## Experimental
 
