@@ -16,10 +16,6 @@ All you need to have installed before Koop will run is a [Node.js](https://nodej
 
 Koop uses an in-memory cache by default. This is not recommended when running in production. A PostGIS cache using [koop-pgcache](https://github.com/koopjs/koop-pgcache) is recommended for all production deployments. See [caches](caches.md) for more details.
 
-### Using Docker
-
-There is an example of how to get Koop running with PostGIS inside a docker container [here](https://github.com/kpettijohn/koop-docker-example).
-
 ### Supported Operating Systems
 
 Koop has been tested on:

@@ -18,3 +18,4 @@
 ## Extra
 
 1. [Deploying to Heroku](heroku.md)
+1. [Using Koop with Docker](docker.md)
