@@ -16,8 +16,8 @@
 <h2>Functions</h2>
 <h3>insert</h3>
 <p>Insert a new table into the cache</p>
-<pre><code class="language-javascript">function (table, data, layer, function (err, success)
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, data, layer, function (err, success</span>)
+</span></code></pre>
 <ul>
 <li>Table (string): the name of the table to be inserted. Usually of the form: type:key</li>
 <li>Data (object): geojson to be inserted after creation</li>
@@ -26,8 +26,8 @@
 </ul>
 <h3>insertPartial</h3>
 <p>Insert a set of rows into an existing table</p>
-<pre><code class="language-javascript">function (table, data, layerId, function (err, success)
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, data, layerId, function (err, success</span>)
+</span></code></pre>
 <ul>
 <li>Table (string): the name of the table to be inserted. Usually of the form: type:key</li>
 <li>Data (object): geojson to be inserted after creation</li>
@@ -35,16 +35,16 @@
 <li>Callback (function): returns err on failure or true on success</li>
 </ul>
 <h3>remove</h3>
-<pre><code class="language-javascript">function (table, function(err, success))
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, function(err, success</span>))
+</span></code></pre>
 <ul>
 <li>Table: the name of the table to be deleted. Includes the layer id</li>
 <li>e.g. Socrata:ejk5-56ko:0</li>
 <li>Callback: returns err on failure or true on success</li>
 </ul>
 <h3>select</h3>
-<pre><code class="language-javascript">function (table, options, function(err, data))
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, options, function(err, data</span>))
+</span></code></pre>
 <ul>
 <li>Table (string): The table to select data from, does not include the layerId.</li>
 <li>Options (object): used to select the proper table and pass where clauses</li>
@@ -57,8 +57,8 @@
 </ul>
 <h3>updateInfo</h3>
 <p>Update an info doc that contains metadata about a resource</p>
-<pre><code class="language-javascript">function (table, info, function(err, success)
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, info, function(err, success</span>)
+</span></code></pre>
 <ul>
 <li>Table (string): The resource about which to update info. Includes the layer id</li>
 <li>e.g. Socrata:ejk5-56ko:0</li>
@@ -67,35 +67,35 @@
 <li>Callback: Returns error, false on failure, and null, true on success</li>
 </ul>
 <h4>Example info parameter</h4>
-<pre><code class="language-javascript">{
-  'status': 'processing',
-  'updated_at': 1433882094,
-  'checked_at': 1433882094,
-  'count': 1025355,
-  'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+<pre><code class="hljs language-javascript">{
+  <span class="hljs-string">'status'</span>: <span class="hljs-string">'processing'</span>,
+  <span class="hljs-string">'updated_at'</span>: <span class="hljs-number">1433882094</span>,
+  <span class="hljs-string">'checked_at'</span>: <span class="hljs-number">1433882094</span>,
+  <span class="hljs-string">'count'</span>: <span class="hljs-number">1025355</span>,
+  <span class="hljs-string">'extent'</span>: {<span class="hljs-string">'xmin'</span>: -<span class="hljs-number">104</span>, <span class="hljs-string">'ymin'</span>: <span class="hljs-number">35.6</span>, <span class="hljs-string">'xmax'</span>: -<span class="hljs-number">94.32</span>, <span class="hljs-string">'ymax'</span>: <span class="hljs-number">41</span>}
 }
 </code></pre>
 <h3>getInfo</h3>
 <p>Get an info doc with metadata about a resource</p>
-<pre><code class="language-javascript">function (table, function(err, info))
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, function(err, info</span>))
+</span></code></pre>
 <ul>
 <li>Table (string): The resource about which to update info. Includes the layer id</li>
 <li>Callback (function): Returns error, null failure and null, info (object) on success.</li>
 </ul>
 <h4>Example response</h4>
-<pre><code class="language-javascript">(null, {
-  'status': 'processing',
-  'updated_at': 1433882094,
-  'checked_at': 1433882094,
-  'count': 1025355,
-  'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+<pre><code class="hljs language-javascript">(<span class="hljs-literal">null</span>, {
+  <span class="hljs-string">'status'</span>: <span class="hljs-string">'processing'</span>,
+  <span class="hljs-string">'updated_at'</span>: <span class="hljs-number">1433882094</span>,
+  <span class="hljs-string">'checked_at'</span>: <span class="hljs-number">1433882094</span>,
+  <span class="hljs-string">'count'</span>: <span class="hljs-number">1025355</span>,
+  <span class="hljs-string">'extent'</span>: {<span class="hljs-string">'xmin'</span>: -<span class="hljs-number">104</span>, <span class="hljs-string">'ymin'</span>: <span class="hljs-number">35.6</span>, <span class="hljs-string">'xmax'</span>: -<span class="hljs-number">94.32</span>, <span class="hljs-string">'ymax'</span>: <span class="hljs-number">41</span>}
 })
 </code></pre>
 <h3>getCount</h3>
 <p>Get the count of features in the database for a given resource</p>
-<pre><code class="language-javascript">function (table, options, function (err, count))
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, options, function (err, count</span>))
+</span></code></pre>
 <ul>
 <li>Table (string): The resource about which to update info. Includes the layer id</li>
 <li>Table (string): The table to select data from, does not include the layerId.</li>
@@ -105,29 +105,29 @@
 <li>Callback (function): Returns error, null on failure and null, count on success</li>
 </ul>
 <h3>Example Options param</h3>
-<pre><code class="language-javascript">{
-  'where': 'Field1 &gt; 2014 OR Field2 &gt; 9000'
-  'geometry': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+<pre><code class="hljs language-javascript">{
+  <span class="hljs-string">'where'</span>: <span class="hljs-string">'Field1 &gt; 2014 OR Field2 &gt; 9000'</span>
+  <span class="hljs-string">'geometry'</span>: {<span class="hljs-string">'xmin'</span>: -<span class="hljs-number">104</span>, <span class="hljs-string">'ymin'</span>: <span class="hljs-number">35.6</span>, <span class="hljs-string">'xmax'</span>: -<span class="hljs-number">94.32</span>, <span class="hljs-string">'ymax'</span>: <span class="hljs-number">41</span>}
 }
 </code></pre>
 <h4>Example response</h4>
-<pre><code class="language-javascript">(null, 105005)
+<pre><code class="hljs language-javascript">(<span class="hljs-literal">null</span>, <span class="hljs-number">105005</span>)
 </code></pre>
 <h3>timerGet</h3>
 <p>Fetch a timer that tells the provider whether to check for cache expiration</p>
-<pre><code class="language-javascript">function (table, expires, function (err, timer)
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, expires, function (err, timer</span>)
+</span></code></pre>
 <ul>
 <li>Table (string): The resource about which to update info. Includes the layer id</li>
 <li>Callback (function): Returns with error, null on failure and null, timer on success</li>
 </ul>
 <h3>Example response</h3>
-<pre><code class="language-javascript">(null, 1433883928)
+<pre><code class="hljs language-javascript">(<span class="hljs-literal">null</span>, <span class="hljs-number">1433883928</span>)
 </code></pre>
 <h3>timerSet</h3>
 <p>Set a timer that will tell the provider to check for cache expiration when it’s up</p>
-<pre><code class="language-javascript">function (table, expires, function (err, success)
-</code></pre>
+<pre><code class="hljs language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, expires, function (err, success</span>)
+</span></code></pre>
 <ul>
 <li>Table (string): The resource about which to update info. Includes the layer id</li>
 <li>Expires (date object): The next date at which to check for cache expiration</li>

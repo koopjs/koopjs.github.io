@@ -4,7 +4,7 @@
 
 > Setting up a development environment for Koop
 
-All you need to have installed before Koop will run is a [Node.js](https://nodejs.org/) environment and an internet connection. We recommend using version `0.10` until the [Node.js Foundation](https://www.joyent.com/blog/introducing-the-nodejs-foundation) stabilizes differences between `0.12` and `iojs`.
+All you need to have installed before Koop will run is a [Node.js](https://nodejs.org/) environment and an internet connection. We recommend using version 4, which is the long term stability release.
 
 ### Required
 
