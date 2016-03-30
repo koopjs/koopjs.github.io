@@ -5,7 +5,7 @@ You can deploy an instance of Koop to your [Heroku](https://www.heroku.com/) acc
 [![deploy][deploy-button]][deploy-url]
 
 [deploy-button]: https://www.herokucdn.com/deploy/button.png
-[deploy-url]: https://heroku.com/deploy?template=https://github.com/koopjs/koop-sample-app
+[deploy-url]: https://heroku.com/deploy?template=https://github.com/koopjs/koop-sample-app/tree/heroku
 
 If you like doing things manually, feel free to check out out the information in the [Heroku Dev Center](https://devcenter.heroku.com/articles/getting-started-with-nodejs#deploy-the-app).
 
