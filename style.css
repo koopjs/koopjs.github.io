@@ -6,7 +6,7 @@ html {
 }
 .page {
   margin: 3rem auto;
-  max-width: 640px;
+  max-width: 690px;
 }
 .markdown-body {
   position: relative;
@@ -16,7 +16,7 @@ html {
   position: absolute;
   left: -240px;
   top: 0;
-  width: 200px;
+  width: 150px;
   text-align: right;
 }
 .koop-logo {
