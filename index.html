@@ -11,6 +11,19 @@
 <main class="page">
 
 <section class="markdown-body">
+
+
+<nav class="sidebar">
+  <a href="/" class="koop-logo">
+    <img src="/logo.png" alt="Koop">
+  </a>
+  <ul>
+    <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
+    <li><a class="site-link" href="/docs/">Docs</a></li>
+    <li><a class="site-link" href="http://github.com/koopjs">Github</a></li>
+  </ul>
+</nav>
+
 <h1><a href="https://github.com/koopjs/koop">Koop</a></h1>
 <blockquote>
 <p>An Open Geospatial ETL Engine</p>
@@ -18,7 +31,7 @@
 <p><a href="https://www.npmjs.com/package/koop"><img src="https://img.shields.io/npm/v/koop.svg?style=flat-square" alt="npm"></a>
 <a href="https://travis-ci.org/koopjs/koop"><img src="https://img.shields.io/travis/koopjs/koop/master.svg?style=flat-square" alt="build status"></a></p>
 <p>Leave geospatial data where it lives and transform it into GeoJSON, CSV, KML, a Shapefile, or a Feature Service dynamically.</p>
-<pre><code class="hljs">ArcGIS Online                   GeoJSON
+<pre><code>ArcGIS Online                   GeoJSON
 Socrata                         CSV
 CKAN             =&gt; Koop =&gt;     KML
 Github                          Shapefile
@@ -26,8 +39,8 @@ OpenStreetMap                   Feature Service
 </code></pre>
 <h2>Core Concepts</h2>
 <p><strong>Koop</strong> is, first and foremost, a <strong>web server</strong>. It is written in <strong>JavaScript</strong> and runs in the <a href="https://nodejs.org/"><strong>Node.js</strong></a> runtime environment. It acts as <strong>middleware</strong> for the <a href="http://expressjs.com/"><strong>Express</strong></a> web framework. Koop extracts data from third party <strong>providers</strong>, transforms that data into <a href="http://geojson.org/"><strong>GeoJSON</strong></a> and loads it into a <strong>cache</strong> database. From that point a user can query the data as a feature service or download it in various formats.</p>
-<h3><a href="docs/providers.html">Providers</a></h3>
-<p>Koop uses <strong>providers</strong> to transform data from different sources – most often open data providers that serve geospatial data on the web.</p>
+<h3><a href="docs/providers/">Providers</a></h3>
+<p>Koop uses <strong>providers</strong> to transform data from different sources &#x2013; most often open data providers that serve geospatial data on the web.</p>
 <table>
 <thead>
 <tr>
@@ -59,7 +72,7 @@ OpenStreetMap                   Feature Service
 </tr>
 </tbody>
 </table>
-<h3><a href="docs/caches.html">Caches</a></h3>
+<h3><a href="docs/caches/">Caches</a></h3>
 <p>Koop uses a <strong>cache</strong> to store data from third party providers. This helps reduce requests to other servers, bypass rate limiting issues, and speed up response times.</p>
 <table>
 <thead>
@@ -77,7 +90,7 @@ OpenStreetMap                   Feature Service
 </tr>
 </tbody>
 </table>
-<h3><a href="docs/plugins.html">Plugins</a></h3>
+<h3><a href="docs/plugins/">Plugins</a></h3>
 <p>Koop has <strong>plugins</strong> that add extra functionality not covered by providers and caches.</p>
 <table>
 <thead>
@@ -98,17 +111,6 @@ OpenStreetMap                   Feature Service
 <h2>Contributions welcome</h2>
 <p>Koop is entirely open source. Check us out, file an issue, open a pull request, and help grow the project to make it as useful as possible to the geospatial community.</p>
 <p><a href="http://github.com/koopjs">github.com/koopjs</a></p>
-<nav class="sidebar">
-  <a href="/" class="koop-logo">
-    <img src="/logo.png" alt="Koop">
-  </a>
-  <ul>
-    <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
-    <li><a class="site-link" href="/docs/">Docs</a></li>
-    <li><a class="site-link" href="http://github.com/koopjs">Github</a></li>
-  </ul>
-</nav>
-
 </section>
 </main>
 
