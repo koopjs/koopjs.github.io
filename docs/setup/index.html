@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Koop</title>
+  <title>Setup</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <link rel="stylesheet" href="/style.css">
 </head>
@@ -11,6 +11,19 @@
 <main class="page">
 
 <section class="markdown-body">
+
+
+<nav class="sidebar">
+  <a href="/" class="koop-logo">
+    <img src="/logo.png" alt="Koop">
+  </a>
+  <ul>
+    <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
+    <li><a class="site-link" href="/docs/">Docs</a></li>
+    <li><a class="site-link" href="http://github.com/koopjs">Github</a></li>
+  </ul>
+</nav>
+
 <h1>Setup</h1>
 <h2>1. Development Environment</h2>
 <blockquote>
@@ -25,7 +38,7 @@
 <ul>
 <li><a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">Postgres</a> and <a href="http://postgis.net/install">PostGIS</a></li>
 </ul>
-<p>Koop uses an in-memory cache by default. This is not recommended when running in production. A PostGIS cache using <a href="https://github.com/koopjs/koop-pgcache">koop-pgcache</a> is recommended for all production deployments. See <a href="caches.html">caches</a> for more details.</p>
+<p>Koop uses an in-memory cache by default. This is not recommended when running in production. A PostGIS cache using <a href="https://github.com/koopjs/koop-pgcache">koop-pgcache</a> is recommended for all production deployments. See <a href="caches/">caches</a> for more details.</p>
 <h3>Supported Operating Systems</h3>
 <p>Koop has been tested on:</p>
 <ul>
@@ -55,20 +68,9 @@
 <h2>3. Cache</h2>
 <p>By default, Koop uses a local in-memory object to cache requests. We highly recommend using a database as a cache. PostGIS is currently the only officially supported database. The <a href="https://github.com/koopjs/koop-pgcache"><code>koop-pgcache</code></a> module takes care of establishing a connection between Koop and a PostGIS database.</p>
 <h2>4. Providers</h2>
-<p>Once you’ve got a development environment, an Express server, and a database, all you need to do is configure your providers! See the complete <a href="providers.html">list of providers</a> for further instructions.</p>
+<p>Once you&#x2019;ve got a development environment, an Express server, and a database, all you need to do is configure your providers! See the complete <a href="providers/">list of providers</a> for further instructions.</p>
 <h2>5. Start the server!</h2>
-<p>If you’ve got everything set up properly, you should be able to start the server! This is usually done by running <code>node index.js</code>, <code>node server.js</code>, or simply <code>npm start</code>, depending on how you set up your Express server.</p>
-<nav class="sidebar">
-  <a href="/" class="koop-logo">
-    <img src="/logo.png" alt="Koop">
-  </a>
-  <ul>
-    <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
-    <li><a class="site-link" href="/docs/">Docs</a></li>
-    <li><a class="site-link" href="http://github.com/koopjs">Github</a></li>
-  </ul>
-</nav>
-
+<p>If you&#x2019;ve got everything set up properly, you should be able to start the server! This is usually done by running <code>node index.js</code>, <code>node server.js</code>, or simply <code>npm start</code>, depending on how you set up your Express server.</p>
 </section>
 </main>
 
