@@ -52,6 +52,24 @@ It makes sense to use a pass-through strategy if at least one of the following i
 
 Providers can do more than simply implement `getData` and hand GeoJSON back to Koop's core. In fact, they can extend the API space in an arbitrary fashion by adding routes that map to controller functions. Those controller functions call functions on the model to fetch or process data from the remote API.
 
+### Enable/Disable parameters
+
+Recall the `getData` function takes in a `req` that has a set of `params`:
+- host
+- id
+
+By default the host parameter is disabled and the id parameter is enabled. So requests like the following would work:
+
+`/provider/:id/FeatureServer/0`
+
+To enable the `host` parameter, edit the `index.js` file and set `hosts` to `true`. Then requests like the following will work:
+
+`/provider/:host/:id/FeatureServer/0`
+
+Sometimes, your provider may need no parameters at all. To disable the `id` parameter, edit `index.js` and set `disableIdParam` to `true`. Then requests like the following will work:
+
+`/provider/FeatureServer/0`
+
 ### Routes.js
 
 This file is simply an array of routes that should be handled in the namespace of the provider e.g. http://adapters.koopernetes.com/agol/arcgis/datasets/e5255b1f69944bcd9cf701025b68f411_0
