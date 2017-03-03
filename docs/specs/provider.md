@@ -1,6 +1,6 @@
 # Provider
 
-Add support for remote APIs or datasources to Koop
+Add support for any remote API or datasource to Koop. Dive into the docs below or check out a working sample [here](https://github.com/koopjs/koop-sample-provider).
 
 ## Index.js
 
