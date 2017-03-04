@@ -49,7 +49,7 @@ Koop uses a **cache** to store data from third party providers. This helps reduc
 
 ### [Plugins](docs/plugins/)
 
-Koop has **plugins** that add extra functionality not covered by providers and caches.
+Koop uses **plugins** to add extra functionality not supported by other plugin types.
 
 | name | version | build status |
 | --- | --- | --- |
