@@ -2,19 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Koop</title>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-NK268Q4');</script>
-  <!-- End Google Tag Manager -->
+  <title>Documentation</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
-  <meta name="google-site-verification" content="sT2OBur3wkiZO_swFVTv9x2RQlcWr77PCC18lIHahBc" />
+  <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NK268Q4');</script>
+<!-- End Google Tag Manager -->
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK268Q4" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <main class="page">
 
@@ -27,140 +29,32 @@
   <ul>
     <li><a class="site-link" href="/docs/setup.html">Setup</a></li>
     <li><a class="site-link" href="/docs/">Docs</a></li>
-    <li><a class="site-link" href="https://github.com/koopjs">Github</a></li>
+    <li><a class="site-link" href="http://github.com/koopjs">Github</a></li>
   </ul>
 </nav>
 
-<h1><a href="https://github.com/koopjs/koop">Koop</a></h1>
+<h1>Documentation</h1>
 <blockquote>
-<p>An Open Geospatial ETL Engine</p>
+<p>Home of the Koop docs</p>
 </blockquote>
-<p><a href="https://www.npmjs.com/package/koop"><img src="https://img.shields.io/npm/v/koop.svg?style=flat-square" alt="npm"></a>
-<a href="https://travis-ci.org/koopjs/koop-core"><img src="https://img.shields.io/travis/koopjs/koop-core/master.svg?style=flat-square" alt="build status"></a></p>
-<p>Leave geospatial data where it lives and transform it into GeoJSON, CSV, KML, a Shapefile, or a Feature Service dynamically.</p>
-<pre><code>ArcGIS Online                   GeoJSON
-Socrata                         CSV
-CKAN             =&gt; Koop =&gt;     KML
-Github                          Shapefile
-OpenStreetMap                   Feature Service
-</code></pre>
-<h2>Core Concepts</h2>
-<p>Koop is a highly-extensible Javascript toolkit for connecting incompatible spatial APIs. Out of the box it exposes a Node.js server that can translate <a href="http://geojson.org/">GeoJSON</a> into the <a href="https://geoservices.github.io">Geoservices specification</a> supported by the <a href="http://www.esri.com/arcgis/about-arcgis">ArcGIS</a> family of products. Koop can be extended to translate data from any source to any API specification. Don't let API incompatiblity get in your way, start using one of Koop's data providers or <a href="/docs/specs/provider/">write your own</a>.</p>
-<h3><a href="docs/providers/">Providers</a></h3>
-<p>Koop uses <strong>providers</strong> to transform data from different sources &#x2013; most often open data providers that serve geospatial data on the web.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">name</th>
-<th style="text-align:left">version</th>
-<th style="text-align:left">build status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-provider-agol">ArcGIS Online</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-agol"><img src="https://img.shields.io/npm/v/koop-agol.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-provider-agol"><img src="https://img.shields.io/travis/koopjs/koop-provider-agol/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-socrata">Socrata</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-socrata"><img src="https://img.shields.io/npm/v/koop-socrata.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-socrata"><img src="https://img.shields.io/travis/koopjs/koop-socrata/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-github">GitHub</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-github"><img src="https://img.shields.io/npm/v/koop-github.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-github"><img src="https://img.shields.io/travis/koopjs/koop-github/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-gist">Gist</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-gist"><img src="https://img.shields.io/npm/v/koop-gist.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-gist"><img src="https://img.shields.io/travis/koopjs/koop-gist/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-</tbody>
-</table>
-<h3><a href="docs/outputs/">Outputs</a></h3>
-<p>Koop uses <strong>outputs</strong> to serve data in open specifications like <a href="https://geoservices.github.io">Geoservices</a> so data can be used in clients that support them.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">name</th>
-<th style="text-align:left">version</th>
-<th style="text-align:left">build status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-output-geoservices">Geoservices</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-output-geoservices"><img src="https://img.shields.io/npm/v/koop-output-geoservices.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-output-geoservices"><img src="https://img.shields.io/travis/koopjs/koop-output-geoservices/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-</tbody>
-</table>
-<h3><a href="docs/caches/">Caches</a></h3>
-<p>Koop uses a <strong>cache</strong> to store data from third party providers. This helps reduce requests to other servers, bypass rate limiting issues, and speed up response times.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">name</th>
-<th style="text-align:left">version</th>
-<th style="text-align:left">build status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-cache-memory">Memory</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-cache-memory"><img src="https://img.shields.io/npm/v/koop-cache-memory.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-cache-memory"><img src="https://img.shields.io/travis/koopjs/koop-cache-memory/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-pgcache">PostGIS</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-pgcache"><img src="https://img.shields.io/npm/v/koop-pgcache.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-pgcache"><img src="https://img.shields.io/travis/koopjs/koop-pgcache/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-</tbody>
-</table>
-<h3><a href="docs/plugins/">Plugins</a></h3>
-<p>Koop has <strong>plugins</strong> that add extra functionality not covered by providers and caches.</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">name</th>
-<th style="text-align:left">version</th>
-<th style="text-align:left">build status</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-exporter">File Exporter</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-exporter"><img src="https://img.shields.io/npm/v/koop-exporter.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-exporter"><img src="https://img.shields.io/travis/koopjs/koop-exporter/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-tile-plugin">Tile Generator</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-tile-plugin"><img src="https://img.shields.io/npm/v/koop-tile-plugin.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-tile-plugin"><img src="https://img.shields.io/travis/koopjs/koop-tile-plugin/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-queue">Queue</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-queue"><img src="https://img.shields.io/npm/v/koop-queue.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-queue"><img src="https://img.shields.io/travis/koopjs/koop-queue/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-logger">Logger</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-logger"><img src="https://img.shields.io/npm/v/koop-logger.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-logger"><img src="https://img.shields.io/travis/koopjs/koop-logger/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-<tr>
-<td style="text-align:left"><a href="https://github.com/koopjs/koop-worker">Worker</a></td>
-<td style="text-align:left"><a href="https://www.npmjs.com/package/koop-worker"><img src="https://img.shields.io/npm/v/koop-worker.svg?style=flat-square" alt="npm"></a></td>
-<td style="text-align:left"><a href="https://travis-ci.org/koopjs/koop-worker"><img src="https://img.shields.io/travis/koopjs/koop-worker/master.svg?style=flat-square" alt="travis"></a></td>
-</tr>
-</tbody>
-</table>
-<h2>Contributions welcome</h2>
-<p>Koop is entirely open source. Check us out, file an issue, open a pull request, and help grow the project to make it as useful as possible to the geospatial community.</p>
-<p><a href="https://github.com/koopjs">github.com/koopjs</a></p>
+<h2>Basics</h2>
+<ol>
+<li><a href="setup/">Setup</a></li>
+<li><a href="providers/">Providers</a></li>
+<li><a href="caches/">Caches</a></li>
+<li><a href="plugins/">Plugins</a></li>
+</ol>
+<h2>Specifications</h2>
+<ol>
+<li><a href="specs/provider/">Provider</a></li>
+<li><a href="specs/cache/">Cache</a></li>
+<li><a href="specs/plugin/">Plugin</a></li>
+</ol>
+<h2>Extra</h2>
+<ol>
+<li><a href="heroku/">Deploying to Heroku</a></li>
+<li><a href="docker/">Using Koop with Docker</a></li>
+</ol>
 </section>
 </main>
 
