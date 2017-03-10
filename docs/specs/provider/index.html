@@ -47,7 +47,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Providers typically fall into two categories: cached and pass-through.</p>
 <h3>Cached</h3>
 <p>Cached providers periodically request entire datasets from the remote API.</p>
-<p><a href="https://github.com/koopjs/Koop-Provider-Craigslist">Koop-Provider-Craigslist</a> is a good example. The Craigslist API returns the entire set of postings for a given city and type in one call (e.g. Atlanta apartments). The data also does not that frequently. Therefore the Craigslist provider uses the Koop cache with a TTL of 1 hour, guaranteeing that data will never be more than an hour out of date.</p>
+<p><a href="https://github.com/koopjs/Koop-Provider-Craigslist">Koop-Provider-Craigslist</a> is a good example. The Craigslist API returns the entire set of postings for a given city and type in one call (e.g. Atlanta apartments). The data also does not change that frequently. Therefore the Craigslist provider uses the Koop cache with a TTL of 1 hour, guaranteeing that data will never be more than an hour out of date.</p>
 <p>It makes sense to use a cache strategy if at least one of the following is true:</p>
 <ul>
 <li>The remote dataset does not change often</li>
