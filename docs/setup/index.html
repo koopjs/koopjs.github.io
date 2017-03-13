@@ -38,16 +38,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <blockquote>
 <p>Setting up a development environment for Koop</p>
 </blockquote>
-<p>All you need to have installed before Koop will run is a <a href="https://nodejs.org/">Node.js</a> environment and an internet connection. We recommend using version 4, which is the long term stability release.</p>
+<p>All you need to have installed before Koop will run is a <a href="https://nodejs.org/">Node.js</a> environment and an internet connection. We recommend using version 6, which is the long term stability release.</p>
+<p>Once Node is installed run:</p>
+<ol>
+<li>npm init</li>
+<li>npm install -S koop</li>
+<li>npm install (any koop provider)</li>
+</ol>
 <h3>Required</h3>
 <ul>
 <li><a href="https://nodejs.org/download/">Node.js</a></li>
 </ul>
-<h3>Recommended</h3>
+<h3>Advanced</h3>
 <ul>
 <li><a href="https://wiki.postgresql.org/wiki/Detailed_installation_guides">Postgres</a> and <a href="http://postgis.net/install">PostGIS</a></li>
 </ul>
-<p>Koop uses an in-memory cache by default. This is not recommended when running in production. A PostGIS cache using <a href="https://github.com/koopjs/koop-pgcache">koop-pgcache</a> is recommended for all production deployments. See <a href="caches/">caches</a> for more details.</p>
+<p>Koop uses an in-memory cache by default. A PostGIS cache <a href="https://github.com/koopjs/koop-pgcache">koop-pgcache</a> will store data independent of the Koop server processes and speed up queries, but it is optional. See <a href="caches/">caches</a> for more details.</p>
 <h3>Supported Operating Systems</h3>
 <p>Koop has been tested on:</p>
 <ul>
@@ -73,13 +79,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </li>
 </ul>
 <h2>2. Express server</h2>
-<p>Once you have a development environment set up, you need a basic Express server to get started with Koop. You can use the <a href="https://github.com/koopjs/koop-sample-app">sample app</a> as a starting point.</p>
-<h2>3. Cache</h2>
-<p>By default, Koop uses a local in-memory object to cache requests. We highly recommend using a database as a cache. PostGIS is currently the only officially supported database. The <a href="https://github.com/koopjs/koop-pgcache"><code>koop-pgcache</code></a> module takes care of establishing a connection between Koop and a PostGIS database.</p>
-<h2>4. Providers</h2>
+<p>Koop exposes an <a href="https://expressjs.com">Express</a> server at <code>koop.server</code> which can be instructed to listen on port 80 (or any port of your choosing) as in the example below.</p>
+<script src="https://gist.github.com/dmfenton/fb27fafcc82089cf6099d22f443a18ba.js"></script>
+<p>You can also run Koop as <a href="https://expressjs.com/en/guide/using-middleware.html">middleware</a> in an existing Express server.</p>
+<script src="https://gist.github.com/dmfenton/d457518ab46790d7af136589bb7258d6.js"></script>
+<p>If you want to mount Koop at a route other than <code>/</code> e.g. <code>/koop</code> you can use Koop as middleware and mount it wherever you like.</p>
+<script src="https://gist.github.com/dmfenton/1f252732bfa66bca4ff0a21628fb7ec1.js"></script>
+<h2>3. Providers</h2>
 <p>Once you&#x2019;ve got a development environment, an Express server, and a database, all you need to do is configure your providers! See the complete <a href="providers/">list of providers</a> for further instructions.</p>
-<h2>5. Start the server!</h2>
-<p>If you&#x2019;ve got everything set up properly, you should be able to start the server! This is usually done by running <code>node index.js</code>, <code>node server.js</code>, or simply <code>npm start</code>, depending on how you set up your Express server.</p>
+<p><code>koop.register(provider)</code></p>
+<h2>4. Start the server!</h2>
+<p>If you&#x2019;ve got everything set up properly, you should be able to start the server! Add a script to you package.json like the example below that points to your server file and type <code>npm start</code>.</p>
+<script src="https://gist.github.com/dmfenton/114c09b3befd8e60b3a30ff5f65d8c82.js"></script>
+<p>Happy Kooping!</p>
 </section>
 </main>
 
