@@ -25,7 +25,7 @@
   ],
   "license": "Apache-2.0",
   "main": "scripts/build.js",
-  "private": "true",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/koopjs/koopjs.github.io.git"
