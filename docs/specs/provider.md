@@ -25,7 +25,7 @@ Providers typically fall into two categories: cached and pass-through.
 
 Pass-through providers do not store any data, they act as a proxy/translator between the client and the remote API.
 
-[Koop-Provider-Yelp](https://github.com/dmfenton/Koop-Provider-Yelp) is a good example. The Yelp API supports filters and geographic queries, but it only returns 20 results at a time and there is no way to download the entire Yelp dataset.
+[Koop-Provider-Yelp](https://github.com/koopjs/Koop-Provider-Yelp) is a good example. The Yelp API supports filters and geographic queries, but it only returns 20 results at a time and there is no way to download the entire Yelp dataset.
 
 It makes sense to use a pass-through strategy if at least one of the following is true:
 - The remote dataset changes frequently
@@ -49,7 +49,7 @@ http://localhost:8080/yelp/FeatureServer/0?where=term=pizza&f=geojson
 
 Cached providers periodically request entire datasets from the remote API.
 
-[Koop-Provider-Craigslist](https://github.com/koopjs/koop-provider-craigslist) is a good example. The Craigslist API returns the entire set of postings for a given city and type in one call (e.g. Atlanta apartments). The data also does not change that frequently. Therefore the Craigslist provider uses the Koop cache with a TTL of 1 hour, guaranteeing that data will never be more than an hour out of date.
+[Koop-Provider-Craigslist](https://github.com/dmfenton/koop-provider-craigslist) is a good example. The Craigslist API returns the entire set of postings for a given city and type in one call (e.g. Atlanta apartments). The data also does not change that frequently. Therefore the Craigslist provider uses the Koop cache with a TTL of 1 hour, guaranteeing that data will never be more than an hour out of date.
 
 It makes sense to use a cache strategy if at least one of the following is true:
 - The remote dataset does not change often
