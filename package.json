@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "sitedown --build . --layout layout.html --watch .",
-    "start": "nodefront serve",
+    "start": "nodefront serve & npm run build",
     "test": "standard"
   }
 }
