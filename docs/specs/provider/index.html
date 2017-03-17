@@ -36,7 +36,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </nav>
 
 <h1>Provider</h1>
-<p>Add support for any remote API or datasource to Koop. Dive into the docs below or check out a working sample <a href="https://github.com/koopjs/koop-sample-provider">here</a>.</p>
+<p>Add support for any remote API or datasource to Koop. Dive into the docs below or check out a working sample <a href="https://github.com/koopjs/koop-provider-sample">here</a>.</p>
 <h2>Index.js</h2>
 <p>Every provider must have a file called <code>index.js</code>. Its purpose is to tell Koop how to load and use the provider. The keys and values are enumerated in the example below.</p>
 <script src="https://gist.github.com/dmfenton/93379d71f4412716b3e508e1c8612cfa.js"></script>
@@ -47,17 +47,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="https://gist.github.com/dmfenton/066061daa62b53c60f1fcbf94ade9567.js"></script>
 <h2>Cached vs Pass-Through</h2>
 <p>Providers typically fall into two categories: cached and pass-through.</p>
-<h3>Cached</h3>
-<p>Cached providers periodically request entire datasets from the remote API.</p>
-<p><a href="https://github.com/koopjs/Koop-Provider-Craigslist">Koop-Provider-Craigslist</a> is a good example. The Craigslist API returns the entire set of postings for a given city and type in one call (e.g. Atlanta apartments). The data also does not change that frequently. Therefore the Craigslist provider uses the Koop cache with a TTL of 1 hour, guaranteeing that data will never be more than an hour out of date.</p>
-<p>It makes sense to use a cache strategy if at least one of the following is true:</p>
-<ul>
-<li>The remote dataset does not change often</li>
-<li>The remote dataset is large</li>
-<li>The entire remote dataset can be fetched</li>
-<li>The remote API does not support filters or geographic queries</li>
-<li>The remote API is slow to respond</li>
-</ul>
 <h3>Pass-Through</h3>
 <p>Pass-through providers do not store any data, they act as a proxy/translator between the client and the remote API.</p>
 <p><a href="https://github.com/koopjs/Koop-Provider-Yelp">Koop-Provider-Yelp</a> is a good example. The Yelp API supports filters and geographic queries, but it only returns 20 results at a time and there is no way to download the entire Yelp dataset.</p>
@@ -69,6 +58,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <li>The remote API does not allow fetching the entire dataset</li>
 <li>The remote API supports filters and geographic queries</li>
 <li>The remote API is quick to respond</li>
+</ul>
+<p>The request below fetches data from yelp and translates it into Geoservices JSON</p>
+<pre><code>http://localhost:8080/yelp/FeatureServer/0?where=term=pizza
+</code></pre>
+<p>GeoJSON can be retrieved as well</p>
+<pre><code>http://localhost:8080/yelp/FeatureServer/0?where=term=pizza&amp;f=geojson
+</code></pre>
+<h3>Cached</h3>
+<p>Cached providers periodically request entire datasets from the remote API.</p>
+<p><a href="https://github.com/dmfenton/koop-provider-craigslist">Koop-Provider-Craigslist</a> is a good example. The Craigslist API returns the entire set of postings for a given city and type in one call (e.g. Atlanta apartments). The data also does not change that frequently. Therefore the Craigslist provider uses the Koop cache with a TTL of 1 hour, guaranteeing that data will never be more than an hour out of date.</p>
+<p>It makes sense to use a cache strategy if at least one of the following is true:</p>
+<ul>
+<li>The remote dataset does not change often</li>
+<li>The remote dataset is large</li>
+<li>The entire remote dataset can be fetched</li>
+<li>The remote API does not support filters or geographic queries</li>
+<li>The remote API is slow to respond</li>
 </ul>
 <h2>Advanced</h2>
 <p>Providers can do more than simply implement <code>getData</code> and hand GeoJSON back to Koop&#x2019;s core. In fact, they can extend the API space in an arbitrary fashion by adding routes that map to controller functions. Those controller functions call functions on the model to fetch or process data from the remote API.</p>

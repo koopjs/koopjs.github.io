@@ -10,6 +10,7 @@
     "glob": "^5.0.13",
     "markdown-it": "^3.0.2",
     "nodefront": "^1.0.7",
+    "npm-run-all": "^4.0.2",
     "sitedown": "^3.1.1",
     "standard": "^8.0.0"
   },
@@ -25,14 +26,15 @@
   ],
   "license": "Apache-2.0",
   "main": "scripts/build.js",
-  "private": "true",
+  "private": true,
   "repository": {
     "type": "git",
     "url": "git://github.com/koopjs/koopjs.github.io.git"
   },
   "scripts": {
     "build": "sitedown --build . --layout layout.html --watch .",
-    "start": "nodefront serve",
+    "serve": "nodefront serve",
+    "start": "npm-run-all --parallel serve build",
     "test": "standard"
   }
 }
