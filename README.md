@@ -26,8 +26,8 @@ Koop uses **providers** to transform data from different sources – most often 
 | name | version | build status |
 | --- | --- | --- |
 | [ArcGIS Online](https://github.com/koopjs/koop-provider-agol) | [![npm](https://img.shields.io/npm/v/koop-agol.svg?style=flat-square)](https://www.npmjs.com/package/koop-agol) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-agol/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-agol) |
-| [Socrata](https://github.com/koopjs/koop-socrata) | [![npm](https://img.shields.io/npm/v/koop-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-socrata) |
-| [GitHub](https://github.com/koopjs/koop-github) | [![npm](https://img.shields.io/npm/v/koop-github.svg?style=flat-square)](https://www.npmjs.com/package/koop-github) | [![travis](https://img.shields.io/travis/koopjs/koop-github/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-github) |
+| [Socrata](https://github.com/koopjs/koop-provider-socrata) | [![npm](https://img.shields.io/npm/v/koop-provider-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-socrata) |
+| [GitHub](https://github.com/koopjs/koop-provider-github) | [![npm](https://img.shields.io/npm/v/koop-github.svg?style=flat-square)](https://www.npmjs.com/package/koop-github) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-github/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-github) |
 | [Gist](https://github.com/koopjs/koop-gist) | [![npm](https://img.shields.io/npm/v/koop-gist.svg?style=flat-square)](https://www.npmjs.com/package/koop-gist) | [![travis](https://img.shields.io/travis/koopjs/koop-gist/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-gist) |
 
 ### [Outputs](docs/outputs/)
