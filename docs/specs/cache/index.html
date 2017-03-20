@@ -12,6 +12,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-NK268Q4');</script>
 <!-- End Google Tag Manager -->
   <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/styles/default.min.css">
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.10.0/highlight.min.js"></script>
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -34,127 +36,159 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </nav>
 
 <h1>Koop cache module specification</h1>
-<p>In order to function as a cache for Koop, a module must support the following API</p>
-<h2>Functions</h2>
-<h3>insert</h3>
-<p>Insert a new table into the cache</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, data, layer, function (err, success</span>)
-</span></code></pre>
-<ul>
-<li>Table (string): the name of the table to be inserted. Usually of the form: type:key</li>
-<li>Data (object): geojson to be inserted after creation</li>
-<li>Layer (integer): the id of the layer. Usually defaults to 0</li>
-<li>Callback (function): returns err on failure or true on success</li>
-</ul>
-<h3>insertPartial</h3>
-<p>Insert a set of rows into an existing table</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, data, layerId, function (err, success</span>)
-</span></code></pre>
-<ul>
-<li>Table (string): the name of the table to be inserted. Usually of the form: type:key</li>
-<li>Data (object): geojson to be inserted after creation</li>
-<li>Layer (integer): the id of the layer. Usually defaults to 0</li>
-<li>Callback (function): returns err on failure or true on success</li>
-</ul>
-<h3>remove</h3>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, function(err, success</span>))
-</span></code></pre>
-<ul>
-<li>Table: the name of the table to be deleted. Includes the layer id</li>
-<li>e.g. Socrata:ejk5-56ko:0</li>
-<li>Callback: returns err on failure or true on success</li>
-</ul>
-<h3>select</h3>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, options, function(err, data</span>))
-</span></code></pre>
-<ul>
-<li>Table (string): The table to select data from, does not include the layerId.</li>
-<li>Options (object): used to select the proper table and pass where clauses</li>
-<li>layerId (integer): the id of the layer to select. usually defaults to 0</li>
-<li>where (string): Sql where clause</li>
-<li>geometry (object): Bounding box to restrict select e.g. {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}</li>
-<li>idFilter (?) : ?</li>
-<li>fields (array): Fields to include in the data response, * returns all fields. Akin to <code>select field1, field2</code> or <code>select *</code></li>
-<li>Callback (function): Returns error if select failed, or returns GeoJSON from the cache</li>
-</ul>
-<h3>updateInfo</h3>
-<p>Update an info doc that contains metadata about a resource</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, info, function(err, success</span>)
-</span></code></pre>
-<ul>
-<li>Table (string): The resource about which to update info. Includes the layer id</li>
-<li>e.g. Socrata:ejk5-56ko:0</li>
-<li>Info (object): Info to store along with the resource. Status must be set at processing while data is being added to the cache</li>
-<li>e.g. {status: &#x2018;processing&#x2019;, updated_at: 1433882094, checked_at: 1433882094, count: 1025355, extent: {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}}</li>
-<li>Callback: Returns error, false on failure, and null, true on success</li>
-</ul>
-<h4>Example info parameter</h4>
-<pre><code class="language-javascript">{
-  <span class="hljs-string">&apos;status&apos;</span>: <span class="hljs-string">&apos;processing&apos;</span>,
-  <span class="hljs-string">&apos;updated_at&apos;</span>: <span class="hljs-number">1433882094</span>,
-  <span class="hljs-string">&apos;checked_at&apos;</span>: <span class="hljs-number">1433882094</span>,
-  <span class="hljs-string">&apos;count&apos;</span>: <span class="hljs-number">1025355</span>,
-  <span class="hljs-string">&apos;extent&apos;</span>: {<span class="hljs-string">&apos;xmin&apos;</span>: <span class="hljs-number">-104</span>, <span class="hljs-string">&apos;ymin&apos;</span>: <span class="hljs-number">35.6</span>, <span class="hljs-string">&apos;xmax&apos;</span>: <span class="hljs-number">-94.32</span>, <span class="hljs-string">&apos;ymax&apos;</span>: <span class="hljs-number">41</span>}
-}
+<p>Any backend can be used as a Koop cache, e.g. PostGIS, Elasticsearch, Redis etc. All it must do is follow the specification in this document.</p>
+<h2>Usage</h2>
+<p>To be used by Koop, the cache must be registered with the Koop object before the server begins listening as in the example below.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> Koop = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;koop&apos;</span>)
+<span class="hljs-keyword">const</span> koop = <span class="hljs-keyword">new</span> Koop()
+<span class="hljs-keyword">const</span> cache = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;koop-cache-memory&apos;</span>)
+koop.register(cache)
+koop.server.listen(<span class="hljs-number">80</span>)
 </code></pre>
-<h3>getInfo</h3>
-<p>Get an info doc with metadata about a resource</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, function(err, info</span>))
-</span></code></pre>
-<ul>
-<li>Table (string): The resource about which to update info. Includes the layer id</li>
-<li>Callback (function): Returns error, null failure and null, info (object) on success.</li>
-</ul>
-<h4>Example response</h4>
-<pre><code class="language-javascript">(<span class="hljs-literal">null</span>, {
-  <span class="hljs-string">&apos;status&apos;</span>: <span class="hljs-string">&apos;processing&apos;</span>,
-  <span class="hljs-string">&apos;updated_at&apos;</span>: <span class="hljs-number">1433882094</span>,
-  <span class="hljs-string">&apos;checked_at&apos;</span>: <span class="hljs-number">1433882094</span>,
-  <span class="hljs-string">&apos;count&apos;</span>: <span class="hljs-number">1025355</span>,
-  <span class="hljs-string">&apos;extent&apos;</span>: {<span class="hljs-string">&apos;xmin&apos;</span>: <span class="hljs-number">-104</span>, <span class="hljs-string">&apos;ymin&apos;</span>: <span class="hljs-number">35.6</span>, <span class="hljs-string">&apos;xmax&apos;</span>: <span class="hljs-number">-94.32</span>, <span class="hljs-string">&apos;ymax&apos;</span>: <span class="hljs-number">41</span>}
+<h2>API</h2>
+<p>The cache is a JavaScript object that lives in-memory. It is used to store geojson features.</p>
+<h3><code>insert</code></h3>
+<p>Insert geojson into the cache</p>
+<p>Note: A metadata entry will be created automatically. It can be populated from an object on the inserted geojson.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> geojson = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&apos;FeatureCollection&apos;</span>,
+  <span class="hljs-attr">features</span>: [],
+  <span class="hljs-attr">metadata</span>: { <span class="hljs-comment">// Metadata is an arbitrary object that will be stored in the catalog under the same key as the geojson</span>
+    name: <span class="hljs-string">&apos;Example GeoJSON&apos;</span>,
+    <span class="hljs-attr">description</span>: <span class="hljs-string">&apos;This is geojson that will be stored in the cache&apos;</span>
+  }
+}
+
+<span class="hljs-keyword">const</span> options = {
+  <span class="hljs-attr">ttl</span>: <span class="hljs-number">1000</span> <span class="hljs-comment">// The TTL option is measured in seconds, it will be used to set the `expires` field in the catalog entry</span>
+}
+
+cache.insert(<span class="hljs-string">&apos;key&apos;</span>, geojson, options, err =&gt; {
+  <span class="hljs-comment">// This function will call back with an error if there is already data in the cache using the same key</span>
 })
 </code></pre>
-<h3>getCount</h3>
-<p>Get the count of features in the database for a given resource</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, options, function (err, count</span>))
-</span></code></pre>
-<ul>
-<li>Table (string): The resource about which to update info. Includes the layer id</li>
-<li>Table (string): The table to select data from, does not include the layerId.</li>
-<li>Options (object): used to select the proper table and pass where clauses</li>
-<li>where (string): Sql where clause</li>
-<li>geometry (object): Bounding box to restrict select }</li>
-<li>Callback (function): Returns error, null on failure and null, count on success</li>
-</ul>
-<h3>Example Options param</h3>
-<pre><code class="language-javascript">{
-  <span class="hljs-string">&apos;where&apos;</span>: <span class="hljs-string">&apos;Field1 &gt; 2014 OR Field2 &gt; 9000&apos;</span>
-  <span class="hljs-string">&apos;geometry&apos;</span>: {<span class="hljs-string">&apos;xmin&apos;</span>: <span class="hljs-number">-104</span>, <span class="hljs-string">&apos;ymin&apos;</span>: <span class="hljs-number">35.6</span>, <span class="hljs-string">&apos;xmax&apos;</span>: <span class="hljs-number">-94.32</span>, <span class="hljs-string">&apos;ymax&apos;</span>: <span class="hljs-number">41</span>}
+<h3><code>append</code></h3>
+<p>Add features to an existing geojson feature collection in the cache
+Note:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> geojson = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&apos;FeatureCollection&apos;</span>,
+  <span class="hljs-attr">features</span>: []
 }
+cache.append(<span class="hljs-string">&apos;key&apos;</span>, geojson, err =&gt; {
+  <span class="hljs-comment">// This function will call back with an error if the cache key does not exist</span>
+})
 </code></pre>
-<h4>Example response</h4>
-<pre><code class="language-javascript">(<span class="hljs-literal">null</span>, <span class="hljs-number">105005</span>)
+<h3><code>update</code></h3>
+<p>Update a cached feature collection with new features.
+This will completely replace the features that are in the cache, but the metadata doc will remain in the catalog.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> geojson = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&apos;FeatureCollection&apos;</span>,
+  <span class="hljs-attr">features</span>: []
+}
+
+<span class="hljs-keyword">const</span> options = {
+  <span class="hljs-attr">ttl</span>: <span class="hljs-number">1000</span>
+}
+cache.update(<span class="hljs-string">&apos;key&apos;</span>, geojson, options, err =&gt; {
+  <span class="hljs-comment">// This function will call back with an error if the cache key does not exist</span>
+})
 </code></pre>
-<h3>timerGet</h3>
-<p>Fetch a timer that tells the provider whether to check for cache expiration</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, expires, function (err, timer</span>)
-</span></code></pre>
-<ul>
-<li>Table (string): The resource about which to update info. Includes the layer id</li>
-<li>Callback (function): Returns with error, null on failure and null, timer on success</li>
-</ul>
-<h3>Example response</h3>
-<pre><code class="language-javascript">(<span class="hljs-literal">null</span>, <span class="hljs-number">1433883928</span>)
+<h3><code>upsert</code></h3>
+<p>Update a cached feature collection with new features or insert if the features are not there.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> geojson = {
+  <span class="hljs-attr">type</span>: <span class="hljs-string">&apos;FeatureCollection&apos;</span>,
+  <span class="hljs-attr">features</span>: []
+}
+
+<span class="hljs-keyword">const</span> options = {
+  <span class="hljs-attr">ttl</span>: <span class="hljs-number">1000</span>
+}
+
+cache.upsert(<span class="hljs-string">&apos;key&apos;</span>, geojson, options, err =&gt; {
+  <span class="hljs-comment">// This function will call back with an error if the cache key does not exist</span>
+})
 </code></pre>
-<h3>timerSet</h3>
-<p>Set a timer that will tell the provider to check for cache expiration when it&#x2019;s up</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">table, expires, function (err, success</span>)
-</span></code></pre>
-<ul>
-<li>Table (string): The resource about which to update info. Includes the layer id</li>
-<li>Expires (date object): The next date at which to check for cache expiration</li>
-<li>Callback (function): Returns err, null or null, true</li>
-</ul>
+<h3><code>retrieve</code></h3>
+<p>Retrieve a cached feature collection, optionally applying a query or aggregation to the data</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> options = {} <span class="hljs-comment">// This options object may be a query compatible with the GeoServices spec or as is used in Winnow</span>
+cache.retrieve(<span class="hljs-string">&apos;key&apos;</span>, options, (err, geojson) =&gt; {
+  <span class="hljs-comment">/* This function will call back with an error if there is no geojson in the cache
+  The geojson returned will contain the metadata document from the catalog
+  {
+    type: &apos;FeatureCollection&apos;,
+    features: [],
+    metadata: {}
+  }
+  */</span>
+})
+</code></pre>
+<h3><code>delete</code></h3>
+<p>Remove a feature collection from the cache</p>
+<pre><code class="language-js">cache.delete(<span class="hljs-string">&apos;key&apos;</span>, err =&gt; {
+  <span class="hljs-comment">// This function will call back with an error if there was nothing to delete</span>
+})
+</code></pre>
+<h3><code>createStream</code></h3>
+<p>Create a stream of features from the cache</p>
+<pre><code class="language-js">cache.createStream(<span class="hljs-string">&apos;key&apos;</span>, options)
+.pipe(<span class="hljs-comment">/* do something with the stream of geojson features emitted one at a time */</span>)
+</code></pre>
+<h2>Catalog API</h2>
+<p>The catalog stores metadata about items that are in the cache.</p>
+<h3><code>catalog.insert</code></h3>
+<p>Add an arbitrary metadata document to the cache.
+Note: This is called automatically by <code>insert</code></p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> metadata = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&apos;Standalone metadata&apos;</span>,
+  <span class="hljs-attr">status</span>: <span class="hljs-string">&apos;Processing&apos;</span>,
+  <span class="hljs-attr">description</span>: <span class="hljs-string">&apos;Metadata that is not attached to any other data in the cache&apos;</span>
+}
+
+cache.catalog.insert(<span class="hljs-string">&apos;key&apos;</span>, metadata, err =&gt; {
+  <span class="hljs-comment">// this function will call back with an error if there is already a metadata document using the same key</span>
+})
+</code></pre>
+<h3><code>catalog.update</code></h3>
+<p>Update a metadata entry</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> original = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&apos;Doc&apos;</span>,
+  <span class="hljs-attr">status</span>: <span class="hljs-string">&apos;Processing&apos;</span>
+}
+cache.catalog.insert(<span class="hljs-string">&apos;key&apos;</span>, original)
+
+<span class="hljs-keyword">const</span> update = {
+  <span class="hljs-attr">status</span>: <span class="hljs-string">&apos;Cached&apos;</span>
+}
+
+cache.catalog.update(<span class="hljs-string">&apos;key&apos;</span>, update, err =&gt; {
+  <span class="hljs-comment">// this function will call back with an error if there is no metadata in the catalog using that key</span>
+})
+
+cache.catalog.retrieve(<span class="hljs-string">&apos;key&apos;</span>, (err, metadata) =&gt; {
+  <span class="hljs-comment">/*
+    Updates are merged into the existing metadata document
+    Return value will be:
+    {
+      name: &apos;Doc&apos;,
+      status: &apos;Cached&apos;
+    }
+  */</span>
+})
+</code></pre>
+<h3><code>catalog.retrieve</code></h3>
+<p>Retrieve a metadata entry from the catalog</p>
+<pre><code class="language-js">cache.catalog.retrieve(<span class="hljs-string">&apos;key&apos;</span>, (err, metadata) =&gt; {
+  <span class="hljs-comment">// This function will call back with an error if there is no metadata stored under the given key</span>
+  <span class="hljs-comment">// Or else it will call back with the stored metadata doc</span>
+})
+</code></pre>
+<h3><code>catalog.delete</code></h3>
+<p>Remove a catalog entry from the catalog
+Note: This cannot be called if data is in the cache under the same key</p>
+<pre><code class="language-js">cache.catalog.delete(<span class="hljs-string">&apos;key&apos;</span>, err =&gt; {
+  <span class="hljs-comment">// This function will call back with an error if there is nothing to delete or if there is still data in the cache using the same key</span>
+})
+</code></pre>
 </section>
 </main>
 

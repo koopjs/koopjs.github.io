@@ -1,133 +1,195 @@
 # Koop cache module specification
 
-In order to function as a cache for Koop, a module must support the following API
+Any backend can be used as a Koop cache, e.g. PostGIS, Elasticsearch, Redis etc. All it must do is follow the specification in this document.
 
-## Functions
+## Usage
 
-### insert
-Insert a new table into the cache
-```javascript
-function (table, data, layer, function (err, success)
- ```
-* Table (string): the name of the table to be inserted. Usually of the form: type:key
-* Data (object): geojson to be inserted after creation
-* Layer (integer): the id of the layer. Usually defaults to 0
-* Callback (function): returns err on failure or true on success
+To be used by Koop, the cache must be registered with the Koop object before the server begins listening as in the example below.
 
-### insertPartial
-Insert a set of rows into an existing table
-```javascript
-function (table, data, layerId, function (err, success)
+```js
+const Koop = require('koop')
+const koop = new Koop()
+const cache = require('koop-cache-memory')
+koop.register(cache)
+koop.server.listen(80)
 ```
-* Table (string): the name of the table to be inserted. Usually of the form: type:key
-* Data (object): geojson to be inserted after creation
-* Layer (integer): the id of the layer. Usually defaults to 0
-* Callback (function): returns err on failure or true on success
 
-### remove
-```javascript
-function (table, function(err, success))
-```
-* Table: the name of the table to be deleted. Includes the layer id
- * e.g. Socrata:ejk5-56ko:0
-* Callback: returns err on failure or true on success
+## API
+The cache is a JavaScript object that lives in-memory. It is used to store geojson features.
 
-### select
-```javascript
-function (table, options, function(err, data))
-```
-* Table (string): The table to select data from, does not include the layerId.
-* Options (object): used to select the proper table and pass where clauses
- * layerId (integer): the id of the layer to select. usually defaults to 0
- * where (string): Sql where clause
- * geometry (object): Bounding box to restrict select e.g. {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}
- * idFilter (?) : ?
- * fields (array): Fields to include in the data response, * returns all fields. Akin to `select field1, field2` or `select *`
-* Callback (function): Returns error if select failed, or returns GeoJSON from the cache
+### `insert`
+Insert geojson into the cache
 
-### updateInfo
-Update an info doc that contains metadata about a resource
-```javascript
-function (table, info, function(err, success)
-```
-* Table (string): The resource about which to update info. Includes the layer id
- * e.g. Socrata:ejk5-56ko:0
-* Info (object): Info to store along with the resource. Status must be set at processing while data is being added to the cache
- * e.g. {status: 'processing', updated_at: 1433882094, checked_at: 1433882094, count: 1025355, extent: {xmin: -104, ymin: 35.6, xmax: -94.32, ymax: 41}}
-* Callback: Returns error, false on failure, and null, true on success
+Note: A metadata entry will be created automatically. It can be populated from an object on the inserted geojson.
 
-#### Example info parameter
-```javascript
-{
-  'status': 'processing',
-  'updated_at': 1433882094,
-  'checked_at': 1433882094,
-  'count': 1025355,
-  'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+```js
+const geojson = {
+  type: 'FeatureCollection',
+  features: [],
+  metadata: { // Metadata is an arbitrary object that will be stored in the catalog under the same key as the geojson
+    name: 'Example GeoJSON',
+    description: 'This is geojson that will be stored in the cache'
+  }
 }
-```
 
-### getInfo
-Get an info doc with metadata about a resource
-```javascript
-function (table, function(err, info))
-```
-* Table (string): The resource about which to update info. Includes the layer id
-* Callback (function): Returns error, null failure and null, info (object) on success.
+const options = {
+  ttl: 1000 // The TTL option is measured in seconds, it will be used to set the `expires` field in the catalog entry
+}
 
-#### Example response
-```javascript
-(null, {
-  'status': 'processing',
-  'updated_at': 1433882094,
-  'checked_at': 1433882094,
-  'count': 1025355,
-  'extent': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+cache.insert('key', geojson, options, err => {
+  // This function will call back with an error if there is already data in the cache using the same key
 })
 ```
 
-### getCount
-Get the count of features in the database for a given resource
-```javascript
-function (table, options, function (err, count))
-```
-* Table (string): The resource about which to update info. Includes the layer id
-* Table (string): The table to select data from, does not include the layerId.
-* Options (object): used to select the proper table and pass where clauses
- * where (string): Sql where clause
- * geometry (object): Bounding box to restrict select }
-* Callback (function): Returns error, null on failure and null, count on success
+### `append`
+Add features to an existing geojson feature collection in the cache
+Note:
 
-### Example Options param
-```javascript
-{
-  'where': 'Field1 > 2014 OR Field2 > 9000'
-  'geometry': {'xmin': -104, 'ymin': 35.6, 'xmax': -94.32, 'ymax': 41}
+```js
+const geojson = {
+  type: 'FeatureCollection',
+  features: []
 }
-````
-#### Example response
-```javascript
-(null, 105005)
-````
-
-### timerGet
-Fetch a timer that tells the provider whether to check for cache expiration
-```javascript
-function (table, expires, function (err, timer)
-```
-* Table (string): The resource about which to update info. Includes the layer id
-* Callback (function): Returns with error, null on failure and null, timer on success
-
-### Example response
-```javascript
-(null, 1433883928)
+cache.append('key', geojson, err => {
+  // This function will call back with an error if the cache key does not exist
+})
 ```
 
-### timerSet
-Set a timer that will tell the provider to check for cache expiration when it's up
-```javascript
-function (table, expires, function (err, success)
+### `update`
+Update a cached feature collection with new features.
+This will completely replace the features that are in the cache, but the metadata doc will remain in the catalog.
+
+```js
+const geojson = {
+  type: 'FeatureCollection',
+  features: []
+}
+
+const options = {
+  ttl: 1000
+}
+cache.update('key', geojson, options, err => {
+  // This function will call back with an error if the cache key does not exist
+})
 ```
-* Table (string): The resource about which to update info. Includes the layer id
-* Expires (date object): The next date at which to check for cache expiration
-* Callback (function): Returns err, null or null, true
+
+### `upsert`
+Update a cached feature collection with new features or insert if the features are not there.
+
+```js
+const geojson = {
+  type: 'FeatureCollection',
+  features: []
+}
+
+const options = {
+  ttl: 1000
+}
+
+cache.upsert('key', geojson, options, err => {
+  // This function will call back with an error if the cache key does not exist
+})
+```
+
+### `retrieve`
+Retrieve a cached feature collection, optionally applying a query or aggregation to the data
+
+```js
+const options = {} // This options object may be a query compatible with the GeoServices spec or as is used in Winnow
+cache.retrieve('key', options, (err, geojson) => {
+  /* This function will call back with an error if there is no geojson in the cache
+  The geojson returned will contain the metadata document from the catalog
+  {
+    type: 'FeatureCollection',
+    features: [],
+    metadata: {}
+  }
+  */
+})
+```
+
+### `delete`
+Remove a feature collection from the cache
+
+```js
+cache.delete('key', err => {
+  // This function will call back with an error if there was nothing to delete
+})
+```
+
+### `createStream`
+Create a stream of features from the cache
+
+```js
+cache.createStream('key', options)
+.pipe(/* do something with the stream of geojson features emitted one at a time */)
+```
+
+## Catalog API
+The catalog stores metadata about items that are in the cache.
+
+### `catalog.insert`
+Add an arbitrary metadata document to the cache.
+Note: This is called automatically by `insert`
+
+```js
+const metadata = {
+  name: 'Standalone metadata',
+  status: 'Processing',
+  description: 'Metadata that is not attached to any other data in the cache'
+}
+
+cache.catalog.insert('key', metadata, err => {
+  // this function will call back with an error if there is already a metadata document using the same key
+})
+```
+
+### `catalog.update`
+Update a metadata entry
+
+```js
+const original = {
+  name: 'Doc',
+  status: 'Processing'
+}
+cache.catalog.insert('key', original)
+
+const update = {
+  status: 'Cached'
+}
+
+cache.catalog.update('key', update, err => {
+  // this function will call back with an error if there is no metadata in the catalog using that key
+})
+
+cache.catalog.retrieve('key', (err, metadata) => {
+  /*
+    Updates are merged into the existing metadata document
+    Return value will be:
+    {
+      name: 'Doc',
+      status: 'Cached'
+    }
+  */
+})
+```
+
+### `catalog.retrieve`
+Retrieve a metadata entry from the catalog
+
+```js
+cache.catalog.retrieve('key', (err, metadata) => {
+  // This function will call back with an error if there is no metadata stored under the given key
+  // Or else it will call back with the stored metadata doc
+})
+```
+
+### `catalog.delete`
+Remove a catalog entry from the catalog
+Note: This cannot be called if data is in the cache under the same key
+
+```js
+cache.catalog.delete('key', err => {
+  // This function will call back with an error if there is nothing to delete or if there is still data in the cache using the same key
+})
+```
