@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
+    <!-- Load Esri Leaflet from CDN -->
+    <script src="https://unpkg.com/esri-leaflet@2.0.7"></script>
+    <script src="https://embed.runkit.com"></script>
+    <script src="sandbox.js"></script>
+  </head>
+  <style>
+    .stage {
+      display: flex;
+      flex-direction: column;
+    }
+    #notebook {
+      width: 100%;
+      height: 33%;
+    }
+    #map {
+      width: 100%;
+      height: 66%;
+    }
+  </style>
+  <body>
+    <H1>Welcome to the Koop Sandbox</h1>
+    <p>Press run to see features on the map</p>
+    <div class="stage">
+      <div id="notebook"></div>
+      <div id="map"></div>
+    </div>
+  </body>
+</html>
