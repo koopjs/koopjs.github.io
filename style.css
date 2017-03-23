@@ -43,3 +43,15 @@ html {
   border-color: #4183c4;
   text-decoration: none;
 }
+.stage {
+  display: flex;
+  flex-direction: row;
+}
+.map {
+  width: 50%;
+  height: 100%;
+}
+.notebook {
+  width: 50%;
+  height: 100%;
+}
