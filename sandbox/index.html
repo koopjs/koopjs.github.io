@@ -1,5 +1,12 @@
 <html>
   <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet-src.js"></script>
     <script src="https://unpkg.com/esri-leaflet@2.0.7"></script>
@@ -7,28 +14,30 @@
     <script src="sandbox.js"></script>
   </head>
   <style>
-    .stage {
-      display: flex;
-      flex-direction: row;
-    }
     .popup {
       display: block;
     }
     #notebook {
-      width: 50%;
+      width: 100%;
       height: 100%;
     }
     #map {
-      width: 50%;
-      height: 100%;
+      width: 100%;
+      height: 50%;
     }
   </style>
   <body>
-    <H1>Welcome to the Koop Sandbox</h1>
-    <p>Press run to see features on the map</p>
-    <div class="stage">
-      <div id="notebook"></div>
-      <div id="map"></div>
+    <div class="container">
+      <H1>Welcome to the Koop Sandbox</h1>
+      <p>Press run to see features on the map</p>
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#notebook" aria-controls="home" role="tab" data-toggle="tab">Code</a></li>
+        <li role="presentation"><a href="#map" aria-controls="profile" role="tab" data-toggle="tab">Map</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="notebook"></div>
+        <div class="tab-pane" id="map"></div>
+      </div>
     </div>
   </body>
 </html>

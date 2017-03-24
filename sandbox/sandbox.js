@@ -1,10 +1,10 @@
-/* global RunKit L */
+/* global RunKit L $ */
 const source = `
 const Koop = require('koop')
 const request = require('request').defaults({gzip: true})
-const express = require("@runkit/runkit/express-endpoint/1.0.0")
+let express = require("@runkit/runkit/express-endpoint/1.0.0")
 // app must be declared at the top for the runkit endpoint to be picked up
-const app = express(exports)
+let app = express(exports)
 
 function Model () {
   // This is our one public function it's job its to fetch data from craigslist and return as a feature collection
@@ -72,7 +72,12 @@ app.use(koop.server)
 `
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  const map = L.map('map').setView([38.9072, -77.0369], 13)
+  const map = L.map('map').setView([38.9072, -77.0369], 12)
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    e.target // newly activated tab
+    e.relatedTarget // previous active tab
+    map.invalidateSize(false)
+  })
   L.esri.basemapLayer('Streets').addTo(map)
   RunKit.createNotebook({
     element: document.getElementById('notebook'),
@@ -91,11 +96,17 @@ document.addEventListener('DOMContentLoaded', function (event) {
         return `${html}<tr><td>${p}</td><td>${layer.feature.properties[p]}</td></tr>`
       }, '')
       const table = `
-        <table>
-          ${rows}
-        </table>
+        <div class="table-responsive">
+          <table class="table">
+            ${rows}
+          </table>
+        </div>
       `
       return table
-    })
+    }, {maxWidth: 500})
   }
+  $('#myTabs a').click(function (e) {
+    e.preventDefault()
+    $(this).tab('show')
+  })
 })
