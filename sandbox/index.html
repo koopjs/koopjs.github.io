@@ -1,9 +1,17 @@
 <html>
   <head>
+    <meta charset="UTF-8">
+    <title>Koop</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NK268Q4');</script>
+    <!-- End Google Tag Manager -->
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -27,16 +35,36 @@
     }
   </style>
   <body>
-    <div class="container">
-      <H1>Welcome to the Koop Sandbox</h1>
-      <p>Press run to see features on the map</p>
-      <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#notebook" aria-controls="home" role="tab" data-toggle="tab">Code</a></li>
-        <li role="presentation"><a href="#map" aria-controls="profile" role="tab" data-toggle="tab">Map</a></li>
-      </ul>
-      <div class="tab-content">
-        <div class="tab-pane active" id="notebook"></div>
-        <div class="tab-pane" id="map"></div>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK268Q4" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">
+            <img alt="Brand" src="/logo.png" height="30px">
+          </a>
+          <ul class="nav nav-justified">
+            <li><a href="/docs/setup/">Setup</a></li>
+            <li><a href="/docs/specs/provider/">Providers</a></li>
+            <li><a href="/docs/">Docs</a></li>
+            <li><a href="http://github.com/koopjs/koop">Github</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="container">
+        <H1>Welcome to the Koop Sandbox</h1>
+        <p>Press run to see features on the map</p>
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#notebook" aria-controls="home" role="tab" data-toggle="tab">Code</a></li>
+          <li role="presentation"><a href="#map" aria-controls="profile" role="tab" data-toggle="tab">Map</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane active" id="notebook"></div>
+          <div class="tab-pane" id="map"></div>
+        </div>
       </div>
     </div>
   </body>
