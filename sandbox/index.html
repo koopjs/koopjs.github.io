@@ -1,5 +1,6 @@
-<html>
+<html lang="en">
   <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta charset="UTF-8">
     <title>Koop</title>
     <meta name="viewport" content="width=device-width, user-scalable=no">
@@ -22,9 +23,6 @@
     <script src="sandbox.js"></script>
   </head>
   <style>
-    .popup {
-      display: block;
-    }
     #notebook {
       width: 100%;
       height: 100%;
@@ -38,13 +36,11 @@
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NK268Q4" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <nav class="navbar navbar-default navbar-static-top">
-      <div class="container-fluid">
+    <nav class="navbar navbar-default navbar-static-top navbar-collapse">
+      <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="/">
-            <img alt="Brand" src="/logo.png" height="30px">
-          </a>
           <ul class="nav nav-justified">
+            <li><a href="/"><img alt="Brand" src="/logo.png" height="30px"></a></li>
             <li><a href="/docs/setup/">Setup</a></li>
             <li><a href="/docs/specs/provider/">Providers</a></li>
             <li><a href="/docs/">Docs</a></li>
@@ -53,7 +49,6 @@
         </div>
       </div>
     </nav>
-    <div class="container-fluid">
       <div class="container">
         <H1>Welcome to the Koop Sandbox</h1>
         <p>Press run to see features on the map</p>
@@ -66,6 +61,5 @@
           <div class="tab-pane" id="map"></div>
         </div>
       </div>
-    </div>
   </body>
 </html>
