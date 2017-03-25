@@ -60,17 +60,22 @@ koop.register({
 })
 
 app.use(koop.server)
-`
+/* Enter the pattern for the provider FeatureServer URL
+   so that it can be added to the map.
+   e.g. with a hosts param and id param: /craigslist/atlanta/apartments/FeatureServer/0
+   e.g. with only an id param: /zillow/atlanta/FeatureServer/0
+*/
+'/trimet/FeatureServer/0'`
 
 document.addEventListener('DOMContentLoaded', function (event) {
-  let addedToMap = false
-  let url
+  let base
+  let added = false
   const map = L.map('map').setView([45.5231, -122.6765], 12)
 
   L.esri.basemapLayer('Streets').addTo(map)
-  RunKit.createNotebook({
+  const notebook = RunKit.createNotebook({
     element: document.getElementById('notebook'),
-    onURLChanged,
+    onURLChanged: nb => { base = nb.URL.replace(/runkit.com/, 'runkit.io') },
     onEvaluate,
     nodeVersion: '> 6.0.0',
     source,
@@ -79,16 +84,15 @@ document.addEventListener('DOMContentLoaded', function (event) {
     ]
   })
 
-  function onURLChanged (nb) {
-    const baseURL = nb.URL.replace(/runkit.com/, 'runkit.io')
-    url = `${baseURL}/branches/master/trimet/FeatureServer/0`
-  }
-
   function onEvaluate (nb) {
-    if (addedToMap) return
-    const points = L.esri.featureLayer({url}).addTo(map)
-    addedToMap = true
-    points.bindPopup(createPopup, {maxHeight: 500, maxWidth: 500})
+    notebook.getSource(source => {
+      const fragment = source.split(/\s/).reverse()[0]
+      const url = `${base}/branches/master${fragment}`.replace(/'/g, '').replace(/"/g, '')
+      if (added) map.removeLayer(points)
+      const points = L.esri.featureLayer({url}).addTo(map)
+      added = true
+      points.bindPopup(createPopup, {maxHeight: 500, maxWidth: 500})
+    })
   }
 
   $('#myTabs a').click(function (e) {
