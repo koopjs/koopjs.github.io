@@ -105,6 +105,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
   })
 
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    const tab = e.target.href.split('#')[1]
+    dataLayer.push({'event': `${tab} view`})
     e.target // newly activated tab
     e.relatedTarget // previous active tab
     map.invalidateSize(false)
