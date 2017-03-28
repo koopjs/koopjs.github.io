@@ -119,7 +119,7 @@ function createPopup (layer) {
   }, '')
   const table = `
     <div class="table-responsive">
-      <table class="table">
+      <table class="table table-striped">
         ${rows}
       </table>
     </div>
