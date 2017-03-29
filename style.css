@@ -56,4 +56,4 @@ html {
   height: 100%;
 }
 
-@media (max-width: 375px) { iframe {width: 80%} }
+@media (max-width: 375px) { iframe {width: 80% !important;} }
