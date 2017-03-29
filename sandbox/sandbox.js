@@ -1,4 +1,4 @@
-/* global RunKit L $ */
+/* global RunKit L $  dataLayer */
 const source = `
 const Koop = require('koop')
 const request = require('request').defaults({gzip: true, json: true})
@@ -75,7 +75,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
   L.esri.basemapLayer('Streets').addTo(map)
   const notebook = RunKit.createNotebook({
     element: document.getElementById('notebook'),
-    onURLChanged: nb => { base = nb.URL.replace(/runkit.com/, 'runkit.io') },
+    onURLChanged: nb => {
+      base = nb.URL.replace(/runkit.com/, 'runkit.io')
+      dataLayer.push({'event': 'Sandbox Create', 'notebook': base})
+    },
     onEvaluate,
     nodeVersion: '> 6.0.0',
     source,
@@ -88,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
     notebook.getSource(source => {
       const fragment = source.split(/\s/).reverse()[0]
       const url = `${base}/branches/master${fragment}`.replace(/'/g, '').replace(/"/g, '')
+      dataLayer.push({'event': 'Sandbox Run', 'service': url})
       if (added) map.removeLayer(points)
       const points = L.esri.featureLayer({url}).addTo(map)
       added = true
@@ -101,6 +105,8 @@ document.addEventListener('DOMContentLoaded', function (event) {
   })
 
   $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    const tab = e.target.href.split('#')[1]
+    dataLayer.push({'event': `${tab} view`})
     e.target // newly activated tab
     e.relatedTarget // previous active tab
     map.invalidateSize(false)
@@ -113,7 +119,7 @@ function createPopup (layer) {
   }, '')
   const table = `
     <div class="table-responsive">
-      <table class="table">
+      <table class="table table-striped">
         ${rows}
       </table>
     </div>
