@@ -60,7 +60,7 @@ Once you've got a development environment, an Express server, and a database, al
 
 ## 4. Start the server!
 
-If you've got everything set up properly, you should be able to start the server! Add a script to you package.json like the example below that points to your server file and type `npm start`.
+If you've got everything set up properly, you should be able to start the server! Add a script to your package.json like the example below that points to your server file and type `npm start`.
 
 <script src="https://gist.github.com/dmfenton/114c09b3befd8e60b3a30ff5f65d8c82.js"></script>
 
