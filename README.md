@@ -1,5 +1,7 @@
 # [Koop](https://github.com/koopjs/koop)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/koopjs/koopjs.github.io.svg)](https://greenkeeper.io/)
+
 > An Open Geospatial ETL Engine
 
 [![npm](https://img.shields.io/npm/v/koop.svg?style=flat-square)](https://www.npmjs.com/package/koop) [![build status](https://img.shields.io/travis/koopjs/koop-core/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-core)
