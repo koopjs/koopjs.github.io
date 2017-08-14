@@ -7,12 +7,12 @@
     "url": "https://github.com/koopjs/koopjs.github.io/issues"
   },
   "devDependencies": {
-    "glob": "^5.0.13",
-    "markdown-it": "^3.0.2",
+    "glob": "^7.1.2",
+    "markdown-it": "^8.3.2",
     "nodefront": "^1.0.7",
     "npm-run-all": "^4.0.2",
     "sitedown": "^3.1.1",
-    "standard": "^8.0.0"
+    "standard": "^10.0.3"
   },
   "homepage": "https://github.com/koopjs/koopjs.github.io",
   "keywords": [
