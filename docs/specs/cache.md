@@ -1,6 +1,6 @@
-# Koop cache module specification
+# Cache
 
-Any backend can be used as a Koop cache, e.g. PostGIS, Elasticsearch, Redis etc. All it must do is follow the specification in this document.
+Any backend can be used as a Koop cache (e.g. PostGIS, Elasticsearch, Redis etc.). All it must do is follow the specification in this document.
 
 ## Usage
 

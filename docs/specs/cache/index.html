@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Koop cache module specification</title>
+  <title>Cache</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -29,7 +29,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       <ul class="nav nav-justified">
         <li><a href="/"><img alt="Brand" src="/logo.png" height="30px"></a></li>
         <li><a href="/docs/setup/">Setup</a></li>
-        <li><a href="/docs/specs/provider/">Providers</a></li>
+        <li><a href="/docs/providers/">Providers</a></li>
         <li><a href="/docs/">Docs</a></li>
         <li><a href="/sandbox/">Sandbox</a></li>
         <li><a href="http://github.com/koopjs/koop">Github</a></li>
@@ -41,8 +41,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <main class="page">
 <section class="markdown-body">
 
-<h1>Koop cache module specification</h1>
-<p>Any backend can be used as a Koop cache, e.g. PostGIS, Elasticsearch, Redis etc. All it must do is follow the specification in this document.</p>
+<h1>Cache</h1>
+<p>Any backend can be used as a Koop cache (e.g. PostGIS, Elasticsearch, Redis etc.). All it must do is follow the specification in this document.</p>
 <h2>Usage</h2>
 <p>To be used by Koop, the cache must be registered with the Koop object before the server begins listening as in the example below.</p>
 <pre><code class="language-js"><span class="hljs-keyword">const</span> Koop = <span class="hljs-built_in">require</span>(<span class="hljs-string">&apos;koop&apos;</span>)

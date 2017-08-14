@@ -1,3 +1,3 @@
-# Koop plugin module specification
+# Plugin
 
 todo
