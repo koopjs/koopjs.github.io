@@ -2,6 +2,9 @@
 
 Koop Plugins are modules that add functionality to Koop not covered by [providers](providers.md) and [caches](caches.md).
 
+#### Create a Plugin
+We encourage you to create your own plugin using the [Plugin](../specs/plugin.md) specification.
+
 ## Officially Supported
 
 | name | version | build status |

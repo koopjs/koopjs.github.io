@@ -2,6 +2,9 @@
 
 In Koop, the **cache** stores data from third party providers to reduce redundant requests and speed up response time. Koop's data caching is by default a local, in-memory object. We strongly recommend using the PostGIS cache for production deployments.
 
+#### Create a Cache
+We encourage you to create your own cache using the [Cache](../specs/cache.md) specification.
+
 ## Officially Supported
 
 | name | version | build status |
