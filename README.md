@@ -30,6 +30,9 @@ Koop uses **providers** to transform data from different sources – most often 
 | [GitHub](https://github.com/koopjs/koop-provider-github) | [![npm](https://img.shields.io/npm/v/koop-github.svg?style=flat-square)](https://www.npmjs.com/package/koop-github) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-github/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-github) |
 | [Gist](https://github.com/koopjs/koop-gist) | [![npm](https://img.shields.io/npm/v/koop-gist.svg?style=flat-square)](https://www.npmjs.com/package/koop-gist) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-gist/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-gist) |
 | [Google Sheets](https://github.com/koopjs/koop-provider-google-sheets) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-sheets.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-sheets) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-google-sheets/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-google-sheets) |
+| [Google Fusion Tables](https://github.com/koopjs/koop-provider-google-fusion-tables) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-fusion-tables.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-fusion-tables) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-google-fusion-tables/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-google-fusion-tables) |
+| [Marklogic](https://github.com/koopjs/koop-provider-marklogic) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-marklogic.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-marklogic) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-marklogic/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-marklogic) |
+
 
 
 ### [Outputs](docs/outputs/)
