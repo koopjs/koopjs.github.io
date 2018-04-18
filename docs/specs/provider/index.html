@@ -51,6 +51,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h3>Function: getData</h3>
 <p>Models are required to implement a function called <code>getData</code>.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the <code>callback</code> function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the <code>callback</code> function with an error as the first parameter and stop processing.</p>
 <script src="https://gist.github.com/dmfenton/066061daa62b53c60f1fcbf94ade9567.js"></script>
+<h4>Metadata</h4>
+<p>You can add a <code>metadata</code> property to the GeoJSON returned from <code>getData</code> and assign it an object for use in Koop output services. In addtion to <code>name</code> and <code>description</code> noted in the example above, the following fields may be useful:</p>
+<script src="https://gist.github.com/rgwozdz/5080e5e66ee1b3452bdb300602150247.js"></script>
+<p>The data type and values used for <code>idField</code> can affect the output of the <a href="https://github.com/koopjs/koop-output-geoservices">koop-output-geoservices</a> and behavior of some consumer clients. <a href="https://github.com/koopjs/FeatureServer">FeatureServer</a> and <a href="https://github.com/koopjs/winnow">winnow</a> (dependencies of <a href="https://github.com/koopjs/koop-output-geoservices">koop-output-geoservices</a>) will create a separate OBJECTID field and set its value to the value of the attribute referenced by <code>idField</code>. OBJECTIDs that are not integers or outside the range of 0 - 2,147,483,647 can break features in some ArcGIS clients.</p>
 <h2>Cached vs Pass-Through</h2>
 <p>Providers typically fall into two categories: cached and pass-through.</p>
 <h3>Pass-Through</h3>
