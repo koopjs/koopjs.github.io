@@ -18,11 +18,11 @@ Models are required to implement a function called `getData`.  It should fetch d
 <script src="https://gist.github.com/dmfenton/066061daa62b53c60f1fcbf94ade9567.js"></script>
 
 #### Metadata
-You can add a `metadata` property to the GeoJSON returned from `getData` and assign it an object for use in Koop output services. In addtion to `name` and `description` as noted in the example above, the following fields may be useful:
+You can add a `metadata` property to the GeoJSON returned from `getData` and assign it an object for use in Koop output services. In addtion to `name` and `description` noted in the example above, the following fields may be useful:
 
 <script src="https://gist.github.com/rgwozdz/5080e5e66ee1b3452bdb300602150247.js"></script>
 
-The data type and values used for `idField` can affect the output for certain Koop output-services and behavior of some consumer clients.  If you are using the [Koop Geoservices Output Plugin](https://github.com/koopjs/koop-output-geoservices), [FeatureServer](https://github.com/koopjs/FeatureServer) and [winnow](https://github.com/koopjs/winnow) will create a separate OBJECTID field and set its value to the value of the attribute referenced by `idField`. OBJECTIDs that are not integers or outside the range of 0 - 2,147,483,647 can break features in some ArcGIS clients.
+The data type and values used for `idField` can affect the output of the [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) and behavior of some consumer clients. [FeatureServer](https://github.com/koopjs/FeatureServer) and [winnow](https://github.com/koopjs/winnow) (dependencies of [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices)) will create a separate OBJECTID field and set its value to the value of the attribute referenced by `idField`. OBJECTIDs that are not integers or outside the range of 0 - 2,147,483,647 can break features in some ArcGIS clients.
 
 ## Cached vs Pass-Through
 
