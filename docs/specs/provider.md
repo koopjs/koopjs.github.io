@@ -87,6 +87,12 @@ Sometimes, your provider may need no parameters at all. To disable the `id` para
 
 `/provider/FeatureServer/0`
 
+### Generation of provider-specific output-routes
+The position of the provider-specific fragment of a route path can vary depending on the `path` assignment in the `routes` array object of your output-services plugin.  By default, Koop will construct the route with the provider's parameters first, and subsequently add the route fragment defined by an output-services plugin.  However, if you need the route path configured differently, you can add a `$provider$` anywhere in the output-services path. Koop will replace the `$provider$`  expression with the provider-specific route fragment. For example, an output path defined as `/rest/services/$provider$/FeatureServer/0` would translate to `/rest/services/proivder/:host/:id/FeatureServer/0`.
+
+### Output-routes without provider parameters
+You may need routes that skip the addition of provider-specific parameters altogether.  This can be accomplished by adding an `absolutePath: true` key-value to the `routes` array object in your output-services plugin. On such routes, Koop will define the route without any additional provider parameters.
+
 ### Routes.js
 
 This file is simply an array of routes that should be handled in the namespace of the provider e.g. http://adapters.koopernetes.com/agol/arcgis/datasets/e5255b1f69944bcd9cf701025b68f411_0
