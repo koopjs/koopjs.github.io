@@ -15,6 +15,13 @@ OpenStreetMap                   Feature Service
 
 ```
 
+## Quickstart
+
+If you want to develop on Koop, it's usually best to start by creating a Provider. You can read more about that below or check out:
+
+- [Koop Provider Guide](/docs/specs/provider)
+- [Koop Provider Sample](https://github.com/koopjs/koop-provider-sample)
+
 ## Core Concepts
 
 Koop is a highly-extensible Javascript toolkit for connecting incompatible spatial APIs. Out of the box it exposes a Node.js server that can translate [GeoJSON](http://geojson.org/) into the [Geoservices specification](https://geoservices.github.io) supported by the [ArcGIS](http://www.esri.com/arcgis/about-arcgis) family of products. Koop can be extended to translate data from any source to any API specification. Don't let API incompatiblity get in your way, start using one of Koop's data providers or [write your own](/docs/specs/provider/).
