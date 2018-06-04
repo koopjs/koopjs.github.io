@@ -1,9 +1,9 @@
-# Auth-Plugins
+# Authorization
 
-Koop Auth-Plugins are modules for securing Koop services. They handle user authentication and request authorization.
+Koop Authorization Plugins are modules for securing Koop services. They handle user authentication and request authorization.
 
-#### Create a Auth-Plugin
-We encourage you to create your own provider using the [Auth-Plugin](../specs/auth-plugin.md) specification.
+#### Create a Authorization plugin
+We encourage you to create your own provider using the [authorization plugin](../specs/authorization.md) specification.
 
 
 ## Officially Supported

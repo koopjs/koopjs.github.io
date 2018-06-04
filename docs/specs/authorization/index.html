@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Authorization Plugin</title>
+  <title>Authorization</title>
   <meta name="viewport" content="width=device-width, user-scalable=no">
   <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -41,30 +41,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <main class="page">
 <section class="markdown-body">
 
-<h1>Authorization Plugin</h1>
+<h1>Authorization</h1>
 <p>Add authorization and authentication to Koop services. Dive into the docs below or check out a working example <a href="https://github.com/koopjs/koop-auth-direct-file">here</a>.</p>
 <h2>Index.js</h2>
 <p>Each authorization plugin must have a file called <code>index.js</code>.  Its purpose is to return a registration object that defines the type of Koop module and provides a set of configured functions that Koop will attach to each provider&#x2019;s Model prototype.  For example, the koop-auth-file-direct plugin exports a function that configures and returns a registration object that includes three functions, <code>getAuthenticateSpecification</code>, <code>authenticate</code>, and <code>authorize</code>.</p>
 <script src="https://gist.github.com/rgwozdz/4098e0e18cc85299f4444a3e64a7c68b.js"></script>
 <h3>Function: getAuthenticationSpecification</h3>
-<p>Authorization plugins are required to return a function called &#x201C;getAuthenticationSpecification&#x201D;.  Its purpose is to configure a function that is used to describe the authentication specification. It should have the following signature:</p>
-<h5>getAuthenticationSpecification(providerNamespace) &#x21D2; function</h5>
-<table>
-<thead>
-<tr>
-<th>Param</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>providerNamespace</td>
-<td><code>string</code></td>
-<td>a provider&#x2019;s namespace</td>
-</tr>
-</tbody>
-</table>
+<p>Authorization plugins are required to return a function called &#x201C;authenticationSpecification&#x201D;.  Its purpose is delivery of an authorization/authentication options object that can be attached to the Model prototype for use in output-services (e.g., koop-output-geoservices). It should have the following signature:</p>
+<h5>authenticationSpecification() &#x21D2; object</h5>
 <p>As noted, <code>getAuthenticationSpecification</code> returns a function configured with a provider&#x2019;s namespace. The configured function should return an object with the following specification:</p>
 <script src="https://gist.github.com/rgwozdz/194106328acd4d32fbbdb2b88c1c866d.js"></script>
 <p>An example of <code>getAuthenticationSpecification</code> is available <a href="https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56">here</a>.</p>
@@ -96,8 +80,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="https://gist.github.com/rgwozdz/283d8604676acd972fb72aef9a228033.js"></script>  
 <p>Authorization plugins are free to validate credentials in any manner.  For example, you might check a database for a match of the submitted username and password, or forward the credentials on to a third-party identity-store. <a href="https://github.com/koopjs/koop-auth-direct-file">koop-auth-direct-file</a> provides an <a href="https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L59-L88">example</a> of a very basic credential validation using a simple JSON file-store.</p>
 <h3>Function: authorize</h3>
-<p>Authorization plugins are required to return a function called <code>authorize</code>.  Its purpose is to validate a token submitted with a resource request.  It should have the following function signature:</p>
-<h5>authorize(token) &#x21D2; Promise</h5>
+<p>Authorization plugins are required to implement a function called <code>authorize</code>.  It should accept an argument that can be used to verify the request is being made by an authenticated user (e.g., a token granted after successful authentication).  It should have the following function signature:</p>
+<h5>authorize(input) &#x21D2; Promise</h5>
 <table>
 <thead>
 <tr>
@@ -108,9 +92,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </thead>
 <tbody>
 <tr>
-<td>token</td>
-<td><code>string</code></td>
-<td>token that can be used to prove previously successful authentication</td>
+<td>input</td>
+<td><code>*</code></td>
+<td>input that can be used to prove previously successful authentication</td>
 </tr>
 </tbody>
 </table>

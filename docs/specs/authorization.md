@@ -1,4 +1,4 @@
-# Authorization Plugin
+# Authorization
 
 Add authorization and authentication to Koop services. Dive into the docs below or check out a working example [here](https://github.com/koopjs/koop-auth-direct-file).
 
@@ -9,13 +9,9 @@ Each authorization plugin must have a file called `index.js`.  Its purpose is to
 
 ### Function: getAuthenticationSpecification
 
-Authorization plugins are required to return a function called "getAuthenticationSpecification".  Its purpose is to configure a function that is used to describe the authentication specification. It should have the following signature:
+Authorization plugins are required to return a function called "authenticationSpecification".  Its purpose is delivery of an authorization/authentication options object that can be attached to the Model prototype for use in output-services (e.g., koop-output-geoservices). It should have the following signature:
 
- ##### getAuthenticationSpecification(providerNamespace) ⇒ function
- 
- Param | Type | Description |
-| --- | --- | --- |
-| providerNamespace | <code>string</code> | a provider's namespace |
+##### authenticationSpecification() ⇒ object
 
 As noted, `getAuthenticationSpecification` returns a function configured with a provider's namespace. The configured function should return an object with the following specification: 
 
@@ -44,13 +40,13 @@ Authorization plugins are free to validate credentials in any manner.  For examp
 
 ### Function: authorize
 
-Authorization plugins are required to return a function called `authorize`.  Its purpose is to validate a token submitted with a resource request.  It should have the following function signature:
+Authorization plugins are required to implement a function called `authorize`.  It should accept an argument that can be used to verify the request is being made by an authenticated user (e.g., a token granted after successful authentication).  It should have the following function signature:
 
-##### authorize(token) ⇒ Promise
+##### authorize(input) ⇒ Promise
 
 | Param | Type | Description |
 | --- | --- | --- |
-| token | <code>string</code> | token that can be used to prove previously successful authentication |
+| input | <code>*</code> |input that can be used to prove previously successful authentication |
 
 As noted above, the `authorize` function should return a promise. If the authorization is unsuccessful, the promise should reject with an error object.  Successful authorization should allow the promise to resolve. An example of an `authorize` function can be viewed [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L90-L108).
 
