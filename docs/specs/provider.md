@@ -15,6 +15,8 @@ Every provider must have a Model. This is where almost all of the business logic
 
 Models are required to implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
 
+GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
+
 <script src="https://gist.github.com/dmfenton/066061daa62b53c60f1fcbf94ade9567.js"></script>
 
 #### Metadata
