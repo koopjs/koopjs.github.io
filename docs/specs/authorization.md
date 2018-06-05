@@ -60,10 +60,10 @@ Registration is simply the code that registers the auth-plugin with Koop.
 
     koop.register(auth)
 
-During registration, Koop stores a reference to the authorization plugin's functions, and then later adds them to `Model` prototypes during provider registration.  It is therefore essential that authorization plugins get configured and registered prior to all providers.
+**During registration, Koop stores a reference to the authorization plugin's functions, and then later adds them to `Model` prototypes during provider registration.  It is therefore essential that authorization plugins get configured and registered prior to all providers.**
 
 Successfully securing your services depends on support from any output-services you may be using. Koop ships with [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices), and as of version 1.5.1, it supports securing services with authorization plugins that implement the API documentent here.  For example, the following snippet demostrates how [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) uses the `authorize` function:
 
 <script src="https://gist.github.com/rgwozdz/0926c83f83f81f31f738d6aa9692abc8.js"></script>
 
-In the above example, the model is inspected for the prescene of an `authorize` function and if found, executed.  Successful authorization allows the fetching of data to proceed.  Failure leads to a rejection of the request.
+In the above example, the model is inspected for an `authorize` function and if found, executed.  Successful authorization allows the fetching of data to proceed.  Failure leads to a rejection of the request.

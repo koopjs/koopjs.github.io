@@ -106,10 +106,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Registration is simply the code that registers the auth-plugin with Koop.</p>
 <pre><code>koop.register(auth)
 </code></pre>
-<p>During registration, Koop stores a reference to the authorization plugin&#x2019;s functions, and then later adds them to <code>Model</code> prototypes during provider registration.  It is therefore essential that authorization plugins get configured and registered prior to all providers.</p>
+<p><strong>During registration, Koop stores a reference to the authorization plugin&#x2019;s functions, and then later adds them to <code>Model</code> prototypes during provider registration.  It is therefore essential that authorization plugins get configured and registered prior to all providers.</strong></p>
 <p>Successfully securing your services depends on support from any output-services you may be using. Koop ships with <a href="https://github.com/koopjs/koop-output-geoservices">koop-output-geoservices</a>, and as of version 1.5.1, it supports securing services with authorization plugins that implement the API documentent here.  For example, the following snippet demostrates how <a href="https://github.com/koopjs/koop-output-geoservices">koop-output-geoservices</a> uses the <code>authorize</code> function:</p>
 <script src="https://gist.github.com/rgwozdz/0926c83f83f81f31f738d6aa9692abc8.js"></script>
-<p>In the above example, the model is inspected for the prescene of an <code>authorize</code> function and if found, executed.  Successful authorization allows the fetching of data to proceed.  Failure leads to a rejection of the request.</p>
+<p>In the above example, the model is inspected for an <code>authorize</code> function and if found, executed.  Successful authorization allows the fetching of data to proceed.  Failure leads to a rejection of the request.</p>
 </section>
 </main>
 
