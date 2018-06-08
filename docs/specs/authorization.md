@@ -13,11 +13,11 @@ Authorization plugins are required to return a function called "authenticationSp
 
 ##### authenticationSpecification() ⇒ object
 
-As noted, `getAuthenticationSpecification` returns a function configured with a provider's namespace. The configured function should return an object with the following specification: 
+As noted, `authenticationSpecification` returns a function configured with a provider's namespace. The configured function should return an object with the following specification, though it can be extended: 
 
 <script src="https://gist.github.com/rgwozdz/194106328acd4d32fbbdb2b88c1c866d.js"></script>
 
-An example of `getAuthenticationSpecification` is available [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56).
+An example of `authenticationSpecification` is available [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56).
 
 
 ### Function: authenticate

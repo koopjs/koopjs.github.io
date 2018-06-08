@@ -49,9 +49,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <h3>Function: getAuthenticationSpecification</h3>
 <p>Authorization plugins are required to return a function called &#x201C;authenticationSpecification&#x201D;.  Its purpose is delivery of an authorization/authentication options object that can be attached to the Model prototype for use in output-services (e.g., koop-output-geoservices). It should have the following signature:</p>
 <h5>authenticationSpecification() &#x21D2; object</h5>
-<p>As noted, <code>getAuthenticationSpecification</code> returns a function configured with a provider&#x2019;s namespace. The configured function should return an object with the following specification:</p>
+<p>As noted, <code>authenticationSpecification</code> returns a function configured with a provider&#x2019;s namespace. The configured function should return an object with the following specification, though it can be extended:</p>
 <script src="https://gist.github.com/rgwozdz/194106328acd4d32fbbdb2b88c1c866d.js"></script>
-<p>An example of <code>getAuthenticationSpecification</code> is available <a href="https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56">here</a>.</p>
+<p>An example of <code>authenticationSpecification</code> is available <a href="https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56">here</a>.</p>
 <h3>Function: authenticate</h3>
 <p>Authorization plugins are required to return a function called <code>authenticate</code>.  Its purpose is to validate credentials and, if successful, issue a token for authorizing subsequent resource requests.  The <code>authenticate</code> function should have the following signature:</p>
 <h5>authenticate(username, password) &#x21D2; Promise</h5>
