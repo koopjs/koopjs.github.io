@@ -71,23 +71,27 @@ It makes sense to use a cache strategy if at least one of the following is true:
 
 Providers can do more than simply implement `getData` and hand GeoJSON back to Koop's core. In fact, they can extend the API space in an arbitrary fashion by adding routes that map to controller functions. Those controller functions call functions on the model to fetch or process data from the remote API.
 
-### Enable/Disable parameters
+### Request parameters in `getData` 
 
-Recall the `getData` function takes in a `req` that has a set of `params`:
-- host
-- id
+Recall the `getData` function receives `req`, an Express.js [request](https://expressjs.com/en/4x/api.html#req) object. `req` includes a set of [route parameters](https://expressjs.com/en/4x/api.html#req.params) accessible with `req.params`, as well as a set of [query-parameters](https://expressjs.com/en/4x/api.html#req.query) accessible with `req.query`. Parameters can be used by `getData` to specify the particulars of data fetching.  For example, route parameters `:host` and `:id` provide the [Craiglist `getData` function](https://github.com/dmfenton/koop-provider-craigslist/blob/master/model.js#L12-L14) with information necessary to generate URLs for requests to the Craigslist API. 
 
-By default the host parameter is disabled and the id parameter is enabled. So requests like the following would work:
+- `:id`  
+Koop includes the `:id` parameter on all service endpoints created with output-services plugins by default. So requests like `/provider/:id/FeatureServer/0` will work. You can remove the `:id` parameter from your routes by editing `index.js` and setting `disableIdParam: true`. Then requests like `/provider/FeatureServer/0` will work. It will be accessible in `getData` with `req.params.id`.
 
-`/provider/:id/FeatureServer/0`
+- `:host`  
+The provider specification allows for another route parameter, `:host`, that precedes `:id`. By default, the `:host` parameter is disabled.  You can configure your provider to add it by editing the `index.js` file and setting `hosts: true`. Then requests like `/provider/:host/:id/FeatureServer/0` will work. It will be accessible in `getData` with `req.params.host`.
 
-To enable the `host` parameter, edit the `index.js` file and set `hosts` to `true`. Then requests like the following will work:
+##### Output-services route parameters
+By default, Koop includes the [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) output-service. It adds a set of `FeatureServer` routes, some of which include addtional route parameters that can be used in your Model's `getData` function. 
 
-`/provider/:host/:id/FeatureServer/0`
+- `:layer`  
+The `:layer` parameter is defined on all FeatureServer requests of form `/provider/:host/:id/FeatureServer/:layer`. It will be accessible in `getData` with `req.params.layer`.
 
-Sometimes, your provider may need no parameters at all. To disable the `id` parameter, edit `index.js` and set `disableIdParam` to `true`. Then requests like the following will work:
+- `:method`  
+The `:method` parameter is defined on all FeatureServer requests of form `/provider/:host/:id/FeatureServer/:layer/:method`. It will be accessible in `getData` with `req.params.method`.  Note that `query` and `generateRenderer` are the only values currently supported by [FeatureServer](https://github.com/koopjs/FeatureServer), a [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) dependency.  All other values will produce a `400, Method not supported` error.  
 
-`/provider/FeatureServer/0`
+##### Query parameters
+As noted above, any query-parameters added to the request URL can accessed within `getData` and leveraged for data fetching purposes.  For example, a request `/provider/:id/FeatureServer/0?foo=bar` would supply `getData` with `req.query.foo` equal to `bar`. With the proper logid, it could then be used to limit fetched data to records that had an attribute `foo` with a value of `bar`.
 
 ### Generation of provider-specific output-routes
 The position of the provider-specific fragment of a route path can vary depending on the `path` assignment in the `routes` array object of your output-services plugin.  By default, Koop will construct the route with the provider's parameters first, and subsequently add the route fragment defined by an output-services plugin.  However, if you need the route path configured differently, you can add the `$namespace` and `$providerParams` placholders anywhere in the output-services path. Koop will replace these placeholders with the provider-specific route fragments (i.e, namespace and `:host/:id`). For example, an output path defined as `$namespace/rest/services/$providerParams/FeatureServer/0` would translate to `provider/rest/services/:host/:id/FeatureServer/0`.
