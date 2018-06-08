@@ -50,6 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Every provider must have a Model. This is where almost all of the business logic of the provider will occur. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing.</p>
 <h3>Function: getData</h3>
 <p>Models are required to implement a function called <code>getData</code>.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the <code>callback</code> function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the <code>callback</code> function with an error as the first parameter and stop processing.</p>
+<p>GeoJSON passed to the callback should be valid with respect to the <a href="https://tools.ietf.org/html/rfc7946">GeoJSON specification</a>.  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the <a href="https://tools.ietf.org/html/rfc7946#section-3.1.6">GeoJSON spec&#x2019;s righthand rule</a> is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting <code>NODE_ENV</code> to anything <strong>except</strong> <code>production</code>.  In this mode, invalid GeoJSON from <code>getData</code> will trigger informative console warnings.</p>
 <script src="https://gist.github.com/dmfenton/066061daa62b53c60f1fcbf94ade9567.js"></script>
 <h4>Metadata</h4>
 <p>You can add a <code>metadata</code> property to the GeoJSON returned from <code>getData</code> and assign it an object for use in Koop output services. In addtion to <code>name</code> and <code>description</code> noted in the example above, the following fields may be useful:</p>
@@ -88,18 +89,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </ul>
 <h2>Advanced</h2>
 <p>Providers can do more than simply implement <code>getData</code> and hand GeoJSON back to Koop&#x2019;s core. In fact, they can extend the API space in an arbitrary fashion by adding routes that map to controller functions. Those controller functions call functions on the model to fetch or process data from the remote API.</p>
-<h3>Enable/Disable parameters</h3>
-<p>Recall the <code>getData</code> function takes in a <code>req</code> that has a set of <code>params</code>:</p>
+<h3>Request parameters in <code>getData</code></h3>
+<p>Recall the <code>getData</code> function receives <code>req</code>, an Express.js <a href="https://expressjs.com/en/4x/api.html#req">request</a> object. <code>req</code> includes a set of <a href="https://expressjs.com/en/4x/api.html#req.params">route parameters</a> accessible with <code>req.params</code>, as well as a set of <a href="https://expressjs.com/en/4x/api.html#req.query">query-parameters</a> accessible with <code>req.query</code>. Parameters can be used by <code>getData</code> to specify the particulars of data fetching.  For example, route parameters <code>:host</code> and <code>:id</code> provide the <a href="https://github.com/dmfenton/koop-provider-craigslist/blob/master/model.js#L12-L14">Craiglist <code>getData</code> function</a> with information necessary to generate URLs for requests to the Craigslist API.</p>
 <ul>
-<li>host</li>
-<li>id</li>
+<li>
+<p><code>:id</code><br>
+Koop includes the <code>:id</code> parameter on all service endpoints created with output-services plugins by default. So requests like <code>/provider/:id/FeatureServer/0</code> will work. You can remove the <code>:id</code> parameter from your routes by editing <code>index.js</code> and setting <code>disableIdParam: true</code>. Then requests like <code>/provider/FeatureServer/0</code> will work. It will be accessible in <code>getData</code> with <code>req.params.id</code>.</p>
+</li>
+<li>
+<p><code>:host</code><br>
+The provider specification allows for another route parameter, <code>:host</code>, that precedes <code>:id</code>. By default, the <code>:host</code> parameter is disabled.  You can configure your provider to add it by editing the <code>index.js</code> file and setting <code>hosts: true</code>. Then requests like <code>/provider/:host/:id/FeatureServer/0</code> will work. It will be accessible in <code>getData</code> with <code>req.params.host</code>.</p>
+</li>
 </ul>
-<p>By default the host parameter is disabled and the id parameter is enabled. So requests like the following would work:</p>
-<p><code>/provider/:id/FeatureServer/0</code></p>
-<p>To enable the <code>host</code> parameter, edit the <code>index.js</code> file and set <code>hosts</code> to <code>true</code>. Then requests like the following will work:</p>
-<p><code>/provider/:host/:id/FeatureServer/0</code></p>
-<p>Sometimes, your provider may need no parameters at all. To disable the <code>id</code> parameter, edit <code>index.js</code> and set <code>disableIdParam</code> to <code>true</code>. Then requests like the following will work:</p>
-<p><code>/provider/FeatureServer/0</code></p>
+<h5>Output-services route parameters</h5>
+<p>By default, Koop includes the <a href="https://github.com/koopjs/koop-output-geoservices">koop-output-geoservices</a> output-service. It adds a set of <code>FeatureServer</code> routes, some of which include addtional route parameters that can be used in your Model&#x2019;s <code>getData</code> function.</p>
+<ul>
+<li>
+<p><code>:layer</code><br>
+The <code>:layer</code> parameter is defined on all FeatureServer requests of form <code>/provider/:host/:id/FeatureServer/:layer</code>. It will be accessible in <code>getData</code> with <code>req.params.layer</code>.</p>
+</li>
+<li>
+<p><code>:method</code><br>
+The <code>:method</code> parameter is defined on all FeatureServer requests of form <code>/provider/:host/:id/FeatureServer/:layer/:method</code>. It will be accessible in <code>getData</code> with <code>req.params.method</code>.  Note that <code>query</code> and <code>generateRenderer</code> are the only values currently supported by <a href="https://github.com/koopjs/FeatureServer">FeatureServer</a>, a <a href="https://github.com/koopjs/koop-output-geoservices">koop-output-geoservices</a> dependency.  All other values will produce a <code>400, Method not supported</code> error.</p>
+</li>
+</ul>
+<h5>Query parameters</h5>
+<p>As noted above, any query-parameters added to the request URL can accessed within <code>getData</code> and leveraged for data fetching purposes.  For example, a request <code>/provider/:id/FeatureServer/0?foo=bar</code> would supply <code>getData</code> with <code>req.query.foo</code> equal to <code>bar</code>. With the proper logid, it could then be used to limit fetched data to records that had an attribute <code>foo</code> with a value of <code>bar</code>.</p>
 <h3>Generation of provider-specific output-routes</h3>
 <p>The position of the provider-specific fragment of a route path can vary depending on the <code>path</code> assignment in the <code>routes</code> array object of your output-services plugin.  By default, Koop will construct the route with the provider&#x2019;s parameters first, and subsequently add the route fragment defined by an output-services plugin.  However, if you need the route path configured differently, you can add the <code>$namespace</code> and <code>$providerParams</code> placholders anywhere in the output-services path. Koop will replace these placeholders with the provider-specific route fragments (i.e, namespace and <code>:host/:id</code>). For example, an output path defined as <code>$namespace/rest/services/$providerParams/FeatureServer/0</code> would translate to <code>provider/rest/services/:host/:id/FeatureServer/0</code>.</p>
 <h3>Output-routes without provider parameters</h3>

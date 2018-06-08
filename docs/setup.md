@@ -54,7 +54,7 @@ If you want to mount Koop at a route other than `/` e.g. `/koop` you can use Koo
 
 ## 3. Providers
 
-Once you've got a development environment, an Express server, and a database, all you need to do is configure your providers! See the complete [list of providers](providers.md) for further instructions.
+Once you've got a development environment, an Express server, and a database, all you need to do is configure your providers! See the complete [list of providers](../docs/providers.md) for further instructions.
 
 `koop.register(provider)`
 
