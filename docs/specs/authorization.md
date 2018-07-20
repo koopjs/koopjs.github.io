@@ -9,11 +9,11 @@ Each authorization plugin must have a file called `index.js`.  Its purpose is to
 
 ### Function: getAuthenticationSpecification
 
-Authorization plugins are required to return a function called "authenticationSpecification".  Its purpose is delivery of an authorization/authentication options object that can be attached to the Model prototype for use in output-services (e.g., koop-output-geoservices). It should have the following signature:
+Authorization plugins are required to return a function called "authenticationSpecification".  Its purpose is delivery of an object for use in configuring authentication in output-services (e.g., koop-output-geoservices). It should have the following signature:
 
 ##### authenticationSpecification() ⇒ object
 
-As noted, `authenticationSpecification` returns a function configured with a provider's namespace. The configured function should return an object with the following specification, though it can be extended: 
+As noted, `authenticationSpecification` returns an object configured with a provider's namespace. The configured function should return an object with the following specification, though it can be extended: 
 
 <script src="https://gist.github.com/rgwozdz/194106328acd4d32fbbdb2b88c1c866d.js"></script>
 
