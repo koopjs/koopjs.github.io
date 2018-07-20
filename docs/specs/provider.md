@@ -11,6 +11,16 @@ Every provider must have a file called `index.js`. Its purpose is to tell Koop h
 
 Every provider must have a Model. This is where almost all of the business logic of the provider will occur. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing.
 
+### Model Functions
+
+| Name   |      Required?     |  Summary |
+|----------|:-------------:|------|
+| `getData` | Yes | Fetches data and translates it to GeoJSON.  See below. |
+| `createKey` | No   | Generates a string to use as a key for the data-cache. See below. |
+| `getAuthenticationSpecification` | No | Delivers an object for use in configuring authentication in output-services. See [authorization spec](http://koopjs.github.io/docs/specs/authorization/).|
+| `authenticate` | No | Validates credentials and issues a token. See [authorization spec](http://koopjs.github.io/docs/specs/authorization/). |
+| `authorize` | No | Verifies request is made by an authenticated user. See [authorization spec](http://koopjs.github.io/docs/specs/authorization/). |
+
 ### Function: getData
 
 Models are required to implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
@@ -18,6 +28,13 @@ Models are required to implement a function called `getData`.  It should fetch d
 GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
 
 <script src="https://gist.github.com/dmfenton/066061daa62b53c60f1fcbf94ade9567.js"></script>
+
+### Function: createKey
+Koop uses a an internal `createKey` function to generate a string for use as a key for the data-cache's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
+
+Models can optionally implement a function called `createKey`.  If defined, the Model's `createKey` overrides Koop's internal function.  This can be useful if the cache key should be composed with parameters in addition to those found in the internal function.  For example, the `createKey` below uses query parameters `startdate` adn `enddate` to construct the key (if they are defined):
+
+<script src="https://gist.github.com/rgwozdz/89b80cb0656f22cb4c71b61fe94947b9.js"></script>
 
 #### Metadata
 You can add a `metadata` property to the GeoJSON returned from `getData` and assign it an object for use in Koop output services. In addtion to `name` and `description` noted in the example above, the following fields may be useful:
@@ -98,13 +115,6 @@ The position of the provider-specific fragment of a route path can vary dependin
 
 ### Output-routes without provider parameters
 You may need routes that skip the addition of provider-specific parameters altogether.  This can be accomplished by adding an `absolutePath: true` key-value to the `routes` array object in your output-services plugin. On such routes, Koop will define the route without any additional provider namespace or parameters.
-
-### Function: createKey
-Koop uses a an internal `createKey` function to generate a string for use as a key for the data-cache's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
-
-Models can optionally implement a function called `createKey`.  If defined, the Model's `createKey` overrides Koop's internal function.  This can be useful if the cache key should be composed with parameters in addition to those found in the internal function.  For example, the `createKey` below uses query parameters `startdate` adn `enddate` to construct the key (if they are defined):
-
-<script src="https://gist.github.com/rgwozdz/89b80cb0656f22cb4c71b61fe94947b9.js"></script>
 
 ### Routes.js
 
