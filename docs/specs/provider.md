@@ -99,6 +99,13 @@ The position of the provider-specific fragment of a route path can vary dependin
 ### Output-routes without provider parameters
 You may need routes that skip the addition of provider-specific parameters altogether.  This can be accomplished by adding an `absolutePath: true` key-value to the `routes` array object in your output-services plugin. On such routes, Koop will define the route without any additional provider namespace or parameters.
 
+### Function: createKey
+Koop uses a an internal `createKey` function to generate a string for use as a key for the data-cache's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
+
+Models can optionally implement a function called `createKey`.  If defined, the Model's `createKey` overrides Koop's internal function.  This can be useful if the cache key should be composed with parameters in addition to those found in the internal function.  For example, the `createKey` below uses query parameters `startdate` adn `enddate` to construct the key (if they are defined):
+
+<script src="https://gist.github.com/rgwozdz/89b80cb0656f22cb4c71b61fe94947b9.js"></script>
+
 ### Routes.js
 
 This file is simply an array of routes that should be handled in the namespace of the provider e.g. http://adapters.koopernetes.com/agol/arcgis/datasets/e5255b1f69944bcd9cf701025b68f411_0
