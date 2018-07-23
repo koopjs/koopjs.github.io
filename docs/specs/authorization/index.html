@@ -47,9 +47,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>Each authorization plugin must have a file called <code>index.js</code>.  Its purpose is to return a registration object that defines the type of Koop module and provides a set of configured functions that Koop will attach to each provider&#x2019;s Model prototype.  For example, the koop-auth-file-direct plugin exports a function that configures and returns a registration object that includes three functions, <code>getAuthenticateSpecification</code>, <code>authenticate</code>, and <code>authorize</code>.</p>
 <script src="https://gist.github.com/rgwozdz/4098e0e18cc85299f4444a3e64a7c68b.js"></script>
 <h3>Function: getAuthenticationSpecification</h3>
-<p>Authorization plugins are required to return a function called &#x201C;authenticationSpecification&#x201D;.  Its purpose is delivery of an authorization/authentication options object that can be attached to the Model prototype for use in output-services (e.g., koop-output-geoservices). It should have the following signature:</p>
+<p>Authorization plugins are required to return a function called &#x201C;authenticationSpecification&#x201D;.  Its purpose is delivery of an object for use in configuring authentication in output-services (e.g., koop-output-geoservices). It should have the following signature:</p>
 <h5>authenticationSpecification() &#x21D2; object</h5>
-<p>As noted, <code>authenticationSpecification</code> returns a function configured with a provider&#x2019;s namespace. The configured function should return an object with the following specification, though it can be extended:</p>
+<p>As noted, <code>authenticationSpecification</code> returns an object configured with a provider&#x2019;s namespace. The configured function should return an object with the following specification, though it can be extended:</p>
 <script src="https://gist.github.com/rgwozdz/194106328acd4d32fbbdb2b88c1c866d.js"></script>
 <p>An example of <code>authenticationSpecification</code> is available <a href="https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56">here</a>.</p>
 <h3>Function: authenticate</h3>

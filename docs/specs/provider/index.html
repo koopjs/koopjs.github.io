@@ -48,10 +48,51 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <script src="https://gist.github.com/dmfenton/93379d71f4412716b3e508e1c8612cfa.js"></script>
 <h2>Model.js</h2>
 <p>Every provider must have a Model. This is where almost all of the business logic of the provider will occur. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing.</p>
+<h3>Model Functions</h3>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th style="text-align:center">Required?</th>
+<th>Summary</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>getData</code></td>
+<td style="text-align:center">Yes</td>
+<td>Fetches data and translates it to GeoJSON.  See below.</td>
+</tr>
+<tr>
+<td><code>createKey</code></td>
+<td style="text-align:center">No</td>
+<td>Generates a string to use as a key for the data-cache. See below.</td>
+</tr>
+<tr>
+<td><code>getAuthenticationSpecification</code></td>
+<td style="text-align:center">No</td>
+<td>Delivers an object for use in configuring authentication in output-services. See <a href="http://koopjs.github.io/docs/specs/authorization/">authorization spec</a>.</td>
+</tr>
+<tr>
+<td><code>authenticate</code></td>
+<td style="text-align:center">No</td>
+<td>Validates credentials and issues a token. See <a href="http://koopjs.github.io/docs/specs/authorization/">authorization spec</a>.</td>
+</tr>
+<tr>
+<td><code>authorize</code></td>
+<td style="text-align:center">No</td>
+<td>Verifies request is made by an authenticated user. See <a href="http://koopjs.github.io/docs/specs/authorization/">authorization spec</a>.</td>
+</tr>
+</tbody>
+</table>
 <h3>Function: getData</h3>
 <p>Models are required to implement a function called <code>getData</code>.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the <code>callback</code> function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the <code>callback</code> function with an error as the first parameter and stop processing.</p>
 <p>GeoJSON passed to the callback should be valid with respect to the <a href="https://tools.ietf.org/html/rfc7946">GeoJSON specification</a>.  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the <a href="https://tools.ietf.org/html/rfc7946#section-3.1.6">GeoJSON spec&#x2019;s righthand rule</a> is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting <code>NODE_ENV</code> to anything <strong>except</strong> <code>production</code>.  In this mode, invalid GeoJSON from <code>getData</code> will trigger informative console warnings.</p>
 <script src="https://gist.github.com/dmfenton/066061daa62b53c60f1fcbf94ade9567.js"></script>
+<h3>Function: createKey</h3>
+<p>Koop uses a an internal <code>createKey</code> function to generate a string for use as a key for the data-cache&#x2019;s key-value store. Koop&#x2019;s <code>createKey</code> uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.</p>
+<p>Models can optionally implement a function called <code>createKey</code>.  If defined, the Model&#x2019;s <code>createKey</code> overrides Koop&#x2019;s internal function.  This can be useful if the cache key should be composed with parameters in addition to those found in the internal function.  For example, the <code>createKey</code> below uses query parameters <code>startdate</code> adn <code>enddate</code> to construct the key (if they are defined):</p>
+<script src="https://gist.github.com/rgwozdz/89b80cb0656f22cb4c71b61fe94947b9.js"></script>
 <h4>Metadata</h4>
 <p>You can add a <code>metadata</code> property to the GeoJSON returned from <code>getData</code> and assign it an object for use in Koop output services. In addtion to <code>name</code> and <code>description</code> noted in the example above, the following fields may be useful:</p>
 <script src="https://gist.github.com/rgwozdz/5080e5e66ee1b3452bdb300602150247.js"></script>
