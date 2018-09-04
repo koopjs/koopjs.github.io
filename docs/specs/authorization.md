@@ -24,12 +24,11 @@ An example of `authenticationSpecification` is available [here](https://github.c
 
 Authorization plugins are required to return a function called `authenticate`.  Its purpose is to validate credentials and, if successful, issue a token for authorizing subsequent resource requests.  The `authenticate` function should have the following signature:
 
-##### authenticate(username, password) ⇒ Promise
+##### authenticate(req) ⇒ Promise
 
 | Param | Type | Description |
 | --- | --- | --- |
-| username | <code>string</code> | requester's username |
-| password | <code>string</code> | requester's password |
+| req | <code>object</code> | Express request object. Credentials for authentication should be found in the `query` object. |
 
 
 As noted above, the `authenticate` function should return a promise. If the authentication is unsuccessful the promise should reject with an error object.  The error should have a `code` property with value `401`. If the authentication is successful, the promise should resolve an object with the following properties:
@@ -46,7 +45,7 @@ Authorization plugins are required to implement a function called `authorize`.  
 
 | Param | Type | Description |
 | --- | --- | --- |
-| input | <code>*</code> |input that can be used to prove previously successful authentication |
+| input | <code>object</code> | Express request object. Query parameter or header should include input (e.g., token) that can be used to prove previously successful authentication |
 
 As noted above, the `authorize` function should return a promise. If the authorization is unsuccessful, the promise should reject with an error object.  Successful authorization should allow the promise to resolve. An example of an `authorize` function can be viewed [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L90-L108).
 

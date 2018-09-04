@@ -54,7 +54,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <p>An example of <code>authenticationSpecification</code> is available <a href="https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56">here</a>.</p>
 <h3>Function: authenticate</h3>
 <p>Authorization plugins are required to return a function called <code>authenticate</code>.  Its purpose is to validate credentials and, if successful, issue a token for authorizing subsequent resource requests.  The <code>authenticate</code> function should have the following signature:</p>
-<h5>authenticate(username, password) &#x21D2; Promise</h5>
+<h5>authenticate(req) &#x21D2; Promise</h5>
 <table>
 <thead>
 <tr>
@@ -65,14 +65,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </thead>
 <tbody>
 <tr>
-<td>username</td>
-<td><code>string</code></td>
-<td>requester&#x2019;s username</td>
-</tr>
-<tr>
-<td>password</td>
-<td><code>string</code></td>
-<td>requester&#x2019;s password</td>
+<td>req</td>
+<td><code>object</code></td>
+<td>Express request object. Credentials for authentication should be found in the <code>query</code> object.</td>
 </tr>
 </tbody>
 </table>
@@ -93,8 +88,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <tbody>
 <tr>
 <td>input</td>
-<td><code>*</code></td>
-<td>input that can be used to prove previously successful authentication</td>
+<td><code>object</code></td>
+<td>Express request object. Query parameter or header should include input (e.g., token) that can be used to prove previously successful authentication</td>
 </tr>
 </tbody>
 </table>
