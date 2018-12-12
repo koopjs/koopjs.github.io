@@ -1,0 +1,36 @@
+
+- title: Basics
+  path: basics/overview
+  docs:
+  - title: Overview
+    path: basics/overview
+  - title: Quickstart
+    path: basics/quickstart
+  - title: System Reqiurements
+    path: basics/system-requirements
+
+- title: Available Plugins
+  path: available-plugins/providers
+  docs:
+  - title: Providers
+    path: available-plugins/providers
+  - title: Outputs
+    path: available-plugins/outputs
+  - title: Caches
+    path: available-plugins/caches
+  - title: Authorization
+    path: available-plugins/authorization
+  - title: Plugins
+    path: available-plugins/plugins
+
+- title: Usage and Specifications
+  path: usage/koop-core
+  docs:
+  - title: Koop Core
+    path: usage/koop-core
+  - title: Provider Spec
+    path: usage/provider
+  - title: Cache Spec
+    path: usage/cache
+  - title: Authorization Spec
+    path: usage/authorization

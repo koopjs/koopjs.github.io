@@ -1,0 +1,186 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+// Import partials from `sass_dir` (defaults to `_sass`)
+
+
+
+@import
+  {% if site.bootwatch %}
+    "bootswatch/{{site.bootwatch | downcase}}/variables",
+  {% endif %}
+
+  "bootstrap",
+
+  {% if site.bootwatch %}
+    "bootswatch/{{site.bootwatch | downcase}}/bootswatch",
+  {% endif %}
+
+  "syntax-highlighting",
+  "typeahead"
+;
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  padding-top: $navbar-height + $navbar-margin-bottom;
+  margin-bottom: 46px;
+}
+
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  margin-top: 30px;
+  margin-bottom: 10.5px;
+
+  .anchor {
+    float: left;
+    line-height: 1;
+    margin-left: -20px;
+    padding-right: 4px;
+    opacity: 0;
+  }
+
+  .anchor:hover {
+    opacity: 1;
+  }
+}
+
+h1:hover, .h1:hover, h2:hover, .h2:hover, h3:hover, .h3:hover, h4:hover, .h4:hover, h5:hover, .h5:hover, h6:hover, .h6:hover {
+  .anchor{
+    opacity: 1;
+  }
+}
+
+.navbar-brand{
+  img{
+    margin: -$navbar-padding-vertical 0;
+    height: $navbar-height;
+    padding: 10px 0;
+  }
+}
+
+.navbar-default span.twitter-typeahead .tt-menu {
+  background-color: #fff;
+}
+
+.header-container {
+
+  background-color: #383838;
+  color: #fff;
+
+  h1 {
+    color: #fff;
+  }
+  h3 {
+    color: #fff;
+  }
+  margin-top: -37px;
+}
+.navbar-container {
+  font-size: 16px;
+}
+.page-content {
+  padding-bottom: 20px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 46px;
+  padding-top: 10px;
+  background-color: $gray-lighter;
+  color: $gray-dark;
+}
+
+.post-list-container {
+  li a.active {
+    font-weight: bold;
+  }
+}
+*[id]:before {
+  display: block;
+  content: " ";
+  margin-top: -75px;
+  height: 75px;
+  visibility: hidden;
+}
+.navbar-form .has-feedback .form-control-feedback{
+  top:10px
+}
+
+.landing-header-no-top-margin {
+  margin-top: 0;
+}
+
+.tile-link {
+  color:inherit;
+  text-decoration: none;
+}
+.landing-tiles {
+  h4 {
+    font-size: 22px;
+  }
+}
+
+.panel {
+  .list-group  {
+
+    padding-bottom: 6px;
+
+    .arrow-wrapper {
+      display: inline-block;
+      width: 12px;
+      .active-icon {
+        display: none;
+        color: #008cba;
+      }
+    }
+
+    .list-group-item {
+      background-color: inherit;
+      color: #7d7d7d;
+      font-size: 14px;
+      border: none;
+      padding-top: 4px;
+      padding-bottom: 4px;
+
+      &.active {
+        font-weight: 500;
+        color: #008cba;
+        .arrow-wrapper {
+          .active-icon {
+            display: inline;
+          }
+        }
+      }
+    }
+
+    .sublist-group {
+      padding-left: 0;
+
+      .list-sub-group-item {
+        display: block;
+        list-style-type: none;
+        padding-left: 10px;
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-size: 14px;
+        color: #7d7d7d;
+
+        &.active {
+          color: #008cba;
+          .arrow-wrapper {
+            .active-icon {
+              display: inline;
+            }
+          }
+        }
+      }
+    }
+
+
+  }
+}

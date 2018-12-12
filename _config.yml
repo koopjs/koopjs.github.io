@@ -1,0 +1,56 @@
+# Site settings
+title: Koop
+email: rgwozdz@esri.com
+description: >
+  Koop - an open source geospatial ETL engine
+
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: https://koopjs.github.io # the base hostname & protocol for your site
+git_address: https://github.com/koopjs/koopjs.github.io
+git_edit_address: https://github.com/koopjs/koopjs.github.io/blob/master
+
+# theme options from https://bootswatch.com/
+# comment out this to use default Bootstrap
+bootwatch: yeti
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+gems:
+  - jekyll-feed
+  - jekyll-redirect-from
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-octicons
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - .idea/
+  - .gitignore
+  - README.md
+timezone: America/New_York
+defaults:
+- scope:
+    path: _posts
+    type: posts
+  values:
+    layout: post
+    sectionid: blog
+
+- scope:
+    path: _docs
+    type: docs
+  values:
+    layout: docs
+    sectionid: docs
+    seo:
+      type: "WebPage"
+
+collections:
+  docs:
+    permalink: /:collection/:path/
+    output: true
+  posts:
+    permalink: /blog/:year/:month/:day/:title/
+    output: true
