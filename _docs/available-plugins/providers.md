@@ -44,6 +44,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [Citybikes](https://github.com/nixta/koop-citybikes) | [![npm](https://img.shields.io/npm/v/koop-citybikes.svg?style=flat-square)](https://www.npmjs.com/package/koop-citybikes) | [![travis](https://img.shields.io/travis/nixta/koop-citybikes.svg?style=flat-square)](https://travis-ci.org/nixta/koop-citybikes) |
 | [Zillow](https://github.com/dmfenton/koop-provider-zillow) | [![npm](https://img.shields.io/npm/v/koop-zillow.svg?style=flat-square)](https://www.npmjs.com/package/koop-zillow) | [![travis](https://img.shields.io/travis/dmfenton/koop-provider-zillow.svg?style=flat-square)](https://travis-ci.org/dmfenton/koop-provider-zillow) |
 | [Strava](https://github.com/Jking-GIS/koop-provider-Strava) | [![npm](https://img.shields.io/npm/v/koop-strava.svg?style=flat-square)](https://www.npmjs.com/package/koop-strava) | [![travis](https://img.shields.io/travis/Jking-GIS/koop-provider-Strava.svg?style=flat-square)](https://travis-ci.org/Jking-GIS/koop-provider-Strava) |
+| [CSV](https://github.com/haoliangyu/koop-provider-csv) | [![npm](https://img.shields.io/npm/v/koop-provider-csv.svg?style=flat-square)](https://www.npmjs.com/package/koop-provider-csv) | [![travis](https://travis-ci.org/haoliangyu/koop-provider-csv.svg?branch=master)](https://github.com/haoliangyu/koop-provider-csv) |
 
 <br>
 Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!  
