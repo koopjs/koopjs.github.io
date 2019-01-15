@@ -46,7 +46,7 @@ Every provider must have a `Model`. This is where almost all of the business log
 
 _[back to top](#contents)_
 
-### `getData`
+### `getData` function
 
 Models are required to implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
 
