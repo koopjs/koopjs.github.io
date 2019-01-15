@@ -5,7 +5,7 @@ permalink: /docs/usage/authorization
 
 Add authorization and authentication to Koop services. Dive into the docs below or check out a working example [here](https://github.com/koopjs/koop-auth-direct-file).
 
-## index.js <a class="anchor" href="#indexjs--">{% octicon link %} </a>
+## index.js
 
 Each authorization plugin must have a file called `index.js`.  Its purpose is to return a registration object that defines the type of Koop module and provides a set of configured functions that Koop will attach to each provider's Model prototype.  For example, the koop-auth-file-direct plugin exports a function that configures and returns a registration object that includes three functions, `getAuthenticateSpecification`, `authenticate`, and `authorize`.
 
@@ -18,7 +18,7 @@ Each authorization plugin must have a file called `index.js`.  Its purpose is to
 }
 ```
 
-### `authenticationSpecification` function <a class="anchor" href="#authenticationspecification-function--">{% octicon link %} </a>
+### `authenticationSpecification`
 
 Authorization plugins are required to return a function called "authenticationSpecification".  Its purpose is delivery of an object for use in configuring authentication in output-services (e.g., koop-output-geoservices). It should have the following signature:
 
@@ -35,7 +35,7 @@ As noted, `authenticationSpecification` returns an object configured with a prov
 An example of `authenticationSpecification` is available [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56).
 
 
-### `authenticate` function <a class="anchor" href="#authenticate-function--">{% octicon link %} </a>
+### `authenticate`
 
 Authorization plugins are required to return a function called `authenticate`.  Its purpose is to validate credentials and, if successful, issue a token for authorizing subsequent resource requests.  The `authenticate` function should have the following signature:
 
@@ -57,7 +57,7 @@ As noted above, the `authenticate` function should return a promise. If the auth
 
 Authorization plugins are free to validate credentials in any manner.  For example, you might check a database for a match of the submitted username and password, or forward the credentials on to a third-party identity-store. [koop-auth-direct-file](https://github.com/koopjs/koop-auth-direct-file) provides an [example](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L59-L88) of a very basic credential validation using a simple JSON file-store. 
 
-### `authorize` function <a class="anchor" href="#authorize--">{% octicon link %} </a>
+### `authorize`
 
 Authorization plugins are required to implement a function called `authorize`.  It should accept an argument that can be used to verify the request is being made by an authenticated user (e.g., a token granted after successful authentication).  It should have the following function signature:
 
@@ -69,7 +69,7 @@ Authorization plugins are required to implement a function called `authorize`.  
 
 As noted above, the `authorize` function should return a promise. If the authorization is unsuccessful, the promise should reject with an error object.  Successful authorization should allow the promise to resolve. An example of an `authorize` function can be viewed [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L90-L108).
 
-### Usage <a class="anchor" href="#usage--">{% octicon link %} </a>
+### Usage
 
 Usage of an authorization-plugin can be conceptually divided into three parts: (1) configuration, (2) registration with Koop, and (3) use in output-services.  Configuration will be dependent on how the plugin is authored.  For example, with [koop-auth-direct-file](https://github.com/koopjs/koop-auth-direct-file), configuration includes supplying required and or optional arguments and getting a configured response back:
 

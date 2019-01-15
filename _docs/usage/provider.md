@@ -4,14 +4,14 @@ permalink: /docs/usage/provider
 ---
 
 #### Contents
-1. [The `index.js` file](#indexjs--)  
-2. [The `model.js` file](#modeljs--)  
+1. [The `index.js` file](#indexjs)  
+2. [The `model.js` file](#modeljs)  
 3. [Cached vs. Pass-through providers](#cached-vs.-pass-through)  
 4. [Routes and Controllers](#routes-and-controllers)
 
 <hr>
 
-## index.js <a class="anchor" href="#indexjs--">{% octicon link %} </a>
+## index.js
 
 Every provider must have a file called `index.js`. Its purpose is to tell Koop how to load and use the provider. The keys and values are enumerated in the example below.
 
@@ -31,10 +31,10 @@ module.exports = {
 _[back to top](#contents)_
 <hr>
 
-## model.js  <a class="anchor" href="#modeljs--">{% octicon link %} </a>
+## model.js
 Every provider must have a `Model`. This is where almost all of the business logic of the provider will occur. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing.  `Model` has a set of prototype functions that allow Koop to interact with it.  Some of these functions are optional, others are required.  The table below lists the `Model` function that Koop currently uses.
 
-### `Model` class methods overview <a class="anchor" href="#model-class-methods-overview--">{% octicon link %} </a>
+### `Model` class methods overview
 
 | Name   |      Required?     |  Summary |
 |----------|:-------------:|------|
@@ -46,7 +46,7 @@ Every provider must have a `Model`. This is where almost all of the business log
 
 _[back to top](#contents)_
 
-### `getData` function <a class="anchor" href="#getdata-function--">{% octicon link %} </a>
+### `getData`
 
 Models are required to implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
 
@@ -90,7 +90,7 @@ function getData(req, callback) {
 
 _[back to top](#contents)_
 
-#### Setting provider `metadata` in `getData` <a class="anchor" href="#setting-provider-metadata-in-getData--">{% octicon link %} </a>
+#### Setting provider `metadata` in `getData`
 
 You can add a `metadata` property to the GeoJSON returned from `getData` and assign it an object for use in Koop output services. In addtion to `name` and `description` noted in the example above, the following fields may be useful:
 
@@ -121,11 +121,11 @@ The data type and values used for `idField` can affect the output of the [koop-o
 
 _[back to top](#contents)_
 
-#### Request parameters in `getData` <a class="anchor" href="#request-parameters-in-getData--">{% octicon link %} </a>
+#### Request parameters in `getData`
 
 Recall the `getData` function receives `req`, an Express.js [request](https://expressjs.com/en/4x/api.html#req) object. `req` includes a set of [route parameters](https://expressjs.com/en/4x/api.html#req.params) accessible with `req.params`, as well as a set of [query-parameters](https://expressjs.com/en/4x/api.html#req.query) accessible with `req.query`. Parameters can be used by `getData` to specify the particulars of data fetching.  
 
-##### Provider route parameters <a class="anchor" href="#provider-route-parameters--">{% octicon link %} </a>
+##### Provider route parameters
 Providers can enable the `:host` and `:id` route parameters with settings in [`index.js`](#index.js) and then leverage these parameters in `getData`.  For example, the Craigslist Provider's [`getData` function](https://github.com/dmfenton/koop-provider-craigslist/blob/master/model.js#L12-L14) uses the `:host` and `:id` parameter to transmit the city and and posting category to the `getData` function where they are used to generate URLs for requests to the Craigslist API. 
 
 | parameter | `getData` accessor | enabled by default | `index.js` setting |
@@ -133,7 +133,7 @@ Providers can enable the `:host` and `:id` route parameters with settings in [`i
 | `:id` | `req.params.id` | yes | `disableIdParam` |
 |`:host`| `req.params.host` | no | `hosts` |
 
-##### Output-services route parameters <a class="anchor" href="#output-services-route-parameters--">{% octicon link %} </a>
+##### Output-services route parameters
 
 By default, Koop includes the [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) output-service. It adds a set of `FeatureServer` routes (e.g., `/provider/:host/:id/FeatureServer/:layer` and `/provider/:host/:id/FeatureServer/:layer/:method`), which include addtional route parameters that can be used in your Model's `getData` function. 
 
@@ -142,18 +142,18 @@ By default, Koop includes the [koop-output-geoservices](https://github.com/koopj
 | `:layer` | `req.params.layer` | |
 |`:method`| `req.params.method` | `query` and `generateRenderer` are the only values currently supported by [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) dependency.  All other values will produce a `400, Method not supported` error.  |
 
-##### Query parameters <a class="anchor" href="#query-parameters--">{% octicon link %} </a>
+##### Query parameters
 As noted above, any query-parameters added to the request URL can accessed within `getData` and leveraged for data fetching purposes.  For example, a request `/provider/:id/FeatureServer/0?foo=bar` would supply `getData` with `req.query.foo` equal to `bar`. With the proper logic, it could then be used to limit fetched data to records that had an attribute `foo` with a value of `bar`.
 
-#### Generation of provider-specific output-routes <a class="anchor" href="#generation-of-provider-specific-output-routes--">{% octicon link %} </a>
+#### Generation of provider-specific output-routes
 The position of the provider-specific fragment of a route path can vary depending on the `path` assignment in the `routes` array object of your output-services plugin.  By default, Koop will construct the route with the provider's parameters first, and subsequently add the route fragment defined by an output-services plugin.  However, if you need the route path configured differently, you can add the `$namespace` and `$providerParams` placholders anywhere in the output-services path. Koop will replace these placeholders with the provider-specific route fragments (i.e, namespace and `:host/:id`). For example, an output path defined as `$namespace/rest/services/$providerParams/FeatureServer/0` would translate to `provider/rest/services/:host/:id/FeatureServer/0`.
 
-#### Output-routes without provider parameters  <a class="anchor" href="#output-routes-without-provider-parameters--">{% octicon link %} </a>
+#### Output-routes without provider parameters
 You may need routes that skip the addition of provider-specific parameters altogether.  This can be accomplished by adding an `absolutePath: true` key-value to the `routes` array object in your output-services plugin. On such routes, Koop will define the route without any additional provider namespace or parameters.
 
 _[back to top](#contents)_
 
-### `createKey` function  <a class="anchor" href="#createkeyfunction--">{% octicon link %} </a>
+### `createKey` function
 Koop uses a an internal `createKey` function to generate a string for use as a key for the data-cache's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
 
 Models can optionally implement a function called `createKey`.  If defined, the Model's `createKey` overrides Koop's internal function.  This can be useful if the cache key should be composed with parameters in addition to those found in the internal function.  For example, the `createKey` below uses query parameters `startdate` and `enddate` to construct the key (if they are defined):
@@ -170,11 +170,11 @@ Model.prototype.createKey = function (req) {
 
 _[back to top](#contents)_
 
-## Cached vs. Pass-Through Providers <a class="anchor" href="#cached-vs-pass-through-providers--">{% octicon link %} </a>
+## Cached vs. Pass-Through Providers
 
 Providers typically fall into two categories: cached and pass-through.
 
-### Cached  <a class="anchor" href="#cached--">{% octicon link %} </a>
+### Cached
 
 Cached providers periodically request entire datasets from the remote API.
 
@@ -187,7 +187,7 @@ It makes sense to use a cache strategy if at least one of the following is true:
 - The remote API does not support filters or geographic queries
 - The remote API is slow to respond
 
-### Pass-Through <a class="anchor" href="#passthrough--">{% octicon link %} </a>
+### Pass-Through
 
 Pass-through providers do not store any data, they act as a proxy/translator between the client and the remote API.
 
@@ -213,9 +213,9 @@ http://localhost:8080/yelp/FeatureServer/0?where=term=pizza&f=geojson
 
 _[back to top](#contents)_
 
-## Routes and Controllers  <a class="anchor" href="#routes-and-controllers--">{% octicon link %} </a>
+## Routes and Controllers
 
-### Routes.js  <a class="anchor" href="#routes--">{% octicon link %} </a>
+### Routes.js
 
 This file is simply an array of routes that should be handled in the namespace of the provider e.g. http://adapters.koopernetes.com/agol/arcgis/datasets/e5255b1f69944bcd9cf701025b68f411_0
 
@@ -260,7 +260,7 @@ module.exports = [
 ]
 ```
 
-### Controller.js <a class="anchor" href="#controllers--">{% octicon link %} </a>
+### Controller.js
 
 Providers can do more than simply implement `getData` and hand GeoJSON back to Koop's core. In fact, they can extend the API space in an arbitrary fashion by adding routes that map to controller functions. Those controller functions call functions on the model to fetch or process data from the remote API.
 
