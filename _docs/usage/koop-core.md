@@ -1,5 +1,5 @@
 ---
-title: Koop Core
+title: Koop Core Usage
 permalink: /docs/usage/koop-core
 redirect_from: /docs/usage/index.html
 ---
