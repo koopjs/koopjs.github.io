@@ -51,4 +51,4 @@ Know of any providers that aren't listed below? Please let us know by [submittin
 
 <br>
 ### Create a Provider
-We encourage you to create your own provider using the [Provider](../specs/provider.md) specification.
+We encourage you to create your own provider using the [Provider](../usage/provider) specification.
