@@ -4,7 +4,7 @@
   {% for section in site.data.docs %}
   {% assign section_url = section.path | prepend:"/docs/" %}
   {% assign secs_docs = section.docs.size  %}
-  {% assign loop_one = forloop = section.docs.size  %}
+  {% assign forloop = section.docs.size  %}
     {
       "title": "{{ section.title }}",
       "url": "{{ section.url }}"
@@ -15,7 +15,7 @@
       {
         "title": "{{ item.title }}",
         "url": "{{ item_url }}"
-      }{% unless loop_one.last and forloop.last %},{% endunless %}
+      }{% unless forloop.last and forloop.last %},{% endunless %}
     {% endfor %}
   
   {% endfor %}
