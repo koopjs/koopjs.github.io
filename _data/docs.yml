@@ -20,8 +20,15 @@
     path: available-plugins/outputs
   - title: Caches
     path: available-plugins/caches
+<<<<<<< HEAD
   - title: Authorization
     path: available-plugins/authorizations
+=======
+  - title: Authorizations
+    path: available-plugins/authorization
+  - title: File Systems
+    path: available-plugins/file-systems
+>>>>>>> Update plugin lists.
   - title: Plugins
     path: available-plugins/plugins
 
