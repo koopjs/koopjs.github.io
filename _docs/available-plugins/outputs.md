@@ -17,6 +17,7 @@ Koop uses **outputs** to tranform the GeoJSON supplied by providers to serve dat
 
 | name | version | build status | koop compatibility |
 | --- | --- | --- | --- |
+|[Flatted JSON](https://github.com/koopjs/koop-output-flat)||| 3.x |
 |[Vector Tiles](https://github.com/koopjs/koop-output-vector-tiles)||| 3.x |
 |[WFS](https://github.com/koopjs/koop-output-wfs)||| 3.x |
 |[WMS](https://github.com/koopjs/koop-output-wms)||| 3.x |
