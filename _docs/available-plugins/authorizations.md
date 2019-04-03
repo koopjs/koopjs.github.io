@@ -1,6 +1,6 @@
 ---
 title: Authorization
-permalink: /docs/available-plugins/authorization
+permalink: /docs/available-plugins/authorizations
 ---
 Koop Authorization Plugins are modules for securing Koop services. They handle user authentication and request authorization.  
 
