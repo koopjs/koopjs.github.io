@@ -1,14 +1,12 @@
 ---
-title: Overview
+title: Conceptual Overview
 permalink: /docs/basics/overview
-redirect_from: /docs/basics/index.html
 ---
 
-Koop is a plugin-based web-server for geo-spatial data.  It is built on the Express.js framework for Node.js. A Koop instance usually includes the following components: [core](#koop-core), [provider](#provider), [output](output), and [cache](#cache), connected as illustrated below.  
-<br>  
+A Koop instance usually includes the following components: [core](#koop-core), [provider](#provider), [output](output), and [cache](#cache), connected as illustrated below.  
+ 
 
 
-![koop overview](/img/koop-overview.png "Koop Overview")  
 <br>  
 ### Koop-core
 Koop-core is a wrapper around an Express.js server instance. Like Express it listens for incoming requests on a given port and includes some limited middleware for parsing request parameters. It also handles registration of other Koop plugins/components, allowing data and requests to flow through the system.  Note that Koop-core ships with a default cache plugin and a default output plugin.  As a result
