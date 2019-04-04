@@ -13,9 +13,11 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | version | build status | koop compatibility |
 | :--- | :------ | :----------- | :----------- |
 | [ArcGIS Online](https://github.com/koopjs/koop-provider-agol) | [![npm](https://img.shields.io/npm/v/koop-agol.svg?style=flat-square)](https://www.npmjs.com/package/koop-agol) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-agol/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-agol) | 3.0.0-alpha.29 |
+| [AWS S3 Select](https://github.com/koopjs/koop-provider-s3-select) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-s3-select.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-s3-select) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-s3-select/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-s3-select) | 3.x |
 | [File GeoJSON](https://github.com/koopjs/koop-provider-file-geojson) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-file-geojson.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-file-geojson) | [![travis](https://travis-ci.com/koopjs/koop-provider-file-geojson.svg?branch=master)](https://travis-ci.org/koopjs/koop-provider-file-geojson) | 3.x |
 | [Gist](https://github.com/koopjs/koop-gist) | [![npm](https://img.shields.io/npm/v/koop-gist.svg?style=flat-square)](https://www.npmjs.com/package/koop-gist) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-gist/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-gist) | 2.x |
 | [GitHub](https://github.com/koopjs/koop-provider-github) | [![npm](https://img.shields.io/npm/v/koop-github.svg?style=flat-square)](https://www.npmjs.com/package/koop-github) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-github/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-github) | 3.x |
+| [Google Analytics](https://github.com/koopjs/koop-provider-google-analytics) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-analytics.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-analytics) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-google-analytics/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-google-analytics) | 3.x |
 | [Google Fusion Tables](https://github.com/koopjs/koop-provider-google-fusion-tables) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-fusion-tables.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-fusion-tables) | NA | 3.x |
 | [Google Sheets](https://github.com/koopjs/koop-provider-google-sheets) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-sheets.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-sheets) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-google-sheets/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-google-sheets) | 3.x |
 | [Marklogic](https://github.com/koopjs/koop-provider-marklogic) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-marklogic.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-marklogic) | NA | 3.x|
@@ -43,12 +45,14 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [Citybikes](https://github.com/nixta/koop-citybikes) | NA | NA | |
 | [Cloudant](https://github.com/cloudant/koop-cloudant) | [![npm](https://img.shields.io/npm/v/koop-cloudant.svg?style=flat-square)](https://www.npmjs.com/package/koop-cloudant) | NA | |
 | [CSV](https://github.com/haoliangyu/koop-provider-csv) | [![npm](https://img.shields.io/npm/v/koop-provider-csv.svg?style=flat-square)](https://www.npmjs.com/package/koop-provider-csv) | [![travis](https://travis-ci.org/haoliangyu/koop-provider-csv.svg?branch=master)](https://github.com/haoliangyu/koop-provider-csv) | 3.x |
+| [Postgres/PostGIS](https://github.com/brambow/koop-provider-postgis) | NA| NA | 3.x |
 | [Strava](https://github.com/Jking-GIS/koop-provider-Strava) | [![npm](https://img.shields.io/npm/v/koop-strava.svg?style=flat-square)](https://www.npmjs.com/package/koop-strava) | [![travis](https://img.shields.io/travis/Jking-GIS/koop-provider-Strava.svg?style=flat-square)](https://travis-ci.org/Jking-GIS/koop-provider-Strava) | 3.x |
 | [Zillow](https://github.com/dmfenton/koop-provider-zillow) | [![npm](https://img.shields.io/npm/v/koop-zillow.svg?style=flat-square)](https://www.npmjs.com/package/koop-zillow) | NA | 3.x |
+
 
 <br>
 Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!  
 
 <br>
 ### Create a Provider
-We encourage you to create your own provider using the [Provider](../usage/provider) specification.
+We encourage you to create your own provider! Check out [Koop-CLI](https://github.com/koopjs/koop-cli) and the [provider specification](../usage/provider).
