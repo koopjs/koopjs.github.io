@@ -40,9 +40,9 @@ Every provider must have a `Model`. This is where almost all of the business log
 |----------|:-------------:|------|
 | `getData` | Yes | Fetches data and translates it to GeoJSON.  See below. |
 | `createKey` | No   | Generates a string to use as a key for the data-cache. See below. |
-| `getAuthenticationSpecification` | No | Delivers an object for use in configuring authentication in output-services. See [authorization spec](http://koopjs.github.io/docs/usage/authorization/).|
-| `authenticate` | No | Validates credentials and issues a token. See [authorization spec](http://koopjs.github.io/docs/usage/authorization/). |
-| `authorize` | No | Verifies request is made by an authenticated user. See [authorization spec](http://koopjs.github.io/docs/usage/authorization/). |
+| `getAuthenticationSpecification` | No | Delivers an object for use in configuring authentication in output-services. See [authorization spec](http://koopjs.github.io/docs/usage/authorization).|
+| `authenticate` | No | Validates credentials and issues a token. See [authorization spec](http://koopjs.github.io/docs/usage/authorization). |
+| `authorize` | No | Verifies request is made by an authenticated user. See [authorization spec](http://koopjs.github.io/docs/usage/authorization). |
 
 _[back to top](#contents)_
 
