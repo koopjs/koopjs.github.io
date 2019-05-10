@@ -36,6 +36,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [OpenStreetMap](https://github.com/koopjs/koop-osm) | [![npm](https://img.shields.io/npm/v/koop-osm.svg?style=flat-square)](https://www.npmjs.com/package/koop-osm) | NA | |
 | [VRBO](https://github.com/koopjs/koop-vrbo) | [![npm](https://img.shields.io/npm/v/koop-vrbo.svg?style=flat-square)](https://www.npmjs.com/package/koop-vrbo) | NA | |
 | [Yelp](https://github.com/koopjs/koop-provider-yelp) | [![npm](https://img.shields.io/npm/v/koop-yelp.svg?style=flat-square)](https://www.npmjs.com/package/koop-yelp) | NA | 3.x |
+| [Salesforce](https://github.com/Jking-GIS/koop-provider-Salesforce) | [![npm](https://img.shields.io/npm/v/koop-salesforce.svg)](https://www.npmjs.com/package/koop-salesforce) | [![Build Status](https://travis-ci.org/Jking-GIS/koop-provider-Salesforce.svg?branch=master)](https://travis-ci.org/Jking-GIS/koop-provider-Salesforce) | 3.x |
 
 <br>
 #### Third Party
@@ -51,7 +52,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 
 
 <br>
-Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!  
+Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!
 
 <br>
 ### Create a Provider
