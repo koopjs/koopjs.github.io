@@ -36,5 +36,7 @@
     path: usage/provider
   - title: Cache Spec
     path: usage/cache
+  - title: Output Spec
+    path: usage/output
   - title: Authorization Spec
     path: usage/authorization
