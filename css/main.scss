@@ -29,6 +29,7 @@ html {
 body {
   padding-top: $navbar-height + $navbar-margin-bottom;
   margin-bottom: 46px;
+  line-height: 2em;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
@@ -126,6 +127,8 @@ h1:hover, .h1:hover, h2:hover, .h2:hover, h3:hover, .h3:hover, h4:hover, .h4:hov
 }
 
 .panel {
+  line-height: 1.4em;
+
   .list-group  {
 
     padding-bottom: 6px;
