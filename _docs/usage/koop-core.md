@@ -58,44 +58,55 @@ Run the `server.js` file like an Node.js script.
 ```bash
 > node server.js
 
-provider=github fullRoute:/github/rest/info GET
-provider=github fullRoute:/github/rest/info POST
-provider=github fullRoute:/github/tokens/:method GET
-provider=github fullRoute:/github/tokens/:method POST
-provider=github fullRoute:/github/tokens/ GET
-provider=github fullRoute:/github/tokens/ POST
-provider=github fullRoute:/github/rest/services/:id/FeatureServer/:layer/:method GET
-provider=github fullRoute:/github/rest/services/:id/FeatureServer/:layer/:method POST
-provider=github fullRoute:/github/rest/services/:id/FeatureServer/layers GET
-provider=github fullRoute:/github/rest/services/:id/FeatureServer/layers POST
-provider=github fullRoute:/github/rest/services/:id/FeatureServer/:layer GET
-provider=github fullRoute:/github/rest/services/:id/FeatureServer/:layer POST
-provider=github fullRoute:/github/rest/services/:id/FeatureServer GET
-provider=github fullRoute:/github/rest/services/:id/FeatureServer POST
-provider=github fullRoute:/github/:id/FeatureServer/:layer/:method GET
-provider=github fullRoute:/github/:id/FeatureServer/:layer/:method POST
-provider=github fullRoute:/github/:id/FeatureServer/layers GET
-provider=github fullRoute:/github/:id/FeatureServer/layers POST
-provider=github fullRoute:/github/:id/FeatureServer/:layer GET
-provider=github fullRoute:/github/:id/FeatureServer/:layer POST
-provider=github fullRoute:/github/:id/FeatureServer GET
-provider=github fullRoute:/github/:id/FeatureServer POST
-provider=github fullRoute:/github/rest/services/:id/FeatureServer* GET
-provider=github fullRoute:/github/rest/services/:id/FeatureServer* POST
-provider=github fullRoute:/github/:id/FeatureServer* GET
-provider=github fullRoute:/github/:id/FeatureServer* POST
-provider=github fullRoute:/github/rest/services/:id/MapServer* GET
-provider=github fullRoute:/github/rest/services/:id/MapServer* POST
-provider=github fullRoute:/github/:id/MapServer* GET
-provider=github fullRoute:/github/:id/MapServer* POST
+Custom Routes for provider: datasets  Methods         
+------------------------------------  ----------------
+/datasets/:id                         GET, PUT, DELETE
+/datasets/:id/metadata                GET, PUT, DELETE
+
+Routes for provider: datasets, Output: Geoservices        Methods  
+--------------------------------------------------------  ---------
+/datasets/rest/info                                       GET, POST
+/datasets/tokens/:method                                  GET, POST
+/datasets/tokens/                                         GET, POST
+/datasets/rest/services/:id/FeatureServer/:layer/:method  GET, POST
+/datasets/rest/services/:id/FeatureServer/layers          GET, POST
+/datasets/rest/services/:id/FeatureServer/:layer          GET, POST
+/datasets/rest/services/:id/FeatureServer                 GET, POST
+/datasets/:id/FeatureServer/:layer/:method                GET, POST
+/datasets/:id/FeatureServer/layers                        GET, POST
+/datasets/:id/FeatureServer/:layer                        GET, POST
+/datasets/:id/FeatureServer                               GET, POST
+/datasets/rest/services/:id/FeatureServer*                GET, POST
+/datasets/:id/FeatureServer*                              GET, POST
+/datasets/rest/services/:id/MapServer*                    GET, POST
+/datasets/:id/MapServer*                                  GET, POST
+
+Routes for Provider: github, Output: Geoservices        Methods  
+------------------------------------------------------  ---------
+/github/rest/info                                       GET, POST
+/github/tokens/:method                                  GET, POST
+/github/tokens/                                         GET, POST
+/github/rest/services/:id/FeatureServer/:layer/:method  GET, POST
+/github/rest/services/:id/FeatureServer/layers          GET, POST
+/github/rest/services/:id/FeatureServer/:layer          GET, POST
+/github/rest/services/:id/FeatureServer                 GET, POST
+/github/:id/FeatureServer/:layer/:method                GET, POST
+/github/:id/FeatureServer/layers                        GET, POST
+/github/:id/FeatureServer/:layer                        GET, POST
+/github/:id/FeatureServer                               GET, POST
+/github/rest/services/:id/FeatureServer*                GET, POST
+/github/:id/FeatureServer*                              GET, POST
+/github/rest/services/:id/MapServer*                    GET, POST
+/github/:id/MapServer*                                  GET, POST
+
 {"level":"info","message":"registered provider: github 3.0.0"}
 Koop listening on port 8080!
 ```
 
 ### Interpreting the console output
-You will notice a list of routes printed to the console. They are a concatenation of the provider name and the routes defined in the default output-service plugin, [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices). If you register more than one provider, you will see additional sets of these routes printed.You can use the listed routes by appending them to the `host:port` of your running Koop instance and replace any parameters with values. For example:
+You will notice a list of routes printed to the console. These include routes for the built-in `datasets` provider, as well as any providers you have registered. Each provider will have a list of any custom routes and a list of routes defined by registered output plugins. You can use the listed routes by appending them to the `host:port` of your running Koop instance and replace any parameters with values. For example:
 
-`provider=github fullRoute:/github/rest/services/:id/FeatureServer/:layer/:method GET`  
+`/github/rest/services/:id/FeatureServer/:layer/:method`  
 
 becomes:
 
@@ -106,9 +117,12 @@ Note that there are `GET` and `POST` versions of all koop-output-geoservices rou
 <hr>
 <br>
 
-## Koop setup options
+## Koop options
 
-#### Route prefixing
+### Disable compression
+As of v3.12.0, Koop adds Express compression by default.  If you do not want Express compression, you can disable it by adding a `disableCompression: true` to your Koop config file.
+
+### Route prefixing
 If needed, you can add a prefix to all of a registered provider's routes.  For example, if you wanted the fragment `/api/v1` prepended to you github provider routes you could register the provider like this:
 
 ```js
@@ -119,39 +133,26 @@ koop.register(provider, { routePrefix: '/api/v1'})
 which results in routes like:
 
 ```bash
-provider=github fullRoute:/api/v1/github/rest/info GET
-provider=github fullRoute:/api/v1/github/rest/info POST
-provider=github fullRoute:/api/v1/github/tokens/:method GET
-provider=github fullRoute:/api/v1/github/tokens/:method POST
-provider=github fullRoute:/api/v1/github/tokens/ GET
-provider=github fullRoute:/api/v1/github/tokens/ POST
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer/:layer/:method GET
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer/:layer/:method POST
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer/layers GET
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer/layers POST
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer/:layer GET
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer/:layer POST
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer GET
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer POST
-provider=github fullRoute:/api/v1/github/:id/FeatureServer/:layer/:method GET
-provider=github fullRoute:/api/v1/github/:id/FeatureServer/:layer/:method POST
-provider=github fullRoute:/api/v1/github/:id/FeatureServer/layers GET
-provider=github fullRoute:/api/v1/github/:id/FeatureServer/layers POST
-provider=github fullRoute:/api/v1/github/:id/FeatureServer/:layer GET
-provider=github fullRoute:/api/v1/github/:id/FeatureServer/:layer POST
-provider=github fullRoute:/api/v1/github/:id/FeatureServer GET
-provider=github fullRoute:/api/v1/github/:id/FeatureServer POST
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer* GET
-provider=github fullRoute:/api/v1/github/rest/services/:id/FeatureServer* POST
-provider=github fullRoute:/api/v1/github/:id/FeatureServer* GET
-provider=github fullRoute:/api/v1/github/:id/FeatureServer* POST
-provider=github fullRoute:/api/v1/github/rest/services/:id/MapServer* GET
-provider=github fullRoute:/api/v1/github/rest/services/:id/MapServer* POST
-provider=github fullRoute:/api/v1/github/:id/MapServer* GET
-provider=github fullRoute:/api/v1/github/:id/MapServer* POST
+Routes for provider: github, Output: Geoservices               Methods  
+-------------------------------------------------------------  ---------
+/api/v1/github/rest/info                                       GET, POST
+/api/v1/github/tokens/:method                                  GET, POST
+/api/v1/github/tokens/                                         GET, POST
+/api/v1/github/rest/services/:id/FeatureServer/:layer/:method  GET, POST
+/api/v1/github/rest/services/:id/FeatureServer/layers          GET, POST
+/api/v1/github/rest/services/:id/FeatureServer/:layer          GET, POST
+/api/v1/github/rest/services/:id/FeatureServer                 GET, POST
+/api/v1/github/:id/FeatureServer/:layer/:method                GET, POST
+/api/v1/github/:id/FeatureServer/layers                        GET, POST
+/api/v1/github/:id/FeatureServer/:layer                        GET, POST
+/api/v1/github/:id/FeatureServer                               GET, POST
+/api/v1/github/rest/services/:id/FeatureServer*                GET, POST
+/api/v1/github/:id/FeatureServer*                              GET, POST
+/api/v1/github/rest/services/:id/MapServer*                    GET, POST
+/api/v1/github/:id/MapServer*                                  GET, POST
 ```
 
-#### Koop as middleware
+## Koop as middleware
 
 You can also run Koop as [middleware](https://expressjs.com/en/guide/using-middleware.html) in an existing Express server.
 
