@@ -6,9 +6,9 @@ permalink: /docs/usage/provider
 #### Contents
 1. [The `index.js` file](#indexjs)  
 2. [The `model.js` file](#modeljs)  
-3. [Cached vs. Pass-through providers](#cached-vs.-pass-through)  
-4. [Routes and Controllers](#routes-and-controllers)
+3. [Routes and Controllers](#routes-and-controllers)  
 
+Note: the discussion of Cached vs Pass-through providers has moved [here](../basics/provider-types).
 <hr>
 
 ## index.js
@@ -167,50 +167,6 @@ Model.prototype.createKey = function (req) {
   return key
 }
 ```
-
-_[back to top](#contents)_
-
-## Cached vs. Pass-Through Providers
-
-Providers typically fall into two categories: cached and pass-through.
-
-### Cached
-
-Cached providers periodically request entire datasets from the remote API.
-
-[Koop-Provider-Craigslist](https://github.com/dmfenton/koop-provider-craigslist) is a good example. The Craigslist API returns the entire set of postings for a given city and type in one call (e.g. Atlanta apartments). The data also does not change that frequently. Therefore the Craigslist provider uses the Koop cache with a TTL of 1 hour, guaranteeing that data will never be more than an hour out of date.
-
-It makes sense to use a cache strategy if at least one of the following is true:
-- The remote dataset does not change often
-- The remote dataset is large
-- The entire remote dataset can be fetched
-- The remote API does not support filters or geographic queries
-- The remote API is slow to respond
-
-### Pass-Through
-
-Pass-through providers do not store any data, they act as a proxy/translator between the client and the remote API.
-
-[Koop-Provider-Yelp](https://github.com/koopjs/Koop-Provider-Yelp) is a good example. The Yelp API supports filters and geographic queries, but it only returns 20 results at a time and there is no way to download the entire Yelp dataset.
-
-It makes sense to use a pass-through strategy if at least one of the following is true:
-- The remote dataset changes frequently
-- The remote dataset is very small
-- The remote dataset is too large to be fetched as a whole
-- The remote API does not allow fetching the entire dataset
-- The remote API supports filters and geographic queries
-- The remote API is quick to respond
-
-The request below fetches data from yelp and translates it into Geoservices JSON
-
-```
-http://localhost:8080/yelp/FeatureServer/0?where=term=pizza
-```
-GeoJSON can be retrieved as well
-```
-http://localhost:8080/yelp/FeatureServer/0?where=term=pizza&f=geojson
-```
-
 _[back to top](#contents)_
 
 ## Routes and Controllers
