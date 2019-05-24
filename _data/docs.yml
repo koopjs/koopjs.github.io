@@ -8,6 +8,8 @@
     path: basics/overview
   - title: Quickstart
     path: basics/quickstart
+  - title: Provider Types
+    path: basics/provider-types
   - title: System Reqiurements
     path: basics/system-requirements
 
