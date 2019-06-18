@@ -22,3 +22,9 @@ Koop uses **outputs** to tranform the GeoJSON supplied by providers to serve dat
 |[WFS](https://github.com/koopjs/koop-output-wfs)||| 3.x |
 |[WMS](https://github.com/koopjs/koop-output-wms)||| 3.x |
 
+<br>
+#### Third Party
+
+| name | version | build status | koop compatibility |
+| --- | --- | --- | --- |
+|[GeoJSON](https://github.com/haoliangyu/koop-output-geojson)| [![npm](https://img.shields.io/npm/v/koop-output-geojson.svg)](https://www.npmjs.com/package/koop-output-geojson) || 3.x |
