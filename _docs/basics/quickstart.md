@@ -2,7 +2,7 @@
 title: Quick start with Koop CLI
 permalink: /docs/basics/quickstart
 ---
-The [Koop CLI] provides a rapid and easy way to launch a Koop instance.  To get going, install the Koop CLI:
+The [Koop CLI](https://github.com/koopjs/koop-cli) provides a rapid and easy way to launch a Koop instance.  To get going, install the Koop CLI:
 
 Using npm:
 

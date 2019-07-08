@@ -6,7 +6,7 @@
     path: basics/what-is-koop
   - title: Overview
     path: basics/overview
-  - title: Quickstart
+  - title: Quick start with Koop CLI
     path: basics/quickstart
   - title: Provider Types
     path: basics/provider-types
