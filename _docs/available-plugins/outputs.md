@@ -13,6 +13,7 @@ Koop uses **outputs** to tranform the GeoJSON supplied by providers to serve dat
 | --- | --- | --- | --- |
 | [Geoservices](https://github.com/koopjs/koop-output-geoservices) | [![npm](https://img.shields.io/npm/v/koop-output-geoservices.svg?style=flat-square)](https://www.npmjs.com/package/koop-output-geoservices) | [![travis](https://img.shields.io/travis/koopjs/koop-output-geoservices/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-output-geoservices) | 3.x |
 | [Vector Tiles](https://github.com/koopjs/koop-output-vector-tiles)| [![npm](https://img.shields.io/npm/v/koop-output-geoservices.svg?style=flat-square)](https://www.npmjs.com/package/koop-output-vector-tiles)| [![travis](https://img.shields.io/travis/koopjs/koop-output-vector-tiles/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-output-vector-tiles)| 3.x |
+
 <br>
 
 #### Experimental
