@@ -13,22 +13,23 @@
       <ul class="list-group">
         {% for item in section.docs %}
           {% assign item_url = item.path | prepend:"/docs/" %}
-
-                <a class="list-group-item {% if page.url contains item_url %}active{% endif %}" href="{{ item_url  | prepend: site.baseurl }}">
-                    <div>{{ item.title}}</div>
-                </a>
+          <div class="list-group-item {% if page.url contains item_url %}active{% endif %}" >
+            <a href="{{ item_url  | prepend: site.baseurl }}">
+                <div>{{ item.title}}</div>
+            </a>
             
             <ul class="sublist-group">
               {% for subitem in item.subdocs %}
               {% assign subitem_url = subitem.path | prepend:"/docs/" %}
               <a class="list-sub-group-item {% if subitem_url == page.url %}active{% endif %}" href="{{ subitem_url  | prepend: site.baseurl }}">
-                <div class="arrow-wrapper">
-                  <i class="active-icon fa fa-long-arrow-right" aria-hidden="true"></i>
-                </div>
-                <span>{{ subitem.title}}</span>
+                <li>
+                  <span>{{ subitem.title}}</span>
+                </li>
+                
               </a>
             {% endfor %}
             </ul>
+          </div>
         {% endfor %}
       </ul>
     </div>
