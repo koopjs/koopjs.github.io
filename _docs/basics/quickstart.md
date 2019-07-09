@@ -1,7 +1,10 @@
 ---
-title: Quick start with Koop CLI
+title: Quick start
 permalink: /docs/basics/quickstart
 ---
+
+## Using the Koop CLI
+
 The [Koop CLI](https://github.com/koopjs/koop-cli) provides a rapid and easy way to launch a Koop instance.  To get going, install the Koop CLI:
 
 Using npm:
@@ -97,10 +100,9 @@ No root directory was specified, defaulting to:  /Users/rich9620/Projects/demo-a
 {"level":"info","message":"Koop server listening at 8080"}
 ```
 
+## Using the Koop Sample App
 
-You can get started with Koop right away by cloning and running the [Koop Sample App](https://github.com/koopjs/koop-sample-app) with one or more Koop providers.
-
-Clone the [koop-sample-app](https://github.com/koopjs/koop-sample-app) repository on your machine.
+The [Koop Sample App](https://github.com/koopjs/koop-sample-app) is a template for generating Koop applications. To get started, clone the [koop-sample-app](https://github.com/koopjs/koop-sample-app) repository on your machine.
 
 ```
 git clone git@github.com:koopjs/koop-sample-app.git
@@ -135,6 +137,7 @@ Once Koop is running, you can test these sample requests:
 * [http://localhost:8080/craigslist/seattle/apartments/FeatureServer/0/query](http://localhost:8080/craigslist/seattle/apartments/FeatureServer/0/query)
 
 <br>
-### Developing with Koop
+
+## Developing with Koop
 If you want to develop on Koop, it’s usually best to start by creating a Provider. You can read more about that in [provider docs](/documentation/provider) or check out the [Koop Provider Sample](https://github.com/koopjs/koop-provider-sample)
 
