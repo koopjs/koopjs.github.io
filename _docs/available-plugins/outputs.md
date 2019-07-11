@@ -30,4 +30,4 @@ Koop uses **outputs** to tranform the GeoJSON supplied by providers to serve dat
 
 | name | version | build status | koop compatibility |
 | --- | --- | --- | --- |
-|[GeoJSON](https://github.com/haoliangyu/koop-output-geojson)| [![npm](https://img.shields.io/npm/v/koop-output-geojson.svg)](https://www.npmjs.com/package/koop-output-geojson) || 3.x |
+|[GeoJSON/TopoJSON](https://github.com/haoliangyu/koop-output-geojson)| [![npm](https://img.shields.io/npm/v/koop-output-geojson.svg)](https://www.npmjs.com/package/koop-output-geojson) || 3.x |
