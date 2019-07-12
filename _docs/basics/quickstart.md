@@ -3,6 +3,9 @@ title: Quick start
 permalink: /docs/basics/quickstart
 ---
 
+## Prerequisites
+See the noted [system requirements](./system-requirements) for Koop. For the walk-throughs below, you will need [npm](https://www.npmjs.com/get-npm) or [yarn](https://yarnpkg.com/en/) and [git](https://git-scm.com/).
+
 ## Using the Koop CLI
 
 The [Koop CLI](https://github.com/koopjs/koop-cli) provides a rapid and easy way to launch a Koop instance.  To get going, install the Koop CLI:
