@@ -6,7 +6,7 @@
     path: basics/what-is-koop
   - title: Overview
     path: basics/overview
-  - title: Quick start with Koop CLI
+  - title: Quick start
     path: basics/quickstart
   - title: Provider Types
     path: basics/provider-types
@@ -29,7 +29,7 @@
   - title: Plugins
     path: available-plugins/plugins
 
-- title: Advanced usage
+- title: Usage
   path: usage/koop-core
   docs:
   - title: Koop Core
