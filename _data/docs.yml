@@ -29,7 +29,7 @@
   - title: Plugins
     path: available-plugins/plugins
 
-- title: Usage and Specifications
+- title: Advanced usage
   path: usage/koop-core
   docs:
   - title: Koop Core
@@ -42,3 +42,15 @@
     path: usage/output
   - title: Authorization Spec
     path: usage/authorization
+
+- title: Plugin Development
+  path: development/provider
+  docs:
+  - title: Provider Spec
+    path: development/provider
+  - title: Cache Spec
+    path: development/cache
+  - title: Output Spec
+    path: development/output
+  - title: Authorization Spec
+    path: development/authorization

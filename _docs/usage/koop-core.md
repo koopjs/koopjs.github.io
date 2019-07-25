@@ -6,7 +6,7 @@ redirect_from: /docs/usage/index.html
 
 Koop-core and its implementation in the main `server.js` file is where all providers, output-services, caches, and authorization plugins are registered. It exposes an [Express](https://expressjs.com) server which can be instructed to listen on port 80 or any port of your choosing. This doc walks through the steps for creating this file from scratch.
 
-## Create the package.json
+## package.json
 Since you need the Koop `npm` dependency, you should start by creating a `package.json` file. With Node.js installed, run:
 
 ```bash
@@ -20,9 +20,8 @@ npm install --save koop
 npm install --save @koopjs/provider-github
 ```
 <hr>
-<br>
 
-## Create the server.js
+## server.js
 
 Create a new file named `server.js`.  The typical content of the Koop server file look like the snippet below:
 
@@ -50,10 +49,25 @@ koop.server.listen(8080, () => console.log(`Koop listening on port 8080!`))
 
 ```
 <hr>
-<br>
+
+## Configuration settings
+
+Koop leverages the [config](https://www.npmjs.com/package/config) package to configuration settings.  To faciliate this module, you should add a `config` directory to your Koop instance with a `default.json` file.  See the [config](https://www.npmjs.com/package/config) documentation for details on using different JSON files and environment variables to vary configuration.
+
+Many Koop plugins will require settings in your config file. See each plugin's documentation for specifics. Configuration settings for the Koop server are noted below.
+
+### disableCompression
+As of v3.12.0, Koop adds Express compression by default.  If you do not want Express compression (e.g., perhaps you are using Nginx for compression), you can disable it by adding a `disableCompression` boolean to your Koop config file:
+
+```json
+{
+  "disableCompression": true
+}
+```
+
 ## Running a Koop instance
 
-Run the `server.js` file like an Node.js script.
+Run the `server.js` file like any Node.js script.
 
 ```bash
 > node server.js
@@ -104,53 +118,17 @@ Koop listening on port 8080!
 ```
 
 ### Interpreting the console output
-You will notice a list of routes printed to the console. These include routes for the built-in `datasets` provider, as well as any providers you have registered. Each provider will have a list of any custom routes and a list of routes defined by registered output plugins. You can use the listed routes by appending them to the `host:port` of your running Koop instance and replace any parameters with values. For example:
+You will notice a list of routes printed to the console. These include routes for the built-in `datasets` provider, as well as any providers you have registered (here, the Github provider). Each provider will have a list of any custom routes and a list of routes defined by registered output plugins. You can use the listed routes by appending them to the `host:port` of your running Koop instance and replace any parameters with values. For example:
 
 `/github/rest/services/:id/FeatureServer/:layer/:method`  
 
 becomes:
 
-`http://localhost:3000/github/koopjs::geodata::north-america/FeatureServer/0/query`
+`http://localhost:8080/github/koopjs::geodata::north-america/FeatureServer/0/query`
 
 Note that there are `GET` and `POST` versions of all koop-output-geoservices routes. Output-services define an array of methods for each of their routes, and in this case every route has been [assigned both `GET` and `POST` methods](https://github.com/koopjs/koop-output-geoservices/blob/master/index.js#L94).
 
 <hr>
-<br>
-
-## Koop options
-
-### Disable compression
-As of v3.12.0, Koop adds Express compression by default.  If you do not want Express compression, you can disable it by adding a `disableCompression: true` to your Koop config file.
-
-### Route prefixing
-If needed, you can add a prefix to all of a registered provider's routes.  For example, if you wanted the fragment `/api/v1` prepended to you github provider routes you could register the provider like this:
-
-```js
-const provider = require('@koopjs/provider-github')
-koop.register(provider, { routePrefix: '/api/v1'})
-```
-
-which results in routes like:
-
-```bash
-Routes for provider: github, Output: Geoservices               Methods  
--------------------------------------------------------------  ---------
-/api/v1/github/rest/info                                       GET, POST
-/api/v1/github/tokens/:method                                  GET, POST
-/api/v1/github/tokens/                                         GET, POST
-/api/v1/github/rest/services/:id/FeatureServer/:layer/:method  GET, POST
-/api/v1/github/rest/services/:id/FeatureServer/layers          GET, POST
-/api/v1/github/rest/services/:id/FeatureServer/:layer          GET, POST
-/api/v1/github/rest/services/:id/FeatureServer                 GET, POST
-/api/v1/github/:id/FeatureServer/:layer/:method                GET, POST
-/api/v1/github/:id/FeatureServer/layers                        GET, POST
-/api/v1/github/:id/FeatureServer/:layer                        GET, POST
-/api/v1/github/:id/FeatureServer                               GET, POST
-/api/v1/github/rest/services/:id/FeatureServer*                GET, POST
-/api/v1/github/:id/FeatureServer*                              GET, POST
-/api/v1/github/rest/services/:id/MapServer*                    GET, POST
-/api/v1/github/:id/MapServer*                                  GET, POST
-```
 
 ## Koop as middleware
 
