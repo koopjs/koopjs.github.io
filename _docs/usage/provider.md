@@ -1,5 +1,5 @@
 ---
-title: Provider Usage
+title: Provider
 permalink: /docs/usage/provider
 ---
 

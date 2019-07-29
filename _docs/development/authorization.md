@@ -3,9 +3,7 @@ title: Authorization Specification
 permalink: /docs/development/authorization
 ---
 
-## Authorization plugin specification
-
-### `index.js` and the registration object
+## API
 
 Each authorization plugin must have a file called `index.js`.  `index.js` must be able to deliver a a Koop registration object.  This object should have the following minimum content:
 
@@ -31,11 +29,11 @@ The table below contains a brief description of the registration object. Note th
 
 Details about each of the API functions are found below.
 
-#### `authenticationSpecification` **function() ⇒ object**
+### `authenticationSpecification` **function() ⇒ object**
 
 Authorization plugins must include a function called "authenticationSpecification".  Its purpose is delivery of an object (i.e., the _authentication specification_) that provides options to the output-plugin. The object returned need only contain data for properly configuring your output plugins of choice. For example, Koop's default geoservices uses a `useHttp` option when generating the [authentication endpoint](https://github.com/koopjs/koop-output-geoservices/blob/master/index.js#L54). An example of `authenticationSpecification` is available [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56).
 
-#### `authenticate` **authenticate(req) ⇒ Promise**
+### `authenticate` **authenticate(req) ⇒ Promise**
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -52,7 +50,7 @@ Authorization plugins must include a function called `authenticate` that returns
 
 Authorization plugins are free to validate credentials in any manner.  For example, you might check a database for a match of the submitted username and password, or forward the credentials on to a third-party identity-store. [koop-auth-direct-file](https://github.com/koopjs/koop-auth-direct-file) provides an [example](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L59-L88) of a very basic credential validation using a simple JSON file-store.
 
-#### `authorize` function **authorize(req) ⇒ Promise**
+### `authorize` function **authorize(req) ⇒ Promise**
 
 | Param | Type | Description |
 | --- | --- | --- |

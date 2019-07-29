@@ -1,6 +1,7 @@
 ---
 title: Provider Specification
 permalink: /docs/development/provider
+redirect_from: /docs/development/index.html
 ---
 
 #### Contents

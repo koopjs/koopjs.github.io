@@ -34,13 +34,13 @@
   docs:
   - title: Koop Core
     path: usage/koop-core
-  - title: Provider Spec
+  - title: Provider
     path: usage/provider
-  - title: Cache Spec
+  - title: Cache
     path: usage/cache
-  - title: Output Spec
+  - title: Output
     path: usage/output
-  - title: Authorization Spec
+  - title: Authorization
     path: usage/authorization
 
 - title: Plugin Development
