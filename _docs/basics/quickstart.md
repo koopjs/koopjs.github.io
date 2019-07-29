@@ -143,4 +143,3 @@ Once Koop is running, you can test these sample requests:
 
 ## Developing with Koop
 If you want to develop on Koop, it’s usually best to start by creating a Provider. You can read more about that in [provider docs](/documentation/provider) or check out the [Koop Provider Sample](https://github.com/koopjs/koop-provider-sample)
-
