@@ -1,5 +1,5 @@
 ---
-title: Output Specification
+title: Output
 permalink: /docs/usage/output
 ---
 
