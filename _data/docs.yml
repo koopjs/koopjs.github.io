@@ -46,6 +46,8 @@
 - title: Plugin Development
   path: development/provider
   docs:
+  - title: Plugin Registration Spec
+    path: development/registration
   - title: Provider Spec
     path: development/provider
   - title: Cache Spec
