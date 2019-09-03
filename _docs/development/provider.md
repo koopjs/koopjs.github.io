@@ -106,6 +106,7 @@ metadata: {
     limitExceeded: Boolean, // whether or not the server has limited the features returned
     timeInfo: Object // describes the time extent and capabilities of the layer,
     transform: Object // describes a quantization transformation
+    renderer: Object // provider can over-ride default symbology of FeatureServer output with a renderer object. See https://developers.arcgis.com/web-map-specification/objects/simpleRenderer, for object specification.
     fields: [
      { // Subkeys are optional
        name: String,
