@@ -52,6 +52,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [Strava](https://github.com/Jking-GIS/koop-provider-Strava) | [![npm](https://img.shields.io/npm/v/koop-strava.svg?style=flat-square)](https://www.npmjs.com/package/koop-strava) | [![travis](https://img.shields.io/travis/Jking-GIS/koop-provider-Strava.svg?style=flat-square)](https://travis-ci.org/Jking-GIS/koop-provider-Strava) | 3.x |
 | [Zillow](https://github.com/dmfenton/koop-provider-zillow) | [![npm](https://img.shields.io/npm/v/koop-zillow.svg?style=flat-square)](https://www.npmjs.com/package/koop-zillow) | NA | 3.x |
 | [OpenDataSoft](https://github.com/haoliangyu/koop-provider-opendatasoft) | [![npm](https://img.shields.io/npm/v/koop-provider-opendatasoft)](https://www.npmjs.com/package/koop-provider-opendatasoft) | [![Build Status](https://travis-ci.org/haoliangyu/koop-provider-opendatasoft.svg?branch=master)](https://travis-ci.org/haoliangyu/koop-provider-opendatasoft) | 3.x |
+| [Carto](https://github.com/hhkaos/koop-provider-carto)|[![npm](https://img.shields.io/npm/v/koop-provider-carto.svg)](https://www.npmjs.com/package/koop-provider-carto)| NA | 3.x |
 
 <br>
 Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!
