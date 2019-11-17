@@ -23,6 +23,7 @@ Koop uses **outputs** to tranform the GeoJSON supplied by providers to serve dat
 |[Flatted JSON](https://github.com/koopjs/koop-output-flat)||| 3.x |
 |[WFS](https://github.com/koopjs/koop-output-wfs)||| 3.x |
 |[WMS](https://github.com/koopjs/koop-output-wms)||| 3.x |
+| [OGC API - Features](https://github.com/koopjs/koop-output-vector-tiles)| [![npm](https://img.shields.io/npm/v/@koopjs/output-ogcapi-features)](https://www.npmjs.com/package/@koopjs/output-ogcapi-features) | [![Build Status](https://www.travis-ci.org/koopjs/output-ogcapi-features.svg?branch=master)](https://www.travis-ci.org/koopjs/output-ogcapi-features) | 3.x |
 
 <br>
 
