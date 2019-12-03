@@ -16,3 +16,6 @@ gem install bundler
 # run jekyll with dependencies
 bundle exec jekyll serve
 ```
+
+## Blog
+Any new blog post should be added to the `_posts` directory and prefixed with a `YYYY-MM-DD-` timestamp.  There is a link to the blog in the navigation bar that is currently commented out in the `_includes/topnav.html` file. Upon the addition of blog posts, that should be uncommented and made visible.
