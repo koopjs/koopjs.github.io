@@ -21,7 +21,8 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [Google Fusion Tables](https://github.com/koopjs/koop-provider-google-fusion-tables) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-fusion-tables.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-fusion-tables) | NA | 3.x |
 | [Google Sheets](https://github.com/koopjs/koop-provider-google-sheets) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-sheets.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-sheets) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-google-sheets/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-google-sheets) | 3.x |
 | [Marklogic](https://github.com/koopjs/koop-provider-marklogic) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-marklogic.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-marklogic) | NA | 3.x|
-| [Socrata](https://github.com/koopjs/koop-provider-socrata) | [![npm](https://img.shields.io/npm/v/koop-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-socrata) | 2.x |
+| [Socrata](https://github.com/koopjs/koop-provider-socrata) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-socrata) | 3.x |
+| [Socrata](https://github.com/koopjs/koop-socrata) | [![npm](https://img.shields.io/npm/v/koop-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-socrata) | 2.x |
 
 <br>
 #### Experimental
@@ -54,7 +55,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [Zillow](https://github.com/dmfenton/koop-provider-zillow) | [![npm](https://img.shields.io/npm/v/koop-zillow.svg?style=flat-square)](https://www.npmjs.com/package/koop-zillow) | NA | 3.x |
 | [OpenDataSoft](https://github.com/haoliangyu/koop-provider-opendatasoft) | [![npm](https://img.shields.io/npm/v/koop-provider-opendatasoft)](https://www.npmjs.com/package/koop-provider-opendatasoft) | [![Build Status](https://travis-ci.org/haoliangyu/koop-provider-opendatasoft.svg?branch=master)](https://travis-ci.org/haoliangyu/koop-provider-opendatasoft) | 3.x |
 | [Carto](https://github.com/hhkaos/koop-provider-carto)|[![npm](https://img.shields.io/npm/v/koop-provider-carto.svg)](https://www.npmjs.com/package/koop-provider-carto)| NA | 3.x |
-
+|[ServiceNow](https://github.com/Esri/indoors-servicenow-feature-service)| NA | NA | 3.x |
 <br>
 Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!
 
