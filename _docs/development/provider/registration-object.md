@@ -1,17 +1,24 @@
 ---
-title: Provider Specification
-permalink: /docs/development/provider
+title: Provider Specification - registration object
+permalink: /docs/development/provider/registration-object
+redirect_from: /docs/development/index.html
 ---
 
-#### Contents
-1. [Provider registration object](#provider-registration-object)  
-2. [The `model.js` file](#modeljs)  
-3. [Routes and Controllers](#routes-and-controllers)  
+Providers modules, like other plugin-types, use the package.json's `main` property to expose an object that allows Koop to successfully registration the plugin. For example:
 
-Note: the discussion of Cached vs Pass-through providers has moved [here](../basics/provider-types).
-<hr>
+```json
+{
+  "name": "provider-example",
+  "version": "0.1.0",
+  "description": "Clever example description",
+  "main": "index.js"
+}
+```
 
-## Provider registration object
+The code in index.js could either (1) directly export a Koop registration object, or 
+
+
+## index.js
 
 Every provider must have a file called `index.js`. Its purpose is to tell Koop how to load and use the provider. The keys and values are enumerated in the example below.
 

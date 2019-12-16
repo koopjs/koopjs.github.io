@@ -10,12 +10,11 @@ Koop plugins use their package.json's `main` property to point to a file that ex
 {
   "name": "koop-plugin",
   "version": "0.1.0",
-  "description": "Clever example description",
   "main": "index.js"
 }
 ```
 
-The code in `index.js` could simply export a Koop registration object (detail differ based on plugin type):
+The exported code in `index.js` can be an object literal.  For example, providers export an object literal as from `index.js`.
 
 ```js
 module.exports = {
@@ -42,9 +41,14 @@ module.exports = function(options = {}) {
 }
 ```
 
-Note that when registering a plugin that exposes a function instead of an object, you must execute the function when it is required so that it returns an object. Continuing on from the exported function example above:
+Lastly, some plugin types define constructor function with specific properties:
 
 ```js
-const output = register('koop-output-example')({ prefix: 'hello' })
-koop.register(output)
+function VectorTilePlugin () {}
+VectorTilePlugin.version = require('../package.json').version
+VectorTilePlugin.type = 'output'
+VectorTilePlugin.routes = []
+module.exports = VectorTilePlugin
 ```
+
+Check the documentation for each plugin type for details about registration requirements or see examples at [KoopJS](https://github.com/koopjs).

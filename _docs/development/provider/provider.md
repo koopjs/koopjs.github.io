@@ -1,17 +1,18 @@
 ---
-title: Provider Specification
-permalink: /docs/development/provider
+title: Provider specification - package.json
+permalink: /docs/development/provider/package-json
+redirect_from: /docs/development/index.html
 ---
 
 #### Contents
-1. [Provider registration object](#provider-registration-object)  
+1. [The `index.js` file](#indexjs)  
 2. [The `model.js` file](#modeljs)  
 3. [Routes and Controllers](#routes-and-controllers)  
 
 Note: the discussion of Cached vs Pass-through providers has moved [here](../basics/provider-types).
 <hr>
 
-## Provider registration object
+## index.js
 
 Every provider must have a file called `index.js`. Its purpose is to tell Koop how to load and use the provider. The keys and values are enumerated in the example below.
 
