@@ -8,14 +8,10 @@
     path: basics/overview
   - title: Quick start
     path: basics/quickstart
-  - title: Usage Basics
-    path: basics/usage-basics
   - title: Provider Types
     path: basics/provider-types
   - title: System Reqiurements
     path: basics/system-requirements
-  - title: FAQs
-    path: basics/faqs
 
 - title: Available Plugins
   path: available-plugins/providers
