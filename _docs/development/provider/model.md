@@ -13,6 +13,9 @@ Model.prototype.getData(req, callback) {
     // if the http request fails, return and callback with error
     if (err) return callback(err)
 
+    // Set metadata used by Koop; geometryType is required unless your data is not geospatial
+    geojson.metadata = { geometryType: 'Point' }
+
     callback(null, geojson)
   })
 }
