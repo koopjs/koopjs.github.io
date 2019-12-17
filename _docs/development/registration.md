@@ -14,7 +14,8 @@ Koop plugins use their package.json's `main` property to point to a file that ex
 }
 ```
 
-The exported code in `index.js` can be an object literal.  For example, providers export an object literal as from `index.js`.
+## Provider and authorization plugins
+The exported code in `index.js` varies by plugin-type.  Providers and authorization plugins should return an object literal or an initialization function that in turn returns an object literal.  An example of an object literal exported from `index.js`:
 
 ```js
 module.exports = {
@@ -27,21 +28,33 @@ module.exports = {
 }
 ```
 
-Alternatively, `module.exports` may be assigned an initialization function that returns a registration object.
+Alternatively, an initialization function that returns a registration object.
 
 ```js
 module.exports = function(options = {}) {
-  // Do something with options that configures plugin options prior to registration
-  const route = options.prefix ? `${options.prefix}/world`|| 'world'
+  // Allow name to be set by options
+  const name = options.name ? options.name : 'example-provider'
 
   return {
+    type: 'provider',
+    name,
+    hosts: true
+    disableIdParam: false
+    Model: require('./model'),
     version: require('../package.json').version
-    type: 'output',
-    routes: [route]
+  }
 }
 ```
+Note that you would need to execute the above initialization function during registration:
 
-Lastly, some plugin types define constructor function with specific properties:
+```js
+const provider = require('<npm-or-path-to-provider>')({ name: 'my-provider' })
+koop.register(provider)
+```
+
+## Output, cache, filesystem, and generic plugins
+
+These `index.js` of these types of plugins should define a constructor function with plugin specific properties:
 
 ```js
 function VectorTilePlugin () {}
