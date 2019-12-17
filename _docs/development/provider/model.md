@@ -1,72 +1,30 @@
 ---
-title: Provider Specification
-permalink: /docs/development/provider
+title: Provider Specification - Model class
+permalink: /docs/development/provider/model
 ---
-
-#### Contents
-1. [The `model.js` file](#modeljs)  
-2. [Routes and Controllers](#routes-and-controllers)  
-
-Note: the discussion of Cached vs Pass-through providers has moved [here](../basics/provider-types).
-
-## model.js
-Every provider must have a `Model`. This is where almost all of the business logic of the provider will occur. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing.  `Model` has a set of prototype functions that allow Koop to interact with it.  Some of these functions are optional, others are required.  The table below lists the `Model` function that Koop currently uses.
-
-### `Model` class methods overview
-
-| Name   |      Required?     |  Summary |
-|----------|:-------------:|------|
-| `getData` | Yes | Fetches data and translates it to GeoJSON.  See below. |
-| `createKey` | No   | Generates a string to use as a key for the data-cache. See below. |
-| `getAuthenticationSpecification` | No | Delivers an object for use in configuring authentication in output-services. See [authorization spec](http://koopjs.github.io/docs/usage/authorization).|
-| `authenticate` | No | Validates credentials and issues a token. See [authorization spec](http://koopjs.github.io/docs/usage/authorization). |
-| `authorize` | No | Verifies request is made by an authenticated user. See [authorization spec](http://koopjs.github.io/docs/usage/authorization). |
-
-_[back to top](#contents)_
-
-### `getData` function
-
-Models are required to implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
-
-GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
+Every provider must implement a `Model` class. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing. This class is usually placed in a file called `model.js` and then referenced in the registration object. The follow snippet shows an example implementation:
 
 ```js
-/*
-Example request: http://koop.com/craigslist/washingtondc/apartments/FeatureServer/0/query?where=price>20&f=geojson
-Req is the express request object: https://expressjs.com/en/4x/api.html#req
-  req.params = {
-    host: 'washingtondc',
-    id: 'apartments'
-  }
- req.query = {
-   where: 'price > 20',
-   f: geojson
- }
-*/
-function getData(req, callback) {
-  // pull pieces we need to form a request to Craigslist from the req.params object.
-  const city = req.params.host
-  const type = req.params.id
-  // using the npm package `request` fetch geojson from craigslist
-  request(`https://${city}.craigslist.org/jsonsearch/type/${type}`, (err, res, body) => {
-    // if the http request fails stop processing and return and call back with an error
+function Model () {}
+
+Model.prototype.getData(req, callback) {
+  // use the npm package `request` fetch geojson from Socrata API
+  request('https://data.ct.gov/resource/y6p2-px98.geojson', (err, res, geojson) => {
+    // if the http request fails, return and callback with error
     if (err) return callback(err)
-    // translate the raw response from Craigslist into GeoJSON
-    const geojson = translate(res.body, type)
-    // add a little bit of metadata to enrich the geojson
-    // metadata is handled by the output plugin that is responding to the request. 
-    // e.g. https://github.com/koopjs/koop-output-geoservices
-    geojson.metadata = {
-      name: `${city} ${type}`,
-      description: `Craigslist ${type} listings proxied by https://github.com/dmfenton/koop-provider-craigslist`
-    }
-    // hand the geojson back to Koop
+
     callback(null, geojson)
   })
 }
+
+module.exports = Model
 ```
 
-_[back to top](#contents)_
+### `getData` function
+
+The `Model` class must implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
+
+GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
 
 #### Setting provider `metadata` in `getData`
 
@@ -84,7 +42,6 @@ metadata: {
     limitExceeded: Boolean, // whether or not the server has limited the features returned
     timeInfo: Object // describes the time extent and capabilities of the layer,
     transform: Object // describes a quantization transformation
-    renderer: Object // provider can over-ride default symbology of FeatureServer output with a renderer object. See https://developers.arcgis.com/web-map-specification/objects/simpleRenderer, for object specification.
     fields: [
      { // Subkeys are optional
        name: String,
@@ -98,7 +55,7 @@ metadata: {
 
 The data type and values used for `idField` can affect the output of the [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) and behavior of some consumer clients. [FeatureServer](https://github.com/koopjs/FeatureServer) and [winnow](https://github.com/koopjs/winnow) (dependencies of [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices)) will create a separate OBJECTID field and set its value to the value of the attribute referenced by `idField`. OBJECTIDs that are not integers or outside the range of 0 - 2,147,483,647 can break features in some ArcGIS clients.
 
-_[back to top](#contents)_
+
 
 #### Request parameters in `getData`
 
@@ -130,7 +87,7 @@ The position of the provider-specific fragment of a route path can vary dependin
 #### Output-routes without provider parameters
 You may need routes that skip the addition of provider-specific parameters altogether.  This can be accomplished by adding an `absolutePath: true` key-value to the `routes` array object in your output-services plugin. On such routes, Koop will define the route without any additional provider namespace or parameters.
 
-_[back to top](#contents)_
+
 
 ### `createKey` function
 Koop uses a an internal `createKey` function to generate a string for use as a key for the data-cache's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
@@ -146,7 +103,7 @@ Model.prototype.createKey = function (req) {
   return key
 }
 ```
-_[back to top](#contents)_
+
 
 ## Routes and Controllers
 
@@ -254,4 +211,12 @@ module.exports = function (model) {
   }
 }
 ```
-_[back to top](#contents)_
+`Model` must implement a `getData` method. Other optional methods are noted in the table below.
+
+| Name   |      Required?     |  Summary |
+|----------|:-------------:|------|
+| `getData` | Yes | Fetches data and translates it to GeoJSON. |
+| `createKey` | No   | Generates a string to use as a key for the data-cache. See below. |
+| `getAuthenticationSpecification` | No | Delivers an object for use in configuring authentication in output-services. See [authorization spec](http://koopjs.github.io/docs/development/authorization).|
+| `authenticate` | No | Validates credentials and issues a token. See [authorization spec](http://koopjs.github.io/docs/development/authorization). |
+| `authorize` | No | Verifies request is made by an authenticated user. See [authorization spec](http://koopjs.github.io/docs/development/authorization). |
