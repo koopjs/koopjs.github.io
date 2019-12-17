@@ -10,12 +10,12 @@ Koop plugins use their package.json's `main` property to point to a file that ex
 {
   "name": "koop-plugin",
   "version": "0.1.0",
-  "description": "Clever example description",
   "main": "index.js"
 }
 ```
 
-The code in `index.js` could simply export a Koop registration object (detail differ based on plugin type):
+## Provider and authorization plugins
+The exported code in `index.js` varies by plugin-type.  Providers and authorization plugins should return an object literal or an initialization function that in turn returns an object literal.  An example of an object literal exported from `index.js`:
 
 ```js
 module.exports = {
@@ -28,23 +28,40 @@ module.exports = {
 }
 ```
 
-Alternatively, `module.exports` may be assigned an initialization function that returns a registration object.
+Alternatively, an initialization function that returns a registration object.
 
 ```js
 module.exports = function(options = {}) {
-  // Do something with options that configures plugin options prior to registration
-  const route = options.prefix ? `${options.prefix}/world`|| 'world'
+  // Allow name to be set by options
+  const name = options.name ? options.name : 'example-provider'
 
   return {
+    type: 'provider',
+    name,
+    hosts: true
+    disableIdParam: false
+    Model: require('./model'),
     version: require('../package.json').version
-    type: 'output',
-    routes: [route]
+  }
 }
 ```
-
-Note that when registering a plugin that exposes a function instead of an object, you must execute the function when it is required so that it returns an object. Continuing on from the exported function example above:
+Note that you would need to execute the above initialization function during registration:
 
 ```js
-const output = register('koop-output-example')({ prefix: 'hello' })
-koop.register(output)
+const provider = require('<npm-or-path-to-provider>')({ name: 'my-provider' })
+koop.register(provider)
 ```
+
+## Output, cache, filesystem, and generic plugins
+
+These `index.js` of these types of plugins should define a constructor function with plugin specific properties:
+
+```js
+function VectorTilePlugin () {}
+VectorTilePlugin.version = require('../package.json').version
+VectorTilePlugin.type = 'output'
+VectorTilePlugin.routes = []
+module.exports = VectorTilePlugin
+```
+
+Check the documentation for each plugin type for details about registration requirements or see examples at [KoopJS](https://github.com/koopjs).

@@ -4,32 +4,10 @@ permalink: /docs/development/provider
 ---
 
 #### Contents
-1. [The `index.js` file](#indexjs)  
-2. [The `model.js` file](#modeljs)  
-3. [Routes and Controllers](#routes-and-controllers)  
+1. [The `model.js` file](#modeljs)  
+2. [Routes and Controllers](#routes-and-controllers)  
 
 Note: the discussion of Cached vs Pass-through providers has moved [here](../basics/provider-types).
-<hr>
-
-## index.js
-
-Every provider must have a file called `index.js`. Its purpose is to tell Koop how to load and use the provider. The keys and values are enumerated in the example below.
-
-```js
-module.exports = {
-  name: 'agol', // Required, the name of this provider and the start of all its URLS
-  type: 'provider', // Required, the type of Koop Plugin this is
-  version: require('./package.json').version, // Required, the version of this provider
-  Model: require('./agol'), // Required contains getData and other functions called by controller
-  hosts: true, // Optional, whether or not routes should include a `host` parameter
-  disableIdParam: false, // Optional, whether or not routes should include an `id` parameter
-  routes: require('./routes'), // Optional, any additional routes to be handled by this provider
-  Controller: require('./controller'), // Optional, a controller to support unique routes
-}
-```
-<br>
-_[back to top](#contents)_
-<hr>
 
 ## model.js
 Every provider must have a `Model`. This is where almost all of the business logic of the provider will occur. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing.  `Model` has a set of prototype functions that allow Koop to interact with it.  Some of these functions are optional, others are required.  The table below lists the `Model` function that Koop currently uses.
