@@ -49,7 +49,12 @@
   - title: Plugin Registration Spec
     path: development/registration
   - title: Provider Spec
-    path: development/provider
+    path: development/provider/registration
+    subdocs:
+    - title: Registration file and options
+      path: development/provider/registration
+    - title: Model Class
+      path: development/provider/model
   - title: Cache Spec
     path: development/cache
   - title: Output Spec
