@@ -10,7 +10,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 
 #### Officially Supported
 
-| name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | version | build status | koop compatibility |
+| name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | version | build status | compatibility |
 | :--- | :------ | :----------- | :----------- |
 | [ArcGIS Online](https://github.com/koopjs/koop-provider-agol) | [![npm](https://img.shields.io/npm/v/koop-agol.svg?style=flat-square)](https://www.npmjs.com/package/koop-agol) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-agol/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-agol) | 3.0.0-alpha.29 |
 | [AWS S3 Select](https://github.com/koopjs/koop-provider-s3-select) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-s3-select.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-s3-select) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-s3-select/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-s3-select) | 3.x |
@@ -27,7 +27,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 <br>
 #### Experimental
 
-| name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| version | build status | koop compatibility |
+| name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| version | build status | compatibility |
 | :--- | :------ | :----------- | :----------- |
 | [American Community Survey](https://github.com/koopjs/koop-acs) | [![npm](https://img.shields.io/npm/v/koop-acs.svg?style=flat-square)](https://www.npmjs.com/package/koop-acs) | NA |  |
 | [CKAN](https://github.com/koopjs/koop-provider-ckan) | [![npm](https://img.shields.io/npm/v/koop-ckan.svg?style=flat-square)](https://www.npmjs.com/package/koop-ckan) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-ckan/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-ckan) | 2.x |
@@ -44,8 +44,8 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 
 #### Third Party
 
-| name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | version | build status | koop compatibility |
-| :--- | :------ | :----------- |:----------- |
+| name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| version | build status | compatibility |
+| :--- | :------ | :----------- | :----------- |
 | [Citybikes](https://github.com/nixta/koop-citybikes) | NA | NA | |
 | [Cloudant](https://github.com/cloudant/koop-cloudant) | [![npm](https://img.shields.io/npm/v/koop-cloudant.svg?style=flat-square)](https://www.npmjs.com/package/koop-cloudant) | NA | |
 | [CSV](https://github.com/haoliangyu/koop-provider-csv) | [![npm](https://img.shields.io/npm/v/koop-provider-csv.svg?style=flat-square)](https://www.npmjs.com/package/koop-provider-csv) | [![travis](https://travis-ci.org/haoliangyu/koop-provider-csv.svg?branch=master)](https://github.com/haoliangyu/koop-provider-csv) | 3.x |
@@ -56,6 +56,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [OpenDataSoft](https://github.com/haoliangyu/koop-provider-opendatasoft) | [![npm](https://img.shields.io/npm/v/koop-provider-opendatasoft)](https://www.npmjs.com/package/koop-provider-opendatasoft) | [![Build Status](https://travis-ci.org/haoliangyu/koop-provider-opendatasoft.svg?branch=master)](https://travis-ci.org/haoliangyu/koop-provider-opendatasoft) | 3.x |
 | [Carto](https://github.com/hhkaos/koop-provider-carto)|[![npm](https://img.shields.io/npm/v/koop-provider-carto.svg)](https://www.npmjs.com/package/koop-provider-carto)| NA | 3.x |
 |[ServiceNow](https://github.com/Esri/indoors-servicenow-feature-service)| NA | NA | 3.x |
+
 <br>
 Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!
 
