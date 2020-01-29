@@ -29,12 +29,12 @@ html {
 body {
   padding-top: $navbar-height + $navbar-margin-bottom;
   margin-bottom: 46px;
-  line-height: 2em;
+  line-height: 1.7em;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   margin-top: 30px;
-  margin-bottom: 10.5px;
+  margin-bottom: 20px;
 
   .anchor {
     float: left;
@@ -49,10 +49,32 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   }
 }
 
+h1 {
+  margin-top: 0;
+}
+
+table {
+  font-size: 16px;
+  margin-bottom: 45px;
+}
+
 h1:hover, .h1:hover, h2:hover, .h2:hover, h3:hover, .h3:hover, h4:hover, .h4:hover, h5:hover, .h5:hover, h6:hover, .h6:hover {
   .anchor{
     opacity: 1;
   }
+}
+
+p {
+  margin: 0 0 20px;
+  font-size: 16px;
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #008cba;
+  background-color: #FFF;
+  border-radius: 0;
 }
 
 .navbar-brand{

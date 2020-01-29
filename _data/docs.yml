@@ -44,12 +44,12 @@
     path: usage/authorization
 
 - title: Plugin Development
-  path: development/registration
+  path: development
   docs:
   - title: Plugin Registration Spec
     path: development/registration
   - title: Provider Spec
-    path: development/provider/registration
+    path: development/provider
     subdocs:
     - title: Registration file and options
       path: development/provider/registration

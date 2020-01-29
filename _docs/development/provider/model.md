@@ -4,12 +4,16 @@ permalink: /docs/development/provider/model
 ---
 Every provider must implement a `Model` class. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing. This class is usually placed in a file called `model.js` and then referenced in the registration object. The follow snippet shows an example implementation:
 
+
 ```js
+// Example Model class
 function Model () {}
 
-Model.prototype.getData(req, callback) {
+Model.prototype.getData(request, callback) {
+
   // use the npm package `request` fetch geojson from Socrata API
   request('https://data.ct.gov/resource/y6p2-px98.geojson', (err, res, geojson) => {
+
     // if the http request fails, return and callback with error
     if (err) return callback(err)
 
@@ -22,14 +26,26 @@ Model.prototype.getData(req, callback) {
 
 module.exports = Model
 ```
+<figcaption><i>Figure 1. Basic Model class with a <code class='highlighter-rouge'>getData</code> method that fetches GeoJSON from the Socrata API.</i></figcaption>
+<hr>
 
-### `getData` function
+## Method: `getData(request, callback)`
 
-The `Model` class must implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
+The `getData` method is a requirement of *all* providers will fetch data from a remote API and convert it to GeoJSON. It should also add a `metadata` property to the GeoJSON object and populate it appropriately. Using the callback argument, it should handle any errors, or pass the GeoJSON object as its second argument.
 
-GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
+### Arguments
 
-#### Setting provider `metadata` in `getData`
+| name | type | description |
+| - | - | - |
+|`request`| `Object` | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+|`callback`| `Function`| The Koop error-first callback function. GeoJSON should be passed as the second parameter to this callback. |
+
+### Getting data from the remote API
+
+### Translating the remote's data to GeoJSON
+ GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
+
+### Adding provider `metadata` to the GeoJSON
 
 You can add a `metadata` property to the GeoJSON returned from `getData` and assign it an object for use in Koop output services. In addtion to `name` and `description` noted in the example above, the following fields may be useful:
 

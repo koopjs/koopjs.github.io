@@ -1,7 +1,7 @@
 ---
 title: Provider Specification - registration object
 permalink: /docs/development/provider/registration
-redirect_from: /docs/development/index.html
+redirect_from: /docs/development/provider/index.html
 ---
 
 Every provider must have a file called `index.js` that exports an object literal. Its purpose is to tell Koop how to load and use the provider. Below is an example for the Koop 3.x specification:
