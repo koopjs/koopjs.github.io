@@ -40,10 +40,34 @@ The `getData` method is a requirement of *all* providers will fetch data from a 
 |`request`| `Object` | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
 |`callback`| `Function`| The Koop error-first callback function. GeoJSON should be passed as the second parameter to this callback. |
 
-### Getting data from the remote API
+### Fetching data from the remote API
+The details of how you fetch data from the remote API depends on how responsive you want the provider to be. The example in figure 1 is extremely simple, but also not very responsive; it will only fetch data for the resource at `https://data.ct.gov/resource/y6p2-px98.geojson`. Instead, we can use Koop's route parameters, found in the `request` object, to build the URL to the remote API.
 
-### Translating the remote's data to GeoJSON
- GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
+```js
+Model.prototype.getData(request, callback) {
+  const { params: { host, id } } = request
+
+  // use the npm package `request` fetch geojson from Socrata API
+  request(`https://${host}/resource/${id}.geojson`, (err, res, geojson) => {
+
+    // if the http request fails, return and callback with error
+    if (err) return callback(err)
+
+    // Set metadata used by Koop; geometryType is required unless your data is not geospatial
+    geojson.metadata = { geometryType: 'Point' }
+
+    callback(null, geojson)
+  })
+}
+```
+<figcaption><i>Figure 2. Using Koop's <code class='highlighter-rouge'>host</code> and <code class='highlighter-rouge'>id</code> parameters to build the remote API URL.</i></figcaption>
+
+In figure 2, we take the `host` and `id` parameters from the incoming Koop request, and use them to dynamically build the remote API request.  Parameters in the Koop request will determine which resource is returned.  Using the code example in figure 2, a Koop request like `http://localhost:8080/koop-provider-socrata/my-host/my-id/FeatureServer/0/query` would construct a remote API URL like `https://my-host/resource/my-id.geojson`. 
+
+Note that you need to configure the provider to use the `host` and/or `id` parameters using the `hosts` and `disableIdParam`, otherwise routes will be built without them and they will be undefined in `getData`. See [provider registion docs](./registration) for more details.
+
+### Translating fetched data to GeoJSON
+ GeoJSON passed to the callback function should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Operations in some output-plugins may expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
 
 ### Adding provider `metadata` to the GeoJSON
 
@@ -74,19 +98,9 @@ metadata: {
 
 The data type and values used for `idField` can affect the output of the [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) and behavior of some consumer clients. [FeatureServer](https://github.com/koopjs/FeatureServer) and [winnow](https://github.com/koopjs/winnow) (dependencies of [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices)) will create a separate OBJECTID field and set its value to the value of the attribute referenced by `idField`. OBJECTIDs that are not integers or outside the range of 0 - 2,147,483,647 can break features in some ArcGIS clients.
 
-
-
 #### Request parameters in `getData`
 
 Recall the `getData` function receives `req`, an Express.js [request](https://expressjs.com/en/4x/api.html#req) object. `req` includes a set of [route parameters](https://expressjs.com/en/4x/api.html#req.params) accessible with `req.params`, as well as a set of [query-parameters](https://expressjs.com/en/4x/api.html#req.query) accessible with `req.query`. Parameters can be used by `getData` to specify the particulars of data fetching.  
-
-##### Provider route parameters
-Providers can enable the `:host` and `:id` route parameters with settings in [`index.js`](#index.js) and then leverage these parameters in `getData`.  For example, the Craigslist Provider's [`getData` function](https://github.com/dmfenton/koop-provider-craigslist/blob/master/model.js#L12-L14) uses the `:host` and `:id` parameter to transmit the city and and posting category to the `getData` function where they are used to generate URLs for requests to the Craigslist API. 
-
-| parameter | `getData` accessor | enabled by default | `index.js` setting |
-| --- | --- | --- | --- |
-| `:id` | `req.params.id` | yes | `disableIdParam` |
-|`:host`| `req.params.host` | no | `hosts` |
 
 ##### Output-services route parameters
 
