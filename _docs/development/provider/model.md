@@ -4,16 +4,21 @@ permalink: /docs/development/provider/model
 ---
 Every provider must implement a `Model` class. Its primary job is to fetch data from a remote source like an API or database and return GeoJSON to Koop for further processing. This class is usually placed in a file called `model.js` and then referenced in the registration object. The follow snippet shows an example implementation:
 
+<div class='codeanchor' id="figure-1"></div>
+
 ```js
+// Example Model class
 function Model () {}
 
-Model.prototype.getData(req, callback) {
+Model.prototype.getData(request, callback) {
+
   // use the npm package `request` fetch geojson from Socrata API
   request('https://data.ct.gov/resource/y6p2-px98.geojson', (err, res, geojson) => {
+
     // if the http request fails, return and callback with error
     if (err) return callback(err)
 
-    // Set metadata used by Koop; geometryType is required unless your data is not geospatial
+    // Set metadata used by Koop
     geojson.metadata = { geometryType: 'Point' }
 
     callback(null, geojson)
@@ -22,204 +27,140 @@ Model.prototype.getData(req, callback) {
 
 module.exports = Model
 ```
+<figcaption><i>Figure 1. Basic Model class with a <code class='highlighter-rouge'>getData</code> method that fetches GeoJSON from the Socrata API.</i></figcaption>
+<hr>
 
-### `getData` function
+## Method: `getData(request, callback)`
 
-The `Model` class must implement a function called `getData`.  It should fetch data from the remote API, translate the data into GeoJSON (if necessary) and call the `callback` function with the GeoJSON as the second parameter. If there is an error in fetching or processing data from the remote API it should call the `callback` function with an error as the first parameter and stop processing.
+The `getData` method is a requirement of *all* providers. It will fetch data from a remote API and convert it to GeoJSON. It may also add a `metadata` property to the GeoJSON object and populate it appropriately. Using the callback argument, it should handle any errors, or pass the GeoJSON object as its second argument.
 
-GeoJSON passed to the callback should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Some operations in output-services expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and can be activated by setting `NODE_ENV` to anything **except** `production`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
+### Arguments
 
-#### Setting provider `metadata` in `getData`
+| name | type | description |
+| - | - | - |
+|`request`| `Object` | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+|`callback`| `Function`| The Koop error-first callback function. GeoJSON should be passed as the second parameter to this callback. |
 
-You can add a `metadata` property to the GeoJSON returned from `getData` and assign it an object for use in Koop output services. In addtion to `name` and `description` noted in the example above, the following fields may be useful:
+### Fetching data from the remote API
 
-```js
-metadata: {
-    name: String, // The name of the layer
-    description: String, // The description of the layer
-    extent: Array, // valid extent array e.g. [[180,90],[-180,-90]]
-    displayField: String, // The display field to be used by a client
-    geometryType: String // REQUIRED if no features are returned with this object Point || MultiPoint || LineString || MultiLineString || Polygon || MultiPolygon
-    idField: Integer || String, // unique identifier field,
-    maxRecordCount: Number, // the maximum number of features a provider can return at once
-    limitExceeded: Boolean, // whether or not the server has limited the features returned
-    timeInfo: Object // describes the time extent and capabilities of the layer,
-    transform: Object // describes a quantization transformation
-    fields: [
-     { // Subkeys are optional
-       name: String,
-       type: String, // 'Date' || 'Double' || 'Integer' || 'String'
-       alias: String, // how should clients display this field name
-       length: Number // max length for a String or Date field (optional)
-     }
-    ]
-  }
-```
+#### Route parameters
+The details of how you fetch data from the remote API depends on how responsive you want the provider to be. The example in [figure 1](#figure-1) is extremely simple, but also not very responsive; it will only fetch data for the resource at `https://data.ct.gov/resource/y6p2-px98.geojson`. Instead, we can use Koop's route parameters, found in the `request` object, to build the URL to the remote API.
 
-The data type and values used for `idField` can affect the output of the [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) and behavior of some consumer clients. [FeatureServer](https://github.com/koopjs/FeatureServer) and [winnow](https://github.com/koopjs/winnow) (dependencies of [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices)) will create a separate OBJECTID field and set its value to the value of the attribute referenced by `idField`. OBJECTIDs that are not integers or outside the range of 0 - 2,147,483,647 can break features in some ArcGIS clients.
-
-
-
-#### Request parameters in `getData`
-
-Recall the `getData` function receives `req`, an Express.js [request](https://expressjs.com/en/4x/api.html#req) object. `req` includes a set of [route parameters](https://expressjs.com/en/4x/api.html#req.params) accessible with `req.params`, as well as a set of [query-parameters](https://expressjs.com/en/4x/api.html#req.query) accessible with `req.query`. Parameters can be used by `getData` to specify the particulars of data fetching.  
-
-##### Provider route parameters
-Providers can enable the `:host` and `:id` route parameters with settings in [`index.js`](#index.js) and then leverage these parameters in `getData`.  For example, the Craigslist Provider's [`getData` function](https://github.com/dmfenton/koop-provider-craigslist/blob/master/model.js#L12-L14) uses the `:host` and `:id` parameter to transmit the city and and posting category to the `getData` function where they are used to generate URLs for requests to the Craigslist API. 
-
-| parameter | `getData` accessor | enabled by default | `index.js` setting |
-| --- | --- | --- | --- |
-| `:id` | `req.params.id` | yes | `disableIdParam` |
-|`:host`| `req.params.host` | no | `hosts` |
-
-##### Output-services route parameters
-
-By default, Koop includes the [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) output-service. It adds a set of `FeatureServer` routes (e.g., `/provider/:host/:id/FeatureServer/:layer` and `/provider/:host/:id/FeatureServer/:layer/:method`), which include addtional route parameters that can be used in your Model's `getData` function. 
-
-| parameter | `getData` accessor | notes|
-| --- | --- | --- | 
-| `:layer` | `req.params.layer` | |
-|`:method`| `req.params.method` | `query` and `generateRenderer` are the only values currently supported by [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) dependency.  All other values will produce a `400, Method not supported` error.  |
-
-##### Query parameters
-As noted above, any query-parameters added to the request URL can accessed within `getData` and leveraged for data fetching purposes.  For example, a request `/provider/:id/FeatureServer/0?foo=bar` would supply `getData` with `req.query.foo` equal to `bar`. With the proper logic, it could then be used to limit fetched data to records that had an attribute `foo` with a value of `bar`.
-
-#### Generation of provider-specific output-routes
-The position of the provider-specific fragment of a route path can vary depending on the `path` assignment in the `routes` array object of your output-services plugin.  By default, Koop will construct the route with the provider's parameters first, and subsequently add the route fragment defined by an output-services plugin.  However, if you need the route path configured differently, you can add the `$namespace` and `$providerParams` placholders anywhere in the output-services path. Koop will replace these placeholders with the provider-specific route fragments (i.e, namespace and `:host/:id`). For example, an output path defined as `$namespace/rest/services/$providerParams/FeatureServer/0` would translate to `provider/rest/services/:host/:id/FeatureServer/0`.
-
-#### Output-routes without provider parameters
-You may need routes that skip the addition of provider-specific parameters altogether.  This can be accomplished by adding an `absolutePath: true` key-value to the `routes` array object in your output-services plugin. On such routes, Koop will define the route without any additional provider namespace or parameters.
-
-
-
-### `createKey` function
-Koop uses a an internal `createKey` function to generate a string for use as a key for the data-cache's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
-
-Models can optionally implement a function called `createKey`.  If defined, the Model's `createKey` overrides Koop's internal function.  This can be useful if the cache key should be composed with parameters in addition to those found in the internal function.  For example, the `createKey` below uses query parameters `startdate` and `enddate` to construct the key (if they are defined):
+<div class='codeanchor' id="figure-2"></div>
 
 ```js
-Model.prototype.createKey = function (req) {
-  let key = req.url.split('/')[1]
-  if (req.params.host) key = `${key}::${req.params.host}`
-  if (req.params.id) key = `${key}::${req.params.id}`
-  key = (req.query.startdate && req.query.enddate) ? `${key}::${req.params.startdate}::${req.params.enddate}` : ''
-  return key
+Model.prototype.getData(request, callback) {
+
+  // Get 'host' and 'id' params from request object
+  const { params: { host, id } } = request
+
+  // Use 'host' and 'id' to build URL to remote API
+  request(`https://${host}/resource/${id}.geojson`, (err, res, geojson) => {
+
+    if (err) return callback(err)
+
+    callback(null, geojson)
+  })
 }
 ```
+<figcaption><i>Figure 2. Using Koop's <code class='highlighter-rouge'>host</code> and <code class='highlighter-rouge'>id</code> parameters to build the remote API URL.</i></figcaption>
 
+In [figure 2](#figure-2), we take the `host` and `id` parameters from the incoming Koop request, and use them to dynamically build the remote API request.  Thus, parameters in the Koop request determine which resource is returned.  Using the code example in [figure 2](#figure-2), a Koop request like `http://localhost:8080/koop-provider-socrata/my-host/my-id/FeatureServer/0/query` would construct a remote API URL like `https://my-host/resource/my-id.geojson`.  
 
-## Routes and Controllers
+Note that you need to configure the provider to use the `host` and`id` parameters using the `hosts` and `disableIdParam` settings, otherwise routes will be built without them and they will be undefined in `getData`. See [provider registion docs](./registration) for more details.
 
-### Routes.js
+In addition to `host` and `id`, there may be other route parameters available in `getData`. It all depends on how the output-plugin defines its routes. For example, the Geoservices output defines the following route `/FeatureServer/:layer/:method`. On a request like `http://localhost:8080/koop-provider-socrata/my-host/my-id/FeatureServer/0/query`, `getData` could also access the `layer` and `method` parameters, which would have values of `0` and `query`, respectively.
 
-This file is simply an array of routes that should be handled in the namespace of the provider e.g. http://adapters.koopernetes.com/agol/arcgis/datasets/e5255b1f69944bcd9cf701025b68f411_0
+#### Query parameters
+Any query parameters that are part of the Koop request can be accessed in the `getData` function and may be useful for building the request to the remote API.
 
-In the example above, the provider namespace is `agol`, and `arcgis` and `e5255b1f69944bcd9cf701025b68f411_0` are parameters. Anything that matches `/agol/*/datasets/*` will be be handled by the model.
-
-Each route has:
-- path: an express.js style route that includes optional parameters
-  - see https://www.npmjs.com/package/path-to-regexp for details
-- methods: the http methods that should be handled at this route
-  - e.g. `get`, `post`, `put`, `delete`, `patch`
-- handler: the Controller function that should handle requests at this route
-
-Example:
+<div class='codeanchor' id="figure-3"></div>
 
 ```js
-module.exports = [
-{
-    path: '/agol/:id/datasets',
-    methods: ['get'],
-    handler: 'get'
-  },
-  {
-    path: '/agol/:id/datasets/:dataset.:format',
-    methods: ['get'],
-    handler: 'get'
-  },
-  {
-    path: '/agol/:id/datasets/:dataset',
-    methods: ['get'],
-    handler: 'get'
-  },
-  {
-    path: '/agol/:id/datasets/:dataset/:method',
-    methods: ['delete'],
-    handler: 'post'
-  },
-      {
-    path: '/agol/:id/datasets/:dataset/:method',
-    methods: ['delete'],
-    handler: 'delete'
-  }
-]
-```
+Model.prototype.getData(request, callback) {
 
-### Controller.js
+  // Get 'host', 'id', 'where' params from request object
+  const { params: { host, id }, query: { where } } = request
 
-Providers can do more than simply implement `getData` and hand GeoJSON back to Koop's core. In fact, they can extend the API space in an arbitrary fashion by adding routes that map to controller functions. Those controller functions call functions on the model to fetch or process data from the remote API.
+  // Use 'host' and 'id' to build URL to remote API
+  request(`https://${host}/resource/${id}.geojson?where=${where}`, (err, res, geojson) => {
 
-The purpose of the Controller file is to handle additional routes that are specified in `route.js`. It is a class that is instantiated with access to the model. Most processing should happen in the model, while the controller acts as a traffic director.
+    if (err) return callback(err)
 
-As of Koop 3.0, you **do not** need to create a controller. If you want to add additional functionality to Koop that is not supported by an output plugin, you can add additional functions to the controller.
+    geojson.filtersApplied = { where: true }
 
-Example:
-
-```js
-module.exports = function (model) {
-  this.model = model
-  /**
-   * returns a list of the registered hosts and their ids
-   */
-  this.get = function (req, res) {
-    this.model.log.debug({route: 'dataset:get', params: req.params, query: req.query})
-    if (req.params.dataset) this._getDataset(req, res)
-    else this._getDatasets(req, res)
-  }
-
-  /**
-   * Put a specific dataset on the queue
-   */
-  this.post = function (req, res) {
-    this.model.log.debug({route: 'POST', params: req.params, query: req.query})
-    if (req.params.method === 'import') this.model.enqueue('import', req, res)
-    else if (req.params.method === 'export') this.model.enqueue('export', req, res)
-    else return res.status(400).json({error: 'Unsupported method'})
-  }
-
-  /**
-   * Deletes a dataset from the cache
-   */
-  this.delete = function (req, res) {
-    this.model.log.debug(JSON.stringify({route: 'dataset:delete', params: req.params, query: req.query}))
-    var ids = this.model.decomposeId(req.params.dataset)
-    this.model.dropResource(ids.item, ids.layer, {}, function (err) {
-      if (err) return res.status(500).send({error: err.message})
-      res.status(200).json({status: 'Deleted'})
-    })
-  }
-
-  this._getDataset = function (req, res) {
-    this.findRecord(req.params, function (err, dataset) {
-      if (err) return res.status(404).json({error: err.message})
-      res.status(200).json({dataset: dataset})
-    })
-  }
-
-  this._getDatasets = function (req, res) {
-    this.model.findRecords(req.query, function (err, datasets) {
-      if (err) return res.status(500).json({error: err.message})
-      res.status(200).json({datasets: datasets})
-    })
-  }
+    callback(null, geojson)
+  })
 }
 ```
-`Model` must implement a `getData` method. Other optional methods are noted in the table below.
+<figcaption><i>Figure 3. Using Koop's route and query parameters to build the remote API URL.</i></figcaption>
 
-| Name   |      Required?     |  Summary |
-|----------|:-------------:|------|
-| `getData` | Yes | Fetches data and translates it to GeoJSON. |
-| `createKey` | No   | Generates a string to use as a key for the data-cache. See below. |
-| `getAuthenticationSpecification` | No | Delivers an object for use in configuring authentication in output-services. See [authorization spec](http://koopjs.github.io/docs/development/authorization).|
-| `authenticate` | No | Validates credentials and issues a token. See [authorization spec](http://koopjs.github.io/docs/development/authorization). |
-| `authorize` | No | Verifies request is made by an authenticated user. See [authorization spec](http://koopjs.github.io/docs/development/authorization). |
+In figure 3, we attach the `where` query parameter from the Koop request to the remote URL. This allows the remote API to executing some of the data filtering, which reduces the amount of data coming over the wire and the amount of post-processing for Koop.  Provider that pass on such instructions to remote API are termed *pass-through* providers.
+
+If you do end up using query parameters to offload operations, you can add a `filtersApplied` object to your GeoJSON. The object should have a boolean flag for any Geoservices operation that has already been executed on the GeoJSON. See the example in figure 3, and the [FeatureServer documentation](https://github.com/koopjs/FeatureServer#featureserverroute) for addition information on `filtersApplied` flags.
+
+### Translating fetched data to GeoJSON
+In the code snippets above, the remote API returned GeoJSON, so no translation was necessary. Your remote data source may not offer GeoJSON as a format. In such a case, there must be a translation function to convert the fetch data to GeoJSON.
+
+GeoJSON passed to the callback function should be valid with respect to the [GeoJSON specification](https://tools.ietf.org/html/rfc7946).  Operations in some output-plugins may expect standard GeoJSON properties and / or values. In some cases, having data that conforms to the [GeoJSON spec's righthand rule](https://tools.ietf.org/html/rfc7946#section-3.1.6) is esstential for generating expected results (e.g., features crossing the antimeridian).  Koop includes a GeoJSON validation that is suitable for non-production environments and is active when `NODE_ENV` is *not* `production` and `KOOP_WARNINGS` is *not* set to `suppress`.  In this mode, invalid GeoJSON from `getData` will trigger informative console warnings.
+
+### Adding provider `metadata` to the GeoJSON
+
+You should add a `metadata` object to the GeoJSON returned from `getData` (see Figure 1). Many Koop output plugins will expect `metadata` to be defined and use certain properties therein. For example, Koop's default Geoservices output-plugin uses `metadata.geometry` to determine if the data is spatial or tabular. There are many other optional metadata settings (shown below) that may be useful for customizing your Geoservices output.
+
+| key | type | description | example |
+| - | - | - | - |
+| name | string | Name of the layer | `'Test layer'` |
+| description | string | Description of the layer | `'Description of the dataset's` |
+| extent | array | Valid extent array | `[[180,90],[-180,-90]]` |
+| displayField | string | Feature attribute name to be used for display by a client |
+| geometryType | String | Geometry type of the features. If not set, Geoservice plugin will use first feature to determine type. If first feature has no geometry, it will assume tabular data. Possible values: `Point`, `MultiPoint`, `LineString`, `MultiLineString`, `Polygon`, `MultiPolygon` | `'Point'`
+| idField | string | Key of feature attribute that should be used as the unique identifier field. Should point to an integer attribute with a range of 0 - 2,147,483,647 | `'id'` |
+| maxRecordCount | number | Maximum number of features a provider can return at once | `1000` |
+| limitExceeded | boolean | Whether total number of features in data source is greater than number being returned | `true` |
+| timeInfo | object | Describes the time extent and capabilities of the layer | |
+| transform | object | Describes a quantization transformation | |
+| fields | object[] | An array of objects that describe feature attribute details.  There should be one object for each feature attribute. | `{ name: 'state', type: 'String', alias: 'State', length: 2 }` |
+| fields[0].name | string | Key used in the GeoJSON `properties` | `'state'`|
+| fields[0].type | string | Data type. valid types include: `'Date'`, `'Double'`, `'Integer'`, `'String'` | `String` |
+| fields[0].alias | string | How should clients display this attribute name (optional) | `'State'` |
+| fields[0].length | number | Max length for a String or Date field (optional) | 2 |
+
+#### Special considerations for `idField`
+As noted above `idField` designates which feature attribute should be used as the feature's unique identifier.  For ArcGIS clients, having a unique identifier is required, and it must be of type integer and in the range of 0 - 2,147,483,647, otherwise some functionality cannot be supported. If you chose not to set `idField` or don't have a feature attribute that fits its requirements, Koop will create an OBJECTID field in its Geoservices output by default which can be used as a unique identifier.  Its value is calculated as the numeric hash of each feature. While you can let Koop handle this, define an `idField` in your metadata is overall more reliable.
+
+## Method: `createKey(request)`
+Koop uses a an internal `createKey` function to generate a string for use as a key in the cache-plugin's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
+
+Models can optionally implement a function called `createKey`.  If defined, the Model's `createKey` overrides Koop's internal function.  This can be useful if the cache key should be composed with additional parameters.
+
+### Arguments
+
+| name | type | description |
+| - | - | - |
+|`request`| `Object` | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+
+In the example below, the `createKey` method uses the query parameter `start` to make a more specific cache key:
+
+<div class='codeanchor' id="figure-4"></div>
+
+```js
+Model.prototype.createKey = function (request) {
+
+  const { url, params: { host, id }, query: { start } } = request
+
+  const keyFragments = []
+
+  // Add provider name
+  keyFragments.push(url.split('/')[1])
+
+  if (host) keyFragments.push(host)
+
+  if (id) keyFragments.push(id)
+
+  if (start) keyFragments.push(start)
+
+  return keyFragments.join('::')
+}
+```
+<figcaption><i>Figure 4. Defining a custom <code class='highlighter-rouge'>createKey</code> method for generating cache keys.</i></figcaption>

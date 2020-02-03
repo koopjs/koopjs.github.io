@@ -29,12 +29,11 @@ html {
 body {
   padding-top: $navbar-height + $navbar-margin-bottom;
   margin-bottom: 46px;
-  line-height: 2em;
+  line-height: 1.7em;
 }
 
-h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
-  margin-top: 30px;
-  margin-bottom: 10.5px;
+h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
+  font-weight: 400;
 
   .anchor {
     float: left;
@@ -49,10 +48,59 @@ h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   }
 }
 
+h1 {
+  margin-top: 0;
+}
+
+h2, .h2, h3, .h3 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+table {
+  font-size: 16px;
+  margin-bottom: 45px;
+}
+
 h1:hover, .h1:hover, h2:hover, .h2:hover, h3:hover, .h3:hover, h4:hover, .h4:hover, h5:hover, .h5:hover, h6:hover, .h6:hover {
   .anchor{
     opacity: 1;
   }
+}
+
+p {
+  margin: 0 0 20px;
+  font-size: 16px;
+}
+
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #dd1144;
+  background-color: #FFF;
+  border-radius: 0;
+}
+
+.codeanchor {
+  .anchor {
+    float: left;
+    line-height: 1;
+    margin-left: -20px;
+    padding-right: 4px;
+    opacity: 0;
+  }
+
+  .anchor:hover {
+    opacity: 1;
+  }
+}
+
+figcaption {
+  margin-bottom: 20px;
+}
+
+.highlight {
+  margin-bottom: 20px;
 }
 
 .navbar-brand{
