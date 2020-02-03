@@ -124,7 +124,7 @@ You will notice a list of routes printed to the console. These include routes fo
 
 becomes:
 
-`http://localhost:8080/github/koopjs::geodata::north-america/FeatureServer/0/query`
+`http://localhost:8080/github/rest/services/koopjs::geodata::north-america/FeatureServer/0/query`
 
 Note that there are `GET` and `POST` versions of all koop-output-geoservices routes. Output-services define an array of methods for each of their routes, and in this case every route has been [assigned both `GET` and `POST` methods](https://github.com/koopjs/koop-output-geoservices/blob/master/index.js#L94).
 

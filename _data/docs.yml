@@ -55,6 +55,8 @@
       path: development/provider/registration
     - title: Model Class
       path: development/provider/model
+    - title: Routes and Controllers
+      path: development/provider/routes
   - title: Cache Spec
     path: development/cache
   - title: Output Spec
