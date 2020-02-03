@@ -142,4 +142,11 @@ Once Koop is running, you can test these sample requests:
 <br>
 
 ## Developing with Koop
-If you want to develop on Koop, it’s usually best to start by creating a Provider. You can read more about that in [provider docs](/documentation/provider) or check out the [Koop Provider Sample](https://github.com/koopjs/koop-provider-sample)
+
+If you want to develop on Koop, it’s usually best to start by creating a Provider. You can read more about that in [provider docs](/documentation/provider).
+
+You can also checkout some examples:
+* [Koop Provider Example](https://github.com/koopjs/koop-provider-example)
+* [Koop App Example](https://github.com/koopjs/koop-app-example)
+* [Koop Serverless Example](https://github.com/koopjs/koop-serverless-example)
+* [Koop Docker Example](https://github.com/koopjs/koop-docker-example)
