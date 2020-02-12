@@ -38,8 +38,8 @@ The `getData` method is a requirement of *all* providers. It will fetch data fro
 
 | name | type | description |
 | - | - | - |
-|request| Object | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
-|callback| Function| The Koop error-first callback function. GeoJSON should be passed as the second parameter to this callback. |
+|`request`| Object | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+|`callback`| Function| The Koop error-first callback function. GeoJSON should be passed as the second parameter to this callback. |
 
 ### Fetching data from the remote API
 
@@ -110,21 +110,21 @@ You should add a `metadata` object to the GeoJSON returned from `getData` (see F
 
 | key | type | description | example |
 | - | - | - | - |
-| name | string | Name of the layer | `'Test layer'` |
-| description | string | Description of the layer | `'Description of the dataset's` |
-| extent | array | Valid extent array | `[[180,90],[-180,-90]]` |
-| displayField | string | Feature attribute name to be used for display by a client |
-| geometryType | String | Geometry type of the features. If not set, Geoservice plugin will use first feature to determine type. If first feature has no geometry, it will assume tabular data. Possible values: `Point`, `MultiPoint`, `LineString`, `MultiLineString`, `Polygon`, `MultiPolygon` | `'Point'`
-| idField | string | Key of feature attribute that should be used as the unique identifier field. Should point to an integer attribute with a range of 0 - 2,147,483,647 | `'id'` |
-| maxRecordCount | number | Maximum number of features a provider can return at once | `1000` |
-| limitExceeded | boolean | Whether total number of features in data source is greater than number being returned | `true` |
-| timeInfo | object | Describes the time extent and capabilities of the layer | |
-| transform | object | Describes a quantization transformation | |
-| fields | object[] | An array of objects that describe feature attribute details.  There should be one object for each feature attribute. | `{ name: 'state', type: 'String', alias: 'State', length: 2 }` |
-| fields[0].name | string | Key used in the GeoJSON `properties` | `'state'`|
-| fields[0].type | string | Data type. valid types include: `'Date'`, `'Double'`, `'Integer'`, `'String'` | `String` |
-| fields[0].alias | string | How should clients display this attribute name (optional) | `'State'` |
-| fields[0].length | number | Max length for a String or Date field (optional) | 2 |
+| `name` | String | Name of the layer | `'Test layer'` |
+| `description` | String | Description of the layer | `'Description of the dataset's` |
+| `extent` | Array | Valid extent array | `[[180,90],[-180,-90]]` |
+| `displayField` | String | Feature attribute name to be used for display by a client |
+| `geometryType` | String | Geometry type of the features. If not set, Geoservice plugin will use first feature to determine type. If first feature has no geometry, it will assume tabular data. Possible values: `Point`, `MultiPoint`, `LineString`, `MultiLineString`, `Polygon`, `MultiPolygon` | `'Point'`
+| `idField` | String | Key of feature attribute that should be used as the unique identifier field. Should point to an integer attribute with a range of 0 - 2,147,483,647 | `'id'` |
+| `maxRecordCount` | Number | Maximum number of features a provider can return at once | `1000` |
+| `limitExceeded` | Boolean | Whether total number of features in data source is greater than number being returned | `true` |
+| `timeInfo` | Object | Describes the time extent and capabilities of the layer | |
+| `transform` | Object | Describes a quantization transformation | |
+| `fields` | Object[] | An array of objects that describe feature attribute details.  There should be one object for each feature attribute. | `{ name: 'state', type: 'String', alias: 'State', length: 2 }` |
+| `fields[0].name` | String | Key used in the GeoJSON `properties` | `'state'`|
+| `fields[0].type` | String | Data type. valid types include: `'Date'`, `'Double'`, `'Integer'`, `'String'` | `String` |
+| `fields[0].alias` | String | How should clients display this attribute name (optional) | `'State'` |
+| `fields[0].length` | Number | Max length for a String or Date field (optional) | 2 |
 
 #### Special considerations for `idField`
 As noted above `idField` designates which feature attribute should be used as the feature's unique identifier.  For ArcGIS clients, having a unique identifier is required, and it must be of type integer and in the range of 0 - 2,147,483,647, otherwise some functionality cannot be supported. If you chose not to set `idField` or don't have a feature attribute that fits its requirements, Koop will create an OBJECTID field in its Geoservices output by default which can be used as a unique identifier.  Its value is calculated as the numeric hash of each feature. While you can let Koop handle this, define an `idField` in your metadata is overall more reliable.
@@ -138,7 +138,7 @@ Models can optionally implement a function called `createKey`.  If defined, the 
 
 | name | type | description |
 | - | - | - |
-| request | Object | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+| `request` | Object | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
 
 In the example below, the `createKey` method uses the query parameter `start` to make a more specific cache key:
 
