@@ -20,16 +20,21 @@ layout: default
             <p>Koop is a JavaScript toolkit for connecting spatial APIs. Out of the box, it exposes a Node.js server that translates GeoJSON into the GeoServices specification supported by ArcGIS products. It's plugin architecture supports output in other formats including vector-tile, WMS, and plain old GeoJSON.</p>
             <br>
             <p>Koop can be extended to translate data from any source to any API specification. Don’t let API incompatiblity get in your way, start using one of Koop’s data providers or write your own. </p>
-
+            <p>Check out <a href={{ "/docs/basics" | prepend: site.baseurl }}>the docs</a> or see our 
+                    {% for post in site.posts limit:1 %}
+                        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">
+                          latest blog entry
+                        </a>
+                    {% endfor %}
+                .</p>
+            
         </div>
         <div class="col-md-4 text-center">
             <img src="img/logonav.png" alt="" class="img-responsive">
         </div>
         <br>
         <br>
-
         <br>
-        <p  class="text-center"><a class="btn btn-primary btn-lg" href="{{ "/docs/basics" | prepend: site.baseurl }}" role="button">Get Started</a></p>
     </div>
 
     <hr>
@@ -50,7 +55,7 @@ layout: default
         <a class='tile-link' href="{{ "/docs/available-plugins" | prepend: site.baseurl }}">
             <div class="col-sm-2 landing-tiles">
                 <h1 class="text-center"><i class="fa fa-plug" aria-hidden="true"></i></h1>
-                <h4 class="text-center">Koop Plugins</h4>
+                <h4 class="text-center">Plugins</h4>
             </div>
         </a>
         <a class='tile-link' href="{{ "/docs/usage" | prepend: site.baseurl }}">
