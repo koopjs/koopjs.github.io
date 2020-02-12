@@ -38,8 +38,8 @@ The `getData` method is a requirement of *all* providers. It will fetch data fro
 
 | name | type | description |
 | - | - | - |
-|`request`| `Object` | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
-|`callback`| `Function`| The Koop error-first callback function. GeoJSON should be passed as the second parameter to this callback. |
+|request| Object | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+|callback| Function| The Koop error-first callback function. GeoJSON should be passed as the second parameter to this callback. |
 
 ### Fetching data from the remote API
 
@@ -138,7 +138,7 @@ Models can optionally implement a function called `createKey`.  If defined, the 
 
 | name | type | description |
 | - | - | - |
-|`request`| `Object` | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+| request | Object | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
 
 In the example below, the `createKey` method uses the query parameter `start` to make a more specific cache key:
 

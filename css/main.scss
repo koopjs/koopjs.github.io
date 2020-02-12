@@ -46,6 +46,10 @@ h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {
   .anchor:hover {
     opacity: 1;
   }
+
+  code {
+    background-color: transparent;
+  }
 }
 
 h1 {
@@ -76,8 +80,8 @@ p {
 code {
   padding: 2px 4px;
   font-size: 90%;
-  color: #dd1144;
-  background-color: #FFF;
+  color: #008cba;
+  background-color: #f5f5f5;
   border-radius: 0;
 }
 
