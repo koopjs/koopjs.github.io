@@ -10,6 +10,8 @@
     path: basics/quickstart
   - title: Provider Types
     path: basics/provider-types
+  - title: FAQs
+    path: basics/faqs
   - title: System Reqiurements
     path: basics/system-requirements
 
