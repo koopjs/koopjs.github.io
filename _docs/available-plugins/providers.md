@@ -62,4 +62,4 @@ Know of any providers that aren't listed below? Please let us know by [submittin
 
 <br>
 ### Create a Provider
-We encourage you to create your own provider! Check out [Koop-CLI](https://github.com/koopjs/koop-cli) and the [provider specification](../usage/provider).
+We encourage you to create your own provider! Check out [Koop-CLI](https://github.com/koopjs/koop-cli) and the [provider specification](../development/provider/registration).
