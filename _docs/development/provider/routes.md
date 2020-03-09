@@ -4,7 +4,7 @@ permalink: /docs/development/provider/routes
 ---
 
 ## Provider-specific routes
-In addition to routes defined by output-plugins, a provider may extend the Koop API by defining their ownvroutes and associated controllers.  These routes are defined in a file that is referenced in the [registration object](./registration). This file should export an array of route definition objects. Each object must have:
+In addition to routes defined by output-plugins, a provider may extend the Koop API by defining their own routes and associated controllers.  These routes are defined in a file that is referenced in the [registration object](./registration). This file should export an array of route definition objects. Each object must have:
 
 | property name | type | description | example |
 | - | - | - | - |
@@ -40,4 +40,5 @@ Controller.prototype.test = function (req, res) {
 }
 
 module.exports = Controller
+```
 <figcaption><i>Figure 2. Contents of a <code class='highlighter-rouge'>controllers.js</code> file that defines a `Controller` class with methods that act as handler for provider-specific routes.</i></figcaption>
