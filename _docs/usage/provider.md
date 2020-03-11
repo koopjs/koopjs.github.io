@@ -73,7 +73,7 @@ koop.register(socrata, {
 ```
 <figcaption><i>Figure 3. Example of using a <code class='highlighter-rouge'>before</code> function to reject specific requests.</i></figcaption>
 
-The before function can also be used to modify the `request` objects.  In the example below, query parameter `limit` is assigned a value of 500 before it gets used by the provider's `getData` function. In the example below, we use the `before` function, to replace the `outSR` parameter is with its WKT equivalent; this allows Koop to successfully reproject the data to the desired output spatial reference:
+The before function can also be used to modify the `request` objects. In the example below, we use the `before` function, to replace the `outSR` parameter is with its WKT equivalent; this allows Koop to successfully reproject the data to the desired output spatial reference:
 
 <div class='codeanchor' id="figure-4"></div>
 ```js
