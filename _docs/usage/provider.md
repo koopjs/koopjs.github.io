@@ -73,7 +73,7 @@ koop.register(socrata, {
 ```
 <figcaption><i>Figure 3. Example of using a <code class='highlighter-rouge'>before</code> function to reject specific requests.</i></figcaption>
 
-The before function can also be used to modify the `request` objects.  In the example below, query parameter `limit` is assigned a value of 500 before it gets used by the provider's `getData` function.
+The before function can also be used to modify the `request` objects. In the example below, we use the `before` function, to replace the `outSR` parameter is with its WKT equivalent; this allows Koop to successfully reproject the data to the desired output spatial reference:
 
 <div class='codeanchor' id="figure-4"></div>
 ```js
@@ -83,13 +83,15 @@ const socrata = require('@koopjs/provider-socrata')
 koop.register(socrata, {
   before: (request, callback) => {
 
-    request.query.limit = 500
+    const { query: { outSR } } = request
+
+    if (outSR === 2285) req.query.outSR = `PROJCS["NAD83/WashingtonNorth(ftUS)",GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["standard_parallel_1",48.73333333333333],PARAMETER["standard_parallel_2",47.5],PARAMETER["latitude_of_origin",47],PARAMETER["central_meridian",-120.8333333333333],PARAMETER["false_easting",1640416.667],PARAMETER["false_northing",0],UNIT["USsurveyfoot",0.3048006096012192,AUTHORITY["EPSG","9003"]],AXIS["X",EAST],AXIS["Y",NORTH],AUTHORITY["EPSG","2285"]]`
 
     callback()
   }
 })
 ```
-<figcaption><i>Figure 4. Example of using a <code class='highlighter-rouge'>before</code> function to modify a request object's query parameter.</i></figcaption>
+<figcaption><i>Figure 4. Example of using an <code class='highlighter-rouge'>before</code> function to assign a WKT to the <code class='highlighter-rouge'>outSR</code> parameter.</i></figcaption>
 
 ### `after`
 The `after` option allows you to add a "transformation" function to the provider call stack that executes a code block _after_ the provider's `getData` method. It can be used to modify the Express `request` object and / or the provider-generated GeoJSON object.
@@ -104,7 +106,7 @@ The `after` option allows you to add a "transformation" function to the provider
 
 An example use of the `after` function is re-projection of non-WGS84 data, since at present, Koop expects all data supplied by a provider to be WGS84.  Let's say you have data stored on Github that has spatial reference NAD83/Washington North (2285).  You could use the existing Github provider with an `after` function to acquire and transform the data to WGS84 so it can be successfully processed by Koop:
 
-<div class='codeanchor' id="figure-4"></div>
+<div class='codeanchor' id="figure-5"></div>
 ```js
 const koop = new Koop()
 const reproject = require('reproject')
@@ -125,27 +127,9 @@ koop.register(github, {
   }
 })
 ```
-<figcaption><i>Figure 4. Example of using an <code class='highlighter-rouge'>after</code> function to reproject non-WGS84 data.</i></figcaption>
+<figcaption><i>Figure 5. Example of using an <code class='highlighter-rouge'>after</code> function to reproject non-WGS84 data.</i></figcaption>
 
-Like `before`, the `after` option can be useful for modifying the `request` object.  In the example below, the spatial reference ID assigned to the `outSR` parameter is replaced with its WKT equivalent; this will allow Koop to successfully reproject the data to the desired output spatial reference (Koop does not keep a lookup for most spatial references; if you want to support `outSR`s beyond WGS84 and Web Mercator you will have to do something like this):
-
-<div class='codeanchor' id="figure-5"></div>
-```js
-const koop = new Koop()
-const socrata = require('@koopjs/provider-socrata')
-
-koop.register(socrata, {
-  before: (request, callback) => {
-
-    const { query: { outSR } } = request
-
-    if (outSR === 2285) req.query.outSR = `PROJCS["NAD83/WashingtonNorth(ftUS)",GEOGCS["NAD83",DATUM["North_American_Datum_1983",SPHEROID["GRS1980",6378137,298.257222101,AUTHORITY["EPSG","7019"]],TOWGS84[0,0,0,0,0,0,0],AUTHORITY["EPSG","6269"]],PRIMEM["Greenwich",0,AUTHORITY["EPSG","8901"]],UNIT["degree",0.0174532925199433,AUTHORITY["EPSG","9122"]],AUTHORITY["EPSG","4269"]],PROJECTION["Lambert_Conformal_Conic_2SP"],PARAMETER["standard_parallel_1",48.73333333333333],PARAMETER["standard_parallel_2",47.5],PARAMETER["latitude_of_origin",47],PARAMETER["central_meridian",-120.8333333333333],PARAMETER["false_easting",1640416.667],PARAMETER["false_northing",0],UNIT["USsurveyfoot",0.3048006096012192,AUTHORITY["EPSG","9003"]],AXIS["X",EAST],AXIS["Y",NORTH],AUTHORITY["EPSG","2285"]]`
-
-    callback()
-  }
-})
-```
-<figcaption><i>Figure 5. Example of using an <code class='highlighter-rouge'>after</code> function to assign a WKT to the `outSR` parameter.</i></figcaption>
+Note that like the `before` function, the `after` option can be useful for modifying the `request` object.
 
 ### `routePrefix`
 If needed, you can add a prefix to all of a registered provider's routes.  For example, if you wanted the fragment `/api/v1` prepended to you github provider routes you could register the provider like this:
