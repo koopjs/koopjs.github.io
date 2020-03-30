@@ -11,7 +11,7 @@ Authorization plugins add a security layer to Koop. There are few important fact
 
 * Successfully securing your plugin-routes depends on authorization support from any output-plugins you may be using. By default, Koop includes [koop-output-geoservices](https://github.com/koopjs/koop-output-geoservices) (a.k.a. feature service output), which supports securing services with authorization plugins.
 
-* Authoriztion plugins should be registered _after_ output-services plugins and _before_ providers.  Any providers registered before an authorization plugin will not have its plugin routes secured.
+* Authorization plugins should be registered _after_ output-services plugins and _before_ providers.  Any providers registered before an authorization plugin will not have its plugin routes secured.
 
 ## Usage
 
@@ -25,7 +25,7 @@ const koop = new Koop()
 // Koop has already added koop-output-geoservices (i.e. FeatureServer routes) by default
 // Add any other output plugins here
 
-// Configure the auth plugin by executing its exported function with requried args
+// Configure the auth plugin by executing its exported function with required args
 const auth = require('@koopjs/auth-direct-file')('pass-in-your-secret', `path/to/identity-store`)
 
 // Register any providers you want to omit from koop auth
