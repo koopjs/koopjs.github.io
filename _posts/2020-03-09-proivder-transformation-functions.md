@@ -77,4 +77,4 @@ koop.register(github, {
 
 In the `after` function above, we use the `reproject` library to convert geojson arriving with geometry in the EPSG:2285 coordinate system to WGS84, then pass it onto to the callback.
 
-To learn more about modify provider behavior with transformation functions, see the [usage docs](docs/usage/provider).
+To learn more about modify provider behavior with transformation functions, see the [usage docs](https://koopjs.github.io/docs/usage/provider).
