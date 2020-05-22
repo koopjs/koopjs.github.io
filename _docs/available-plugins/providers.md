@@ -22,8 +22,8 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [Marklogic](https://github.com/koopjs/koop-provider-marklogic) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-marklogic.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-marklogic) | NA | 3.x|
 | [Socrata](https://github.com/koopjs/koop-provider-socrata) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-socrata) | 3.x |
 | [Socrata](https://github.com/koopjs/koop-socrata) | [![npm](https://img.shields.io/npm/v/koop-socrata.svg?style=flat-square)](https://www.npmjs.com/package/koop-socrata) | [![travis](https://img.shields.io/travis/koopjs/koop-provider-socrata/master.svg?style=flat-square)](https://travis-ci.org/koopjs/koop-provider-socrata) | 2.x |
-
 <br>
+
 #### Experimental
 
 | name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| version | build status | compatibility |
