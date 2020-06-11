@@ -3,7 +3,7 @@ title: Outputs
 permalink: /docs/available-plugins/outputs
 ---
 
-Koop uses **outputs** to tranform the GeoJSON supplied by providers to serve data in open specifications like [Geoservices](https://geoservices.github.io) so data can be used in clients that support them.
+Koop uses **outputs** to transform the GeoJSON supplied by providers to serve data in open specifications like [Geoservices](https://geoservices.github.io) so data can be used in clients that support them.
 
 <br>
 
