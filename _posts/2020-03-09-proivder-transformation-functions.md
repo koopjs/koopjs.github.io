@@ -2,7 +2,7 @@
 layout: post
 title:  "Introduction to provider transformation functions"
 date:   2020-03-09 15:00:00
-author: Rich
+author: Rich Gwozdz
 ---
 
 Koop 3.17.0 supports a new feature we call *provider transformation functions*. These functions are registration options that allow you customize the behavior and response of a provider's `getData` method **without** having to fork and alter a provider's code.  
