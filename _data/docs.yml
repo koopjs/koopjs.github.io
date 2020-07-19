@@ -69,5 +69,7 @@
 - title: Deployment
   path: deployment
   docs:
+  - title: Docker
+    path: deployment/docker
   - title: Heroku
     path: deployment/heroku
