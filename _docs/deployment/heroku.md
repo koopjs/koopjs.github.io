@@ -31,8 +31,8 @@ Heroku dyno uses a dynamic port per machine and specifies it in the environment 
 // This is the original code at line 22
 // koop.server.listen(config.port, () => koop.log.info(`Koop server listening at ${config.port}`))
 
-// You can replace the config.port by process.NODE_ENV.$PORT
-const port = process.NODE_ENV.$PORT
+// You can replace the config.port by process.env.$PORT, an environmental variable provided by Heroku
+const port = process.env.$PORT
 koop.server.listen(port, () => koop.log.info(`Koop server listening at ${port}`))
 ```
 
