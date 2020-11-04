@@ -57,6 +57,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [Carto](https://github.com/hhkaos/koop-provider-carto)|[![npm](https://img.shields.io/npm/v/koop-provider-carto.svg)](https://www.npmjs.com/package/koop-provider-carto)| NA | 3.x up |
 |[ServiceNow](https://github.com/Esri/indoors-servicenow-feature-service)| NA | NA | 3.x up |
 |[GeoNode](https://github.com/haoliangyu/koop-provider-geonode)| [![npm](https://img.shields.io/npm/v/koop-provider-geonode)](https://www.npmjs.com/package/koop-provider-geonode) | NA | 3.x up |
+|[PostgreSQL/PostGIS](https://github.com/doneill/koop-provider-pg)| [![npm](https://img.shields.io/npm/v/koop-provider-pg)](https://www.npmjs.com/package/koop-provider-pg) | [![Build Status](https://travis-ci.org/doneill/koop-provider-pg.svg?branch=main)](https://travis-ci.org/doneill/koop-provider-pg) | 3.x up |
 
 <br>
 Know of any providers that aren't listed below? Please let us know by [submitting an issue](https://github.com/koopjs/koop/issues/new)!
