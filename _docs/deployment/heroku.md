@@ -1,5 +1,5 @@
 ---
-title: Deploy Koop app to Heroku
+title: Deploy a Koop app to Heroku
 permalink: /docs/deployment/heroku
 ---
 

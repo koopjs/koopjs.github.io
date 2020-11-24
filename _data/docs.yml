@@ -73,3 +73,5 @@
     path: deployment/docker
   - title: Heroku
     path: deployment/heroku
+  - title: AWS Lambda
+    path: deployment/aws-lambda
