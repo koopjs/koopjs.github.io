@@ -67,7 +67,7 @@
     path: development/authorization
 
 - title: Deployment
-  path: deployment/index
+  path: deployment
   docs:
   - title: Docker
     path: deployment/docker
