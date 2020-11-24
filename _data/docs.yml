@@ -67,9 +67,11 @@
     path: development/authorization
 
 - title: Deployment
-  path: deployment
+  path: deployment/index
   docs:
   - title: Docker
     path: deployment/docker
   - title: Heroku
     path: deployment/heroku
+  - title: AWS Lambda
+    path: deployment/aws-lambda
