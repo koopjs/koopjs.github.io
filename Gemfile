@@ -13,6 +13,7 @@ group :jekyll_plugins do
    gem "jekyll-redirect-from"
    gem "jekyll-seo-tag"
    gem "jekyll-octicons"
+   gem "kramdown-parser-gfm"
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
