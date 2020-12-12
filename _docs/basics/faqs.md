@@ -17,7 +17,7 @@ http://localhost:8080/github/rest/services/koopjs::geodata::trees/FeatureServer/
 ```
 
 ### Can Koop reproject data to different coordinate systems?
-Koop's default output-plugin, Geoservices/FeatureServer, supports the transformation of data into different coordinate systems with the use of the `outSR` query parameter. `outSR` should be the well-known ID or well-known-text of a coordinate-reference-system (CRS).  Make sure that your Koop instance is using Winnow > 2.2.0 if you want to use WKIDs in your `outSR` parameter
+Koop's default output-plugin, Geoservices (i.e., FeatureServer), supports the transformation of data into different coordinate systems with the use of the `outSR` query parameter. `outSR` should be the well-known ID or well-known-text of a coordinate-reference-system (CRS).  Make sure that your Koop instance is using Winnow > 2.2.0 if you want to use WKIDs in your `outSR` parameter
 
 Other output plugins may or may not support coordinate system transforms to other CRSs.  You should check the plugin documentation.  Output-plugin developers can leverage the Winnow library to implement the same transformations found in the Geoservices/FeatureServer output.
 
