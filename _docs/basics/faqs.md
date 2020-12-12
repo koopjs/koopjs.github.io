@@ -16,13 +16,32 @@ You can also access records beyond the first default 1000 by using the paginatio
 http://localhost:8080/github/rest/services/koopjs::geodata::trees/FeatureServer/0/query?resultRecordCount=1000&resultOffset=1000
 ```
 
-<br>
 ### Can Koop reproject data to different coordinate systems?
-By default, Koop has limited support for reprojection. The Geoservices output plugin includes an `outSR` query parameter that allows for data requests in a non-WGS84 coordinate system. The value of `outSR` can be a spatial reference ID or WKT. If a valid WKT is used as the request's `outSR`, Koop will use it to reproject the data. However, if the request's `outSR` is a spatial reference ID, only a few values will lead to successful reprojection - 4326, 4269, and 3857. This is because Koop uses the [proj4 library](https://github.com/proj4js/proj4js) which only includes default support for those three projections.
+Koop's default output-plugin, Geoservices/FeatureServer, supports the transformation of data into different coordinate systems with the use of the `outSR` query parameter. `outSR` should be the well-known ID or well-known-text of a coordinate-reference-system (CRS).  Make sure that your Koop instance is using Winnow > 2.2.0 if you want to use WKIDs in your `outSR` parameter
 
-If you need to support other values of `outSR`, you have a couple of options.  If authoring your own provider, you can check incoming values of `outSR` in the `getData` method. If an unsupported value arrives, you lookup it's WKT in something like [proj-codes](https://www.npmjs.com/package/@esri/proj-codes) or a remote API like [spatialreference.org](https://spatialreference.org), then assign the WKT as the value of `outSR`.  If you are using an already published provider, you can use the `before` or `after` transformation functions to apply the same strategy. The usage section of [provider transformation functions](../usage/provider#figure-5) has a code example.
+Other output plugins may or may not support coordinate system transforms to other CRSs.  You should check the plugin documentation.  Output-plugin developers can leverage the Winnow library to implement the same transformations found in the Geoservices/FeatureServer output.
 
-<br>
+### Does GeoJSON produced by providers need to use the WGS84 CRS?
+It depends on the output-plugins you are leveraging. The Geoservices/FeatureServer output plugin can work with data in non-WGS84 coordinate-reference-systems (CRS), but the CRS needs to be noted either in the GeoJSON's `crs` property or by adding an `inputCrs` query parameter. To set with the GeoJSON `crs` property, you should have something like this attached to the GeoJSON produced by the provider's `getData` method:
+
+```js
+geojson.crs = {
+  type: 'name',
+  properties: {
+    name: "urn:ogc:def:crs:OGC:1.3:EPSG::2285"
+  }
+}
+```
+where `2285` is an example of a well-known identifier for a CRS.
+
+Alternatively, you can modify the request's `query` object in the `getData` method so that it includes an `inputCrs`:
+
+```
+request.query.inputCrs = 2285
+```
+
+Note that the GeoJSON `crs` or query parameter `inputCrs` can be set in the provider's `getData` method _OR_ by using a provider `after` function.  See the usage for [after](../usage/provider#after) for examples on setting [crs](../usage/provider#figure-5) and [inputCrs](../usage/provider#figure-6). Also note that your Koop instance should be using Winnow > 2.2.0.
+
 ### How can I disable Koop warnings from the console/logs?
 You may see Koop related warnings in the console output.  Most often these are related to an unset `idField`, an `idField` that has an invalid value, or invalid GeoJSON.  Note that invalid GeoJSON warnings may occur for any GeoJSON that does not conform to the specification noted by [IEFT](https://tools.ietf.org/html/rfc7946).  Koop can work with non-standard GeoJSON (e.g., polygons with reversed winding are okay), so in many or most cases these warnings can be ignored.  The warnings can be disabled by setting the `KOOP_WARNINGS` environment variable prior to start-up:
 
