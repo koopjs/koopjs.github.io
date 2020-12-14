@@ -19,7 +19,7 @@ http://localhost:8080/github/rest/services/koopjs::geodata::trees/FeatureServer/
 ### Can Koop reproject data to different coordinate systems?
 Koop's default output-plugin, Geoservices (i.e., FeatureServer), supports the transformation of data into different coordinate systems with the use of the `outSR` query parameter. `outSR` should be the well-known ID or well-known-text of a coordinate-reference-system (CRS).  Make sure that your Koop instance is using Winnow > 2.2.0 if you want to use WKIDs in your `outSR` parameter
 
-Other output plugins may or may not support coordinate system transforms to other CRSs.  You should check the plugin documentation.  Output-plugin developers can leverage the Winnow library to implement the same transformations found in the Geoservices/FeatureServer output.
+Other output plugins may or may not support coordinate system transforms to other CRSs.  You should check the plugin documentation.  Output-plugin developers can leverage the [Winnow](https://github.com/koopjs/winnow) to implement the same transformations found in the Geoservices/FeatureServer output.
 
 ### Does GeoJSON produced by providers need to use the WGS84 CRS?
 It depends on the output-plugins you are leveraging. The Geoservices/FeatureServer output plugin can work with data in non-WGS84 coordinate-reference-systems (CRS), but the CRS needs to be noted either in the GeoJSON's `crs` property or by adding an `inputCrs` query parameter. To set with the GeoJSON `crs` property, you should have something like this attached to the GeoJSON produced by the provider's `getData` method:
