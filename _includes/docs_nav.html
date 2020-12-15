@@ -9,7 +9,7 @@
         </a>
       </h4>
     </div>
-    <div id="collapse-{{forloop.index}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+    <div id="collapse-{{forloop.index}}" class="panel-collapse" role="tabpanel" aria-labelledby="headingOne">
       <ul class="list-group">
         {% for item in section.docs %}
           {% assign item_url = item.path | prepend:"/docs/" %}
