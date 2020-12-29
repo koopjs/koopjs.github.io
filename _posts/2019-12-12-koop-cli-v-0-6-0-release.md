@@ -5,7 +5,7 @@ date:   2019-12-12 15:00:00
 author: Haoliang Yu
 ---
 
-We are excited to introduce a new minor release ([v0.6.0]()) for Koop CLI. Multiple new features are added in this release to enhance the development experience.
+We are excited to introduce a new minor release v0.6.0 for Koop CLI. Multiple new features are added in this release to enhance the development experience.
 
 ## Watch mode
 
