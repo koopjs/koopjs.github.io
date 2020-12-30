@@ -47,7 +47,7 @@ Under the hood, a plugin list is maintained within the `koop.json` file and will
 
 ## Removing a plugin
 
-Remvoing an existing plugin from the Koop app used to be a tedious and error-prone task. It was needed to remove the plugin code and configuration from multiple files, which could be confusing for those who were not familiary with the project structure.
+Remvoing an existing plugin from the Koop app used to be a tedious and error-prone task. It was needed to remove the plugin code and configuration from multiple files, which could be confusing for those who were not familiar with the project structure.
 
 Since the Koop app boileplate is stable, we have automated the plugin removal with the new `remove` command. It reverses the operation done by the `add` command and works for the plugin from both the npm or a local directory.
 
