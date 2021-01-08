@@ -48,3 +48,7 @@ You may see Koop related warnings in the console output.  Most often these are r
 ```bash
 > KOOP_WARNINGS=suppress node server.js
 ```
+
+### How should I write my provider to hanlde `timestamp`-style date queries?
+
+Some clients that use Feature Services may format date queries in the `timestamp` style, for example `where=my_date >= timestamp '2021-01-01 06:00:00'` ([more information on querying dates](https://www.esri.com/arcgis-blog/products/api-rest/data-management/querying-feature-services-date-time-queries/)). To ensure Koop filters the data properly, you should use the `metadata.fields` property to designate that field (in this case, `my_date`) as `type: "Date"` and also return the data from your provider using the JavaScript [Date.toISOString() function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toISOString). For example, `properties.my_date = (new Date(year, month, date)).toISOString();`.
