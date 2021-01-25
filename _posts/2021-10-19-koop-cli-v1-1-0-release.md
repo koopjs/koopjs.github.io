@@ -5,7 +5,7 @@ date:   2021-01-19
 author: Haoliang Yu
 ---
 
-HTTPS support is one of the mostly asked features for Koop. In the recent release of Koop CLI v1.1, we have added the support of HTTPS to the dev server, which allows to create a local HTTPS server with simple command options. In this blog, we will discuss this new feature.
+HTTPS support is one of the mostly requested features for Koop. In the recent release of Koop CLI v1.1, we have added the support of HTTPS to the dev server, which allows to create a local HTTPS server with simple command options. In this blog, we will discuss this new feature.
 
 ## New serve options
 
@@ -51,6 +51,6 @@ The `server` command uses the native node moudle [https](https://nodejs.org/api/
 
 ## What about production?
 
-As the whole blog post is talking about the dev server, you may ask what about the production. Since Koop is a dedicated ET(L) server, it does not incldue the HTTPS feature. The implementation for the HTTPS dev server is not scalable and is not a good way for production use.
+As the whole blog post is talking about the dev server, you may ask "What about the production?". Since Koop is a dedicated ET(L) server, it does not incldue the HTTPS feature. The implementation for the HTTPS dev server is not scalable and is not a good way for production use.
 
 The common industrial practice is to use a proxy server (like nginx) or the service from your cloud provider.
