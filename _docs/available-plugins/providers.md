@@ -46,6 +46,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 
 | name &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;| version | build status | compatibility |
 | :--- | :------ | :----------- | :----------- |
+| [BigQuery](https://github.com/geobabbler/koop-bigquery-provider) | NA | NA | |
 | [Citybikes](https://github.com/nixta/koop-citybikes) | NA | NA | |
 | [Cloudant](https://github.com/cloudant/koop-cloudant) | [![npm](https://img.shields.io/npm/v/koop-cloudant.svg?style=flat-square)](https://www.npmjs.com/package/koop-cloudant) | NA | |
 | [CSV](https://github.com/haoliangyu/koop-provider-csv) | [![npm](https://img.shields.io/npm/v/koop-provider-csv.svg?style=flat-square)](https://www.npmjs.com/package/koop-provider-csv) | [![travis](https://travis-ci.org/haoliangyu/koop-provider-csv.svg?branch=master)](https://github.com/haoliangyu/koop-provider-csv) | 3.x up |
