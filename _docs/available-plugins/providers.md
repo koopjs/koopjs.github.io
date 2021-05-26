@@ -34,6 +34,7 @@ Koop uses **providers** to transform data from different sources to GeoJSON. Onc
 | [GeoCommons](https://github.com/koopjs/koop-geocommons) | [![npm](https://img.shields.io/npm/v/koop-geocommons.svg?style=flat-square)](https://www.npmjs.com/package/koop-geocommons) | NA |  |
 | [Google Fusion Tables](https://github.com/koopjs/koop-provider-google-fusion-tables) | [![npm](https://img.shields.io/npm/v/@koopjs/provider-google-fusion-tables.svg?style=flat-square)](https://www.npmjs.com/package/@koopjs/provider-google-fusion-tables) | NA | 3.x up |
 | [MongoDB](https://github.com/koopjs/koop-provider-mongo) | NA | NA | |
+| [Snowflake](https://github.com/Esri/koop-provider-snowflake) | NA | NA | |
 | [OpenStreetMap](https://github.com/koopjs/koop-osm) | [![npm](https://img.shields.io/npm/v/koop-osm.svg?style=flat-square)](https://www.npmjs.com/package/koop-osm) | NA | |
 | [VRBO](https://github.com/koopjs/koop-vrbo) | [![npm](https://img.shields.io/npm/v/koop-vrbo.svg?style=flat-square)](https://www.npmjs.com/package/koop-vrbo) | NA | |
 | [Yelp](https://github.com/koopjs/koop-provider-yelp) | [![npm](https://img.shields.io/npm/v/koop-yelp.svg?style=flat-square)](https://www.npmjs.com/package/koop-yelp) | NA | 3.x up |
