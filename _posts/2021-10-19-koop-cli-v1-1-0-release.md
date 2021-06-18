@@ -5,11 +5,11 @@ date:   2021-01-19
 author: Haoliang Yu
 ---
 
-HTTPS support is one of the mostly requested features for Koop. In the recent release of Koop CLI v1.1, we have added the support of HTTPS to the dev server, which allows to create a local HTTPS server with simple command options. In this blog, we will discuss this new feature.
+HTTPS support is one of the mostly requested features for Koop. In the recent release of Koop CLI v1.1, we have added the support of HTTPS to the dev server for Koop plugin projects, which allows to create a local HTTPS server with simple command options. In this blog, we will discuss this new feature.
 
 ## New serve options
 
-After updating the CLI version to v1.1 and checking the documentation for the `serve` command, you will see two new options `--ssl-cert` and `--ssl-key`.
+After updating the CLI version to v1.1 and checking the documentation for the `serve` command, you will see two new options `--ssl-cert` and `--ssl-key`. Note that these two options only work for Koop plugin (provider, output, auth, etc.) projects. If you use these two options in an app project, the values will be ignored.
 
 ```
 $ koop serve [path]
@@ -49,8 +49,8 @@ Note that the URL protocol now is `https`, instead of `http`. Such URL is ready 
 
 The `server` command uses the native node moudle [https](https://nodejs.org/api/https.html) to create the HTTPS server. You can see the exact implementation in the office guideline [How to create an https server?](https://nodejs.org/en/knowledge/HTTP/servers/how-to-create-a-HTTPS-server/).
 
-## What about production?
+## What about production use? What about app?
 
-As the whole blog post is talking about the dev server, you may ask "What about the production?". Since Koop is a dedicated ET(L) server, it does not incldue the HTTPS feature. The implementation for the HTTPS dev server is not scalable and is not a good way for production use.
+As the whole blog post is talking about the dev server, you may ask "What about the production?". Since Koop is a dedicated ET(L) server, it does not incldue the HTTPS feature. Implementing HTTPS feature directly in nodejs is not scalable and should not be used for production.
 
 The common industrial practice is to use a proxy server (like nginx) or the service from your cloud provider.
