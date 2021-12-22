@@ -58,3 +58,16 @@ Some clients that use Feature Services may format date queries in the `timestamp
 Koop is a dedicated ET(L) server and doesn't include HTTPS support by default. You should use a proxy server (like nginx) or the service from you cloud provider to add the HTTPS layer in production.
 
 If you just need the HTTPS for local development, the Koop CLI (v1.1+) allows to start a HTTPS dev server for Koop plugins. You can read the [CLI documentation](https://github.com/koopjs/koop-cli/blob/master/docs/commands/serve.md) for more details.
+
+### How to enable the capability to cache data from a provider?
+
+You can easily make the provider cached or pass-through by adding a TTL property. 
+For this you need to add a property ttl for model.js file of a provider, as shown bellow:
+
+```
+geojson.ttl = 60 // will cache for 60 seconds and you can specify the time in seconds by changing this parameter as you need.
+callback(null, geojson)
+```
+ 
+ If your data is cached, then during the ttl period Koop will not execute the getData method of your provider. Once the ttl period has expired, Koop will again go to the getData method to acquire the data. If you add some logging to getData you should be able to confirm this.
+ 
