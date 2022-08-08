@@ -1,13 +1,11 @@
 ---
 layout: post
-title:  "Koop Road Map 2022 -2023"
+title:  "Koop Road Map 2022 - 2023"
 date:   2022-08-08
 author: Rich Gwozdz
 ---
 
-Koop Roadmap for 2022-2023
-
-Hello Koop User Community!  I'd like to shared some proposed changes with you.  They are listed below in order of expected implementation.  Please reach out with any feedback or additions.  It's our hope to start implementing these changes soon.
+Hello Koop User Community!  I'd like to shared some proposed changes with you.  They are listed below in order of expected implementation.  Please comment on this [issue](https://github.com/koopjs/koop/issues/386) with any feedback or suggestions.  It's our hope to start implementing these changes soon.
 
 
 1) Move Koop's core-dependencies to a monorepo
@@ -52,6 +50,6 @@ The existing Koop-provider specification allows for the configuration of two rou
 
 We will:
 
-remove support for providers with an enabled hosts  parameter from koop-core
-reject the registration of providers that enable the hosts parameter and log messages that provide a link to migration documents
-update the Koop documentation so that the provider spec no longer includes hosts, and includes steps to migrate old provider to the new specification.
+- remove support for providers with an enabled hosts  parameter from koop-core
+- reject the registration of providers that enable the hosts parameter and log messages that provide a link to migration documents
+- update the Koop documentation so that the provider spec no longer includes hosts, and includes steps to migrate old provider to the new specification.
