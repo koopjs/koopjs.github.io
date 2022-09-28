@@ -4,7 +4,7 @@
   {% for section in site.data.docs %}
   {% assign section_url = section.path | prepend:"/docs/" %}
   {% assign secs_docs = section.docs.size  %}
-  {% assign loop_one = forloop = section.docs.size  %}
+  {% assign loop_one = forloop %}
     {
       "title": "{{ section.title }}",
       "url": "{{ section.url }}"

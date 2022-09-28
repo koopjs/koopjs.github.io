@@ -12,6 +12,8 @@ The site is built with Jekyll and the [Jekyll Doc Theme](https://github.com/aksa
 # install bundler
 gem install bundler
 
+# install packages
+bundle install
 
 # run jekyll with dependencies
 bundle exec jekyll serve
