@@ -10,7 +10,7 @@ By default, Koop registers the [Geoservices output-plugin](https://github.com/ko
 To be used by Koop, the output-plugin must be registered with the Koop instance before the it begins listening.
 
 ```js
-const Koop = require('koop')
+const Koop = require('@koopjs/koop-core')
 const koop = new Koop()
 const output = require('<output-plugin-package-or-path>')
 koop.register(output)

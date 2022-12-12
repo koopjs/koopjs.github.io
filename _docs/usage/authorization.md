@@ -19,7 +19,7 @@ Usage of an authorization-plugin can be conceptually divided into three parts: (
 
 ```js
 // Initialize Koop
-const Koop = require('koop')
+const Koop = require('@koopjs/koop-core')
 const koop = new Koop()
 
 // Koop has already added koop-output-geoservices (i.e. FeatureServer routes) by default

@@ -28,7 +28,7 @@ Create a new file named `server.js`.  The typical content of the Koop server fil
 ```js
 
 // Initialize Koop
-const Koop = require('koop')
+const Koop = require('@koopjs/koop-core')
 const koop = new Koop()
 
 /* Optional - register additional output-services */

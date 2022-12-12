@@ -7,7 +7,7 @@ In your Koop server file, the provider must be registered with the Koop instance
 
 <div class='codeanchor' id="figure-1"></div>
 ```js
-const Koop = require('koop')
+const Koop = require('@koopjs/koop-core')
 const koop = new Koop()
 const provider = require('<provider-npm-package or local-path>')
 koop.register(provider, { /* provider options */ })
