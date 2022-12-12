@@ -12,7 +12,7 @@ A Koop cache plugin stores data requested from the provider for use in followup 
 To be used by Koop, the cache must be registered with the Koop object before the server begins listening as in the example below.
 
 ```js
-const Koop = require('koop')
+const Koop = require('@koopjs/koop-core')
 const koop = new Koop()
 const cache = require('koop-cache-redis')
 koop.register(cache)
