@@ -14,7 +14,7 @@ Since you need the Koop `npm` dependency, you should start by creating a `packag
 npm init
 
 # Install Koop npm and save to package.json
-npm install --save koop
+npm install --save @koopjs/koop-core
 
 # Install a Koop provider, for example, the koop-provider-github
 npm install --save @koopjs/provider-github
