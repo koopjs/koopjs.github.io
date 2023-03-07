@@ -51,6 +51,6 @@ Inside the request handler `serve`, we have access to Express `request` and `res
 - `pullCatalog (request)`
 - `pullStream (request)` - _Only used if provider implements Node.js streams to send response_
 
-Depending upon what the provider you are using supports for sending geoJSON, call the appropriate pull method by `this.model._pullMethod_` . Once data is received, we can pass it through our custom transform or filter function. In the example above, we have a class method called `#filterTransform` which takes `geojson` from the provider then filters the geoJSON which could implement any sort of custom data manipulation. Then, we finally return the transformed output data to the client. We also wrap all the operations of data retrieval and transformation in `try...catch` block so handle any errors.
+Depending upon what the provider you are using supports for sending geoJSON, call the appropriate pull method by `this.model._pullMethod_` . Once data is received, we can pass it through our custom transform or filter function. In the example above, we have a class method called `#filterTransform` which takes `geojson` from the provider then filters the geoJSON which could implement any sort of custom data manipulation. Then, we finally return the transformed output data to the client. We also wrap all the operations of data retrieval and transformation in `try...catch` block to handle any errors.
 
 See the [koop-output-flat](https://github.com/koopjs/koop-output-flat) source files for an example of a simple output-plugin.
