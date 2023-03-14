@@ -28,7 +28,7 @@ It depends on the output-plugins you are leveraging. The Geoservices/FeatureServ
 geojson.crs = {
   type: 'name',
   properties: {
-    name: "urn:ogc:def:crs:OGC:1.3:EPSG::2285"
+    name: "urn:ogc:def:crs:EPSG::2285"
   }
 }
 ```

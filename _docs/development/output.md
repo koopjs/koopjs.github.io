@@ -8,7 +8,7 @@ Koop output plugins are used to transform data coming from a Koop provider to an
 An output plugin directory must contain `index.js` file that exports a class with following properties:
 
 - `version` – Version for your output plugin
-- `type` – Value of this property must be '`output'` 
+- `type` – Value of this property must be `'output'` 
 - `routes` - An array of objects with `path`, `methods` and `handler`. `path` defines the output plugin routes, `methods` contain valid HTTP methods and `handler` is the class method name for handling the request.
 
 A basic example is below:
