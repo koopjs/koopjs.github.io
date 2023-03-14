@@ -28,7 +28,7 @@ The table below  describes the keys in more detail:
 | version | Yes | `string` | version number of the provider|
 | Model | Yes | `class` | The Model class or `require` for the Model class module |
 | hosts | No | `Boolean` | Adds a `:host` parameter in routes|
-| disableIdParams | No | `Boolean` | Removes the default `:id` parameter from routes|
+| disableIdParam | No | `Boolean` | Removes the default `:id` parameter from routes|
 | routes | No | `object[]` | An array of route objects that expose routes specific to this provider |
 | Controller | No | `class` | The Controller class that supports handling for provider routes |
 
