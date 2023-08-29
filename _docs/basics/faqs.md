@@ -61,7 +61,7 @@ If you just need the HTTPS for local development, the Koop CLI (v1.1+) allows to
 
 ### How to enable the capability to cache data from a provider?
 
-You can easily make the provider cached or pass-through by adding a TTL property. 
+You can easily make the provider cache data by adding a TTL property. 
 For this you need to add a property ttl for model.js file of a provider, as shown bellow:
 
 ```
