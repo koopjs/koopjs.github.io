@@ -3,7 +3,7 @@ title: Provider Types
 permalink: /docs/basics/provider-types
 ---
 
-All Koop providers do one essential thing: fetch data from a remote API and convert it to GeoJSON. There are two basic patterns for implemention : *full-fetch*  or *pass-through*. The difference is how much data is fetched from the remote API. *full-fetch* providers fetch all dataset records from the remote API and passes that full dataset on to Koop's internal libraries for any futher post-processing(filtering, transformations, or sorting). *pass-through* providers ask the remote API to do at least some of any post-processing defined by request parameters.
+All Koop providers do one essential thing: fetch data from a remote API and convert it to GeoJSON. There are two basic patterns for implemention: *full-fetch*  or *pass-through*. The difference is how much data is fetched from the remote API. *full-fetch* providers fetch all dataset records from the remote API and passes that full dataset on to Koop's internal libraries for any futher post-processing(filtering, transformations, or sorting). *pass-through* providers ask the remote API to do at least some of any post-processing defined by request parameters.
 
 ### Full-fetch Providers
 
