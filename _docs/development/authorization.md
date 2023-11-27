@@ -1,5 +1,5 @@
 ---
-title: Authorization Specification
+title: Authorization Plugin Specification
 permalink: /docs/development/authorization
 ---
 
