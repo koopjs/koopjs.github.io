@@ -1,5 +1,5 @@
 ---
-title: Authorization Specification
+title: Authorization Plugin Specification
 permalink: /docs/development/authorization
 ---
 
@@ -10,9 +10,10 @@ Each authorization plugin must have a file called `index.js`.  `index.js` must b
 ```js
 {
     type: 'auth',
-    authenticationSpecification: Function,
     authenticate: Function,
-    authorize: Function
+    authorize: Function,
+    name: 'my-auth-plugin',
+    version: require('../path/to/package.json').version
 }
 ```
 
@@ -23,15 +24,12 @@ The table below contains a brief description of the registration object. Note th
 | property | type | description |
 | --- | --- | --- |
 |`type`| String | Must be set to `auth`; identifies the plugin as an authorization plugin during registration |
-|`authenticationSpecification`| Function | Returns an object with data useful for configuring the authorization plugin with output plugins.|
 |`authorize`| Function | Verfies a user has authorization to make a requests (e.g., a token is validated) |
 |`authenticate`|Function| Authenticates a user's requests based on submitted input (credentials, key, etc)|
+|`name`|String| Name of the plugin |
+|`version`|String| Plugin version number |
 
 Details about each of the API functions are found below.
-
-### `authenticationSpecification` **function() ⇒ object**
-
-Authorization plugins must include a function called "authenticationSpecification".  Its purpose is delivery of an object (i.e., the _authentication specification_) that provides options to the output-plugin. The object returned need only contain data for properly configuring your output plugins of choice. For example, Koop's default geoservices uses a `useHttp` option when generating the [authentication endpoint](https://github.com/koopjs/koop-output-geoservices/blob/master/index.js#L54). An example of `authenticationSpecification` is available [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L44-L56).
 
 ### `authenticate` **authenticate(req) ⇒ Promise**
 
@@ -56,4 +54,4 @@ Authorization plugins are free to validate credentials in any manner.  For examp
 | --- | --- | --- |
 | req | <code>object</code> | Express request object. Query parameter or header should include input (e.g., token) that can be used to prove previously successful authentication |
 
-Authorization plugins are required to implement a function called `authorize`.  It should accept the Express request object as an argument, which that can be used to verify the request is being made by an authenticated user (e.g., validate a token in the authorization header). If the authorization is unsuccessful, the promise should reject with an error object that contains a `401` code.  Successful authorization should allow the promise to resolve. An example of an `authorize` function can be viewed [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L90-L108).
+Authorization plugins are required to implement a function called `authorize`.  It should accept the Express request object as an argument, which that can be used to verify the request is being made by an authenticated user (e.g., validate a token in the authorization header). If the identity of the request user is unknown or can't be determined (e.g., due to a missing or invalid token) the promise should reject with an error object that contains a `401` code. If the token is valid, but the user is not authorized to access the requested resource, the promise should be rejected with an error that contains a `403` code. Successful authorization should allow the promise to resolve. An example of an `authorize` function can be viewed [here](https://github.com/koopjs/koop-auth-direct-file/blob/master/src/index.js#L90-L108).

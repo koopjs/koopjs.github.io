@@ -129,6 +129,21 @@ You should add a `metadata` object to the GeoJSON returned from `getData` (see F
 #### Special considerations for `idField`
 As noted above `idField` designates which feature attribute should be used as the feature's unique identifier.  For ArcGIS clients, having a unique identifier is required, and it must be of type integer and in the range of 0 - 2,147,483,647, otherwise some functionality cannot be supported. If you chose not to set `idField` or don't have a feature attribute that fits its requirements, Koop will create an OBJECTID field in its Geoservices output by default which can be used as a unique identifier.  Its value is calculated as the numeric hash of each feature. While you can let Koop handle this, define an `idField` in your metadata is overall more reliable.
 
+## Method: `getStream(request)`
+The optional `getStream` method should return a Readable-Stream of GeoJSON and is leveraged by any output-plugins that invoke the `pullStream` model method.  Note that as of this writing few output-plugins leverage this method.
+
+### Arguments
+
+| name | type | description |
+| - | - | - |
+|`request`| Object | An Express `request` object. Contains route and query parameters for use in building the URL to the remote API. See the [Express documentation](https://expressjs.com/en/4x/api.html#req) for more details. |
+
+## Method: `authorize(request)`
+The optional `authorize` method may be defined on a provider's model class. This method will invoked before any invocations of `getData` or `getStream`. It overrides any `authorize` method of a registered authorization-plugin. This methods spec is identical to the [authorize method of a authorization-plugin](docs/development/authorization#authorize-function-authorizereq--promise). 
+
+## Method: `authenticate(request)`
+The optional `authenticate` method may be defined on a provider's model class. This method may be use by some output-plugins that have routes that allow token generation. It overrides any `authenticate` method of a registered authorization-plugin. This methods spec is identical to the [authenticate method of a authorization-plugin](docs/development/authorization#authenticate-authenticatereq--promise). 
+
 ## Method: `createKey(request)`
 Koop uses a an internal `createKey` function to generate a string for use as a key in the cache-plugin's key-value store. Koop's `createKey` uses the provider name and route parameters to define a key.  This allows all requests with the same provider name and route parameters to leverage cached data.  
 
@@ -164,3 +179,4 @@ Model.prototype.createKey = function (request) {
 }
 ```
 <figcaption><i>Figure 4. Defining a custom <code class='highlighter-rouge'>createKey</code> method for generating cache keys.</i></figcaption>
+
