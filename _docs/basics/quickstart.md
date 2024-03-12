@@ -108,7 +108,7 @@ No root directory was specified, defaulting to:  /Users/rich9620/Projects/demo-a
 The [Koop Sample App](https://github.com/koopjs/koop-sample-app) is a template for generating Koop applications. To get started, clone the [koop-sample-app](https://github.com/koopjs/koop-sample-app) repository on your machine.
 
 ```
-git clone git@github.com:koopjs/koop-sample-app.git
+git clone https://github.com/koopjs/koop-app-example.git
 ```
 
 Change the working directory to the newly created `koop-sample-app` folder.
