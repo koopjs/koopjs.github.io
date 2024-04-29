@@ -51,7 +51,6 @@ If you do use the pass-through pattern, it is important that you add the `filter
 
 ```js
   filtersApplied: {
-    all: Boolean // true if all post processing should be skipped
     geometry: Boolean, // true if a geometric filter has already been applied to the data
     where: Boolean, // true if a sql-like where filter has already been applied to the data
     offset: Boolean // true if the result offset has already been applied to the data,
